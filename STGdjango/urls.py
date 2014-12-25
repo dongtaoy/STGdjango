@@ -6,5 +6,8 @@ urlpatterns = patterns('',
     # url(r'^$', 'STGdjango.views.home', name='home'),
     # url(r'^blog/', include('blog.urls')),
 
+    # Common url
+    url(r'^', include('common.urls')),
+
     url(r'^admin/', include(admin.site.urls)),
 )
