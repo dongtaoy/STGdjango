@@ -1,17 +1,20 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
 {% block title %}
-    Dashboard
+    {{ client.name }}'s Details
 {% endblock %}
 {% block plugincss %}
 {% endblock %}
 
 {#page content#}
 {% block header %}
+    {{ client.name }}
 {% endblock %}
 {% block subHeader %}
+    Details
 {% endblock %}
 {% block breadcrumb %}
+
 {% endblock %}
 {% block content %}
 {% endblock %}

@@ -7,8 +7,6 @@
 
 {% block plugincss %}
     <link rel="stylesheet" type="text/css" href="{% static 'assets/global/plugins/select2/select2.css' %}"/>
-    <link rel="stylesheet" type="text/css" href="{% static 'assets/global/plugins/datatables/extensions/Scroller/css/dataTables.scroller.min.css' %}"/>
-    <link rel="stylesheet" type="text/css" href="{% static 'assets/global/plugins/datatables/extensions/ColReorder/css/dataTables.colReorder.min.css' %}"/>
     <link rel="stylesheet" type="text/css" href="{% static 'assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css' %}"/>
 {% endblock %}
 
@@ -107,4 +105,9 @@
 {% endblock %}
 
 {% block script %}
+    <script>
+        jQuery(document).ready(function() {
+            TableAdvanced.init();
+        });
+    </script>
 {% endblock %}
