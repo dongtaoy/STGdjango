@@ -21,4 +21,4 @@ def clientList(request):
         }
     ]
     # return render(request, "client/stagePage.html", {"clients": clients})
-    return render(request, "client/clientList.html", {"clients": clients})
+    return render(request, "client/client.list.html", {"clients": clients})
