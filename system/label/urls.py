@@ -14,7 +14,7 @@ urlpatterns = patterns(
     url(r'^$', login_required(ListView.as_view(
         model=Label,
         context_object_name='labels',
-        template_name='system/label/index.html'))),
+        template_name='system/label/label.list.html')), name='label.list'),
 
 
 )
