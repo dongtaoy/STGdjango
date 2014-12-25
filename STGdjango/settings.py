@@ -39,6 +39,7 @@ INSTALLED_APPS = (
     'common',
     'hr',
     'system',
+    'client',
 )
 
 MIDDLEWARE_CLASSES = (
