@@ -112,3 +112,14 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 
 # Session
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+
+
+
+# Auth
+
+LOGIN_REDIRECT_URL = '/'
+
+LOGIN_URL = '/login/'
+
+LOGOUT_URL = '/logout/'
+
