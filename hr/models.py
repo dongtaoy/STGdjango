@@ -19,7 +19,6 @@ class Employee(models.Model):
 
 
 class Department(models.Model):
-    leader = models.ForeignKey('hr.Employee', blank=True, null=True)
     label = models.ForeignKey('system.Label', blank=True, null=True, default=None, on_delete=models.SET_NULL)
     group = models.OneToOneField('auth.Group')
     description = models.TextField(null=True, blank=True)
