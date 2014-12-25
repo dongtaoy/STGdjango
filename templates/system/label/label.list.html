@@ -19,11 +19,11 @@
             <i class="fa fa-circle"></i>
         </li>
         <li>
-            <a href="#">System</a>
+            System
             <i class="fa fa-circle"></i>
         </li>
         <li>
-            <a href="#">Sidebar</a>
+            <a href="{% url 'label.list' %}">Sidebar</a>
         </li>
     </ul>
 {% endblock %}
@@ -34,7 +34,7 @@
             <div class="portlet box green-haze">
                 <div class="portlet-title">
                     <div class="caption">
-                        <i class="fa fa-globe"></i>Datatable with TableTools
+                        <i class="fa fa-globe"></i>Labels
                     </div>
                     <div class="tools">
                         <a href="javascript:;" class="reload">
@@ -44,6 +44,18 @@
                     </div>
                 </div>
                 <div class="portlet-body">
+                    <div class="table-toolbar">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="btn-group">
+                                    <a id="sample_editable_1_new" href="{% url 'label.add' %}" class="btn green">
+                                        Add New <i class="fa fa-plus"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <table class="table table-striped table-bordered table-hover">
                         <thead>
                         <tr>
@@ -83,5 +95,20 @@
         (function () {
             $('.table').dataTable();
         }());
+        {% if perms.system.change_label %}
+            (function () {
+                $(".table tbody").on("dblclick", "tr", function () {
+                    if ($(this).hasClass('selected')) {
+                        $(this).removeClass('selected');
+                    }
+                    else {
+                        $('tr.selected').removeClass('selected');
+                        $(this).addClass('selected');
+                    }
+                    var id = ($(this)).children('td:first').text();
+                    window.location.href = "/system/label/mod/" + id;
+                });
+            }());
+        {% endif %}
     </script>
 {% endblock %}
