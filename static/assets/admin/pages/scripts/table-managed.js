@@ -241,7 +241,7 @@ var TableManaged = function () {
             if (!jQuery().dataTable) {
                 return;
             }
-
+            
             initTable1();
             initTable2();
             initTable3();

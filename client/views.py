@@ -11,7 +11,7 @@ def clientList(request):
             "nationality": "China",
             "consultant": "Tim Wang",
             "clientManager": "Cecilia Han",
-            "stageLink": "http://www.baidu.com",
+            # "stageLink": "http://www.baidu.com",
             "stage": "Stage 1",
             "visa": 163,
             "institution": "University of Melbourne",
@@ -20,4 +20,5 @@ def clientList(request):
             "detailsLink": "http://www.google.com",
         }
     ]
+    # return render(request, "client/stagePage.html", {"clients": clients})
     return render(request, "client/clientList.html", {"clients": clients})

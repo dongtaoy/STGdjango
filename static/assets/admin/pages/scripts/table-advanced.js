@@ -151,11 +151,11 @@ var TableAdvanced = function () {
                 }]
             }
         });
-
+        
         var tableWrapper = $('#sample_2_wrapper'); // datatable creates the table wrapper by adding with id {your_table_jd}_wrapper
         tableWrapper.find('.dataTables_length select').select2(); // initialize select2 dropdown
     }
-
+    
     var initTable3 = function () {
         var table = $('#sample_3');
 
