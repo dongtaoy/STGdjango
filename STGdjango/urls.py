@@ -9,13 +9,13 @@ urlpatterns = patterns(
 
     # Common urls
     url(r'^', include('common.urls')),
-    
+
     # system urls
     url(r'^system/', include('system.urls')),
-    
+
     # client urls
     url(r'^client/', include('client.urls')),
-    
+
     # Admin urls
     url(r'^admin/', include(admin.site.urls)),
 )
