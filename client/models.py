@@ -6,4 +6,4 @@ class Visa(models.Model):
     description = models.TextField(max_length=100, null=True, blank=True)
 
     def __unicode__(self):
-        return self.subClass
+        return str(self.subClass)
