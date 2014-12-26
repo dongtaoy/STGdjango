@@ -10,26 +10,53 @@
         <!-- DOC: Set data-keep-expand="true" to keep the submenues expanded -->
         <!-- DOC: Set data-auto-speed="200" to adjust the sub menu slide up/down speed -->
         <ul class="page-sidebar-menu " data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200">
-            <li class="start active ">
-                <a href="index.html">
-                    <i class="icon-home"></i>
-                    <span class="title">Dashboard</span>
-                </a>
-            </li>
-            <li>
-                <a href="javascript:;">
-                    <i class="icon-basket"></i>
-                    <span class="title">System</span>
-                    <span class="arrow "></span>
-                </a>
-                <ul class="sub-menu">
+            {% for sidebar in Sidebars %}
+                {% if sidebar.children.all %}
                     <li>
-                        <a href="{% url 'label.list' %}">
-                            <i class="icon-home"></i>
-                            Label</a>
+                        <a href="javascript:;">
+                            <i class="icon-basket"></i>
+                            <span class="title">{{ sidebar.text }}</span>
+                            <span class="arrow "></span>
+                        </a>
+                        <ul class="sub-menu">
+                            {% for child in sidebar.children.all %}
+                                <li>
+                                    <a href="{{ child.url }}">
+                                        <i class="icon-home"></i>
+                                        {{ child.text }}</a>
+                                </li>
+                            {% endfor %}
+                        </ul>
                     </li>
-                </ul>
-            </li>
+                {% else %}
+                    <li class="start active ">
+                        <a href="{{ sidebar.url }}">
+                            <i class="icon-home"></i>
+                            <span class="title">{{ sidebar.text }}</span>
+                        </a>
+                    </li>
+                {% endif %}
+            {% endfor %}
+            {#            <li class="start active ">#}
+            {#                <a href="index.html">#}
+            {#                    <i class="icon-home"></i>#}
+            {#                    <span class="title">Dashboard</span>#}
+            {#                </a>#}
+            {#            </li>#}
+            {#            <li>#}
+            {#                <a href="javascript:;">#}
+            {#                    <i class="icon-basket"></i>#}
+            {#                    <span class="title">System</span>#}
+            {#                    <span class="arrow "></span>#}
+            {#                </a>#}
+            {#                <ul class="sub-menu">#}
+            {#                    <li>#}
+            {#                        <a href="{% url 'label.list' %}">#}
+            {#                            <i class="icon-home"></i>#}
+            {#                            Label</a>#}
+            {#                    </li>#}
+            {#                </ul>#}
+            {#            </li>#}
 
         </ul>
         <!-- END SIDEBAR MENU -->
