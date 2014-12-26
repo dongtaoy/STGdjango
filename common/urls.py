@@ -16,5 +16,6 @@ urlpatterns = patterns(
     url(r'^logout/$', 'django.contrib.auth.views.logout_then_login'),
 
     # dashboard
-    url(r'^$', login_required(TemplateView.as_view(template_name='dashboard.html')), name='dashboard')
+    url(r'^$', login_required(TemplateView.as_view(template_name='dashboard.html')), name='dashboard'),
+    # url(r'^delconfirm/$', login_required(TemplateView.as_view(template_name='common/delete.confirmation.html')), name='delete.confirmation'),
 )

@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block title %}
+    Delete Confirmation
+{% endblock %}
+{% block plugincss %}
+{% endblock %}
+
+{#page content#}
+{% block header %}
+    Delete
+{% endblock %}
+{% block subHeader %}
+    confirmation
+{% endblock %}
+{% block breadcrumb %}
+{% endblock %}
+{% block content %}
+<div class="row">
+    <div class="col-md-12">
+        <div class="note note-danger note-shadow">
+            <h3 class="block">Are you sure?</h3>
+            <p>
+                 Are you sure you want to delete the label <b>label-success</b>? All of the following related items will be deleted:
+            </p>
+            <ul>
+                <li>Label: <a href="#">label-success</a></li>
+            </ul>
+            <a href="#" class="btn btn-success">Yes, I'm sure </a>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{#end page content#}
+
+{% block pluginjs %}
+{% endblock %}
+{% block script %}
+{% endblock %}
