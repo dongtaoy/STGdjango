@@ -24,5 +24,5 @@ urlpatterns = patterns(
         permission_required('system.change_label')(LabelUpdateView.as_view()), name='label.mod'),
 
     url(r'^del/(?P<label>\d+)/$',
-        permission_required('system.change_label')(LabelDeleteView.as_view()), name='label.delete'),
+        permission_required('system.delete_label')(LabelDeleteView.as_view()), name='label.delete'),
 )
