@@ -9,4 +9,5 @@ urlpatterns = patterns('',
 
     url(r'^$', 'client.views.clientList'),
     url(r'^details/$', 'client.views.clientDetails'),
+    url(r'^visa/', include("client.visa.urls")),
 )
