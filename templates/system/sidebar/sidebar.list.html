@@ -116,19 +116,23 @@
                 },
                 //"state": {"key": "demo3"},
                 "plugins": ["dnd", "state", "types"]
-            }).on('ready.jstree', function () {
-                $('a.jstree-anchor').contextmenu({
-                    target: '#context-menu',
-                    before: function (e, context) {
-                        $('#edit').attr('href', ('/system/sidebar/mod/' + $(context).parent().attr('id')));
-                        return true;
-                    },
-                    onItem: function () {
-                        window.location.href = $('#edit').attr('href');
-                        return true;
-                    }
-                });
+            }).on('dblclick.jstree', function (e) {
+                console.log($(e.target).parent().attr('id'));
+                window.location.href = '/system/sidebar/mod/' + $(e.target).parent().attr('id');
             });
+            {#                    .on('ready.jstree', function () {#}
+            {#                $('a.jstree-anchor').contextmenu({#}
+            {#                    target: '#context-menu',#}
+            {#                    before: function (e, context) {#}
+            {#                        $('#edit').attr('href', ('/system/sidebar/mod/' + $(context).parent().attr('id')));#}
+            {#                        return true;#}
+            {#                    },#}
+            {#                    onItem: function () {#}
+            {#                        window.location.href = $('#edit').attr('href');#}
+            {#                        return true;#}
+            {#                    }#}
+            {#                });#}
+            {#            });#}
 
 
         }());
