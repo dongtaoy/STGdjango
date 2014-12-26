@@ -12,4 +12,6 @@ urlpatterns = patterns(
     url('^sidebar/', include('system.sidebar.urls')),
 
     url(r'^password/', include('system.password.urls')),
+
+    url(r'^glyphicon/',include('system.glyphicon.urls')),
 )
