@@ -1,6 +1,6 @@
 __author__ = 'dongtaoy'
 from django.forms import ModelForm
-from system.models import Label, Sidebar, Glyphicon
+from system.models import Label, Sidebar, Icon
 
 
 class LabelForm(ModelForm):
@@ -15,7 +15,7 @@ class SidebarForm(ModelForm):
         fields = '__all__'
 
 
-class GlyphiconForm(ModelForm):
+class IconForm(ModelForm):
     class Meta:
-        model = Glyphicon
+        model = Icon
         fields = '__all__'

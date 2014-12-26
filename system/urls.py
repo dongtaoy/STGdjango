@@ -13,5 +13,5 @@ urlpatterns = patterns(
 
     url(r'^password/', include('system.password.urls')),
 
-    url(r'^glyphicon/',include('system.glyphicon.urls')),
+    url(r'^icon/',include('system.icon.urls')),
 )
