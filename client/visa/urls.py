@@ -24,5 +24,5 @@ urlpatterns = patterns(
         permission_required('client.change_visa')(VisaUpdateView.as_view()), name='visa.mod'),
 
     url(r'^del/(?P<visa>\d+)/$',
-        permission_required('client.change_visa')(VisaDeleteView.as_view()), name='visa.delete'),
+        permission_required('client.delete_visa')(VisaDeleteView.as_view()), name='visa.delete'),
 )
