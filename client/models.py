@@ -15,7 +15,7 @@ class Visa(models.Model):
 
 class Stage(models.Model):
     client = models.ForeignKey(Client)
-    number = models.IntegerField(max_length=2, null=True, blank=False)
+    order = models.IntegerField(max_length=2, null=True, blank=False)
     title = models.CharField(max_length=50, null=True, blank=False)
     description = models.TextField()
 
