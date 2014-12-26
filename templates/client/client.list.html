@@ -31,6 +31,7 @@
             </li>
         </ul>
 {% endblock %}
+
 {% block content %}
     <div class="row">
         <div class="col-md-12">
@@ -46,15 +47,12 @@
                         <tr>
                             <th>Name</th>
                             <th>DoB</th>
+                            <th>Status</th>
                             <th>Nationality</th>
                             <th>Consultant</th>
                             <th>Client Manager</th>
                             <th>Stage</th>
                             <th>Visa</th>
-                            <th>Institution</th>
-                            <th>Course Start</th>
-                            <th>Course End</th>
-                            <th>Details</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -62,17 +60,12 @@
                             <tr >
                                 <td>{{ client.name }}</td>
                                 <td>{{ client.DoB }}</td>
+                                <td>{{ client.status }}</td>
                                 <td>{{ client.nationality }}</td>
                                 <td>{{ client.consultant }}</td>
                                 <td>{{ client.clientManager }}</td>
                                 <td>{{ client.stage }}</td>
                                 <td>{{ client.visa }}</td>
-                                <td>{{ client.institution }}</td>
-                                <td>{{ client.courseStart }}</td>
-                                <td>{{ client.courseEnd }}</td>
-                                <td>
-                                    <a href="{{ client.detailsLink }}" type="button" class="btn btn-success">Details</a>
-                                </td>
                             </tr>
                             {% endfor %}
                         </tbody>

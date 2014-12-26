@@ -7,5 +7,6 @@ urlpatterns = patterns('',
     # url(r'^$', 'STGdjango.views.home', name='home'),
     # url(r'^blog/', include('blog.urls')),
 
-    url(r'^list/$', 'client.views.clientList'),
+    url(r'^$', 'client.views.clientList'),
+    url(r'^details/$', 'client.views.clienDetails'),
 )
