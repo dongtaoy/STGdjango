@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% load bootstrap3 %}
+
+{% block plugincss %}
+{% endblock %}
+{% block header %}
+    Icon Configuration
+{% endblock %}
+{% block subHeader %}
+    ## Icon Configuration
+{% endblock %}
+{% block breadcrumb %}
+    <ul class="page-breadcrumb breadcrumb">
+        <li>
+            <a href="{% url 'dashboard' %}">Home</a>
+            <i class="fa fa-circle"></i>
+        </li>
+        <li>
+            System
+            <i class="fa fa-circle"></i>
+        </li>
+        <li>
+            <a href="{% url 'icon.list' %}">Icon</a>
+        </li>
+    </ul>
+{% endblock %}
+{% block content %}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="portlet box green-haze">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="fa fa-globe"></i>Icon Edit
+                    </div>
+                </div>
+                <div class="portlet-body">
+                    <form method="POST">
+                        {% csrf_token %}
+                        {% bootstrap_form form %}
+                        {% buttons submit='OK' reset="Reset" %}{% endbuttons %}
+                    </form>
+
+                    {% if spec_icon %}
+                        {% if perms.systen.delete_icon %}
+                            <a href="{% url 'icon.delete'  spec_icon.id %}" class="btn btn-danger">Delete</a>
+                        {% endif %}
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block pluginjs %}
+{% endblock %}
+{% block script %}
+{% endblock %}

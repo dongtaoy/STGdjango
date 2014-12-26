@@ -1,5 +1,5 @@
 __author__ = 'dongtaoy'
-from django.db import  models
+from django.db import models
 
 
 class Label(models.Model):
