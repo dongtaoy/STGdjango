@@ -40,6 +40,12 @@
                         {% bootstrap_form form %}
                         {% buttons submit='OK' reset="Reset" %}{% endbuttons %}
                     </form>
+
+                    {% if spec_label %}
+                        {% if perms.systen.delete_label %}
+                            <a href="{% url 'label.delete'  spec_label.id %}" class="btn btn-danger">Delete</a>
+                        {% endif %}
+                    {% endif %}
                 </div>
             </div>
         </div>

@@ -16,20 +16,22 @@
 {% block breadcrumb %}
 {% endblock %}
 {% block content %}
-<div class="row">
-    <div class="col-md-12">
-        <div class="note note-danger note-shadow">
-            <h3 class="block">Are you sure?</h3>
-            <p>
-                 Are you sure you want to delete the label <b>label-success</b>? All of the following related items will be deleted:
-            </p>
-            <ul>
-                <li>Label: <a href="#">label-success</a></li>
-            </ul>
-            <a href="#" class="btn btn-success">Yes, I'm sure </a>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="note note-danger note-shadow">
+                <form method="POST">
+                    {% csrf_token %}
+                    <h3 class="block">Are you sure?</h3>
+
+                    <p>
+                        Are you sure you want to delete the label <b>{{ object }}</b>? Warning: All of the related
+                        items will be deleted.
+                    </p>
+                    <button type="submit" class="btn btn-success">Yes, I'm sure</button>
+                </form>
+            </div>
         </div>
     </div>
-</div>
 {% endblock %}
 {#end page content#}
 
