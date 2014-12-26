@@ -38,15 +38,13 @@
                     <form method="POST">
                         {% csrf_token %}
                         {% bootstrap_form form %}
-                        {% buttons submit='OK' reset="Cancel" %}{% endbuttons %}
+                        {% buttons submit='OK' reset="Reset" %}{% endbuttons %}
                     </form>
-                    {% if perms.system.delete_label %}
-
-                    {% endif %}
                 </div>
             </div>
         </div>
     </div>
+
 {% endblock %}
 {% block pluginjs %}
     <script type="text/javascript"

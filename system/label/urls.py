@@ -20,7 +20,7 @@ urlpatterns = patterns(
     url(r'^add/$',
         permission_required('system.add_label')(LabelCreateView.as_view()), name='label.add'),
 
-    url(r'^mod/(?P<label>\d+)$',
+    url(r'^mod/(?P<label>\d+)/$',
         permission_required('system.change_label')(LabelUpdateView.as_view()), name='label.mod'),
 
 

@@ -1,6 +1,8 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
-
+{% block title %}
+    Label Configuration
+{% endblock %}
 {% block plugincss %}
     <link rel="stylesheet" type="text/css"
           href="{% static 'assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css' %}"/>
@@ -19,11 +21,11 @@
             <i class="fa fa-circle"></i>
         </li>
         <li>
-            System
+            <a href="#">System</a>
             <i class="fa fa-circle"></i>
         </li>
         <li>
-            <a href="{% url 'label.list' %}">Sidebar</a>
+            <a href="#">Sidebar</a>
         </li>
     </ul>
 {% endblock %}
@@ -36,19 +38,13 @@
                     <div class="caption">
                         <i class="fa fa-globe"></i>Labels
                     </div>
-                    <div class="tools">
-                        <a href="javascript:;" class="reload">
-                        </a>
-                        <a href="javascript:;" class="remove">
-                        </a>
-                    </div>
                 </div>
                 <div class="portlet-body">
                     <div class="table-toolbar">
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="btn-group">
-                                    <a id="sample_editable_1_new" href="{% url 'label.add' %}" class="btn green">
+                                    <a href="{% url 'label.add' %}" class="btn green">
                                         Add New <i class="fa fa-plus"></i>
                                     </a>
                                 </div>
@@ -67,7 +63,7 @@
                         <tbody>
                         {% for label in labels %}
                             <tr>
-
+                                {#                            <tr>#}
                                 <td>{{ label.id }}</td>
 
                                 <td><span class="label {{ label.css }}">{{ label.name }}</span></td>
@@ -82,8 +78,18 @@
             </div>
         </div>
     </div>
+    {% if perms.system.change_label %}
+        <div id="context-menu">
+            <ul class="dropdown-menu" role="menu">
+                <li><a tabindex="-1" id="edit" href="#">Edit</a></li>
+            </ul>
+        </div>
+    {% endif %}
 {% endblock %}
 {% block pluginjs %}
+
+    <script type="text/javascript"
+            src="{% static 'assets/global/plugins/bootstrap-contextmenu/bootstrap-contextmenu.js' %}"></script>
     <script type="text/javascript"
             src="{% static 'assets/global/plugins/datatables/media/js/jquery.dataTables.min.js' %}"></script>
     <script type="text/javascript"
@@ -94,21 +100,31 @@
     <script>
         (function () {
             $('.table').dataTable();
-        }());
-        {% if perms.system.change_label %}
-            (function () {
-                $(".table tbody").on("dblclick", "tr", function () {
-                    if ($(this).hasClass('selected')) {
-                        $(this).removeClass('selected');
+
+            {% if perms.system.change_label %}
+                $('.table tbody tr').contextmenu({
+                    target: '#context-menu',
+                    before: function (e, context) {
+                        $('#edit').attr('href', ('/system/label/mod/' + $(context).children('td:first').text()));
+                        return true;
+                    },
+                    onItem: function () {
+                        window.location.href = $('#edit').attr('href');
+                        return true;
                     }
-                    else {
-                        $('tr.selected').removeClass('selected');
-                        $(this).addClass('selected');
-                    }
-                    var id = ($(this)).children('td:first').text();
-                    window.location.href = "/system/label/mod/" + id;
                 });
-            }());
-        {% endif %}
+            {% endif %}
+
+        }());
+
+        {#            (function () {#}
+        {#                $(".table tbody").on("contextmenu", "tr", function (e) {#}
+        {##}
+        {##}
+        {#                    var id = ($(this)).children('td:first').text();#}
+        {#                    //window.location.href = "/system/label/mod/" + id;#}
+        {#                });#}
+        {#            }());#}
+        {#        {% endif %}#}
     </script>
 {% endblock %}
