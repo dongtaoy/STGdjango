@@ -5,10 +5,10 @@
 {% block plugincss %}
 {% endblock %}
 {% block header %}
-    Label Configuration
+    Sidebar Configuration
 {% endblock %}
 {% block subHeader %}
-    ## Label Configuration
+    ## Sidebar Configuration
 {% endblock %}
 {% block breadcrumb %}
     <ul class="page-breadcrumb breadcrumb">
@@ -21,7 +21,7 @@
             <i class="fa fa-circle"></i>
         </li>
         <li>
-            <a href="{% url 'label.list' %}">Label</a>
+            <a href="{% url 'sidebar.list' %}">Sidebar</a>
         </li>
     </ul>
 {% endblock %}
@@ -31,7 +31,7 @@
             <div class="portlet box green-haze">
                 <div class="portlet-title">
                     <div class="caption">
-                        <i class="fa fa-globe"></i>Label Edit
+                        <i class="fa fa-globe"></i>Sidebar Edit
                     </div>
                 </div>
                 <div class="portlet-body">
@@ -41,9 +41,9 @@
                         {% buttons submit='OK' reset="Reset" %}{% endbuttons %}
                     </form>
 
-                    {% if spec_label %}
-                        {% if perms.systen.delete_label %}
-                            <a href="{% url 'label.delete'  spec_label.id %}" class="btn btn-danger">Delete</a>
+                    {% if spec_sidebar %}
+                        {% if perms.systen.delete_sidebar %}
+                            <a href="{% url 'sidebar.delete'  spec_sidebar.id %}" class="btn btn-danger">Delete</a>
                         {% endif %}
                     {% endif %}
                 </div>

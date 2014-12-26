@@ -1,0 +1,152 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block title %}
+    Sidebar Configuration
+{% endblock %}
+{% block plugincss %}
+    <link rel="stylesheet" type="text/css"
+          href="{% static 'assets/global/plugins/jstree/dist/themes/default/style.min.css' %}"/>
+
+{% endblock %}
+{% block header %}
+    Sidebar Configuration
+{% endblock %}
+{% block subHeader %}
+    ## Sidebar Configuration
+{% endblock %}
+{% block breadcrumb %}
+    <ul class="page-breadcrumb breadcrumb">
+        <li>
+            <a href="{% url 'dashboard' %}">Home</a>
+            <i class="fa fa-circle"></i>
+        </li>
+        <li>
+            <a href="#">System</a>
+            <i class="fa fa-circle"></i>
+        </li>
+        <li>
+            <a href="#">Sidebar</a>
+        </li>
+    </ul>
+{% endblock %}
+{% block content %}
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="portlet box green-haze">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="fa fa-globe"></i>Sidebar Configuration
+                    </div>
+                </div>
+                <div class="portlet-body">
+
+                    {% if messages %}
+                        {% for message in messages %}
+                            <div class="alert alert-success alert-dismissable">
+                                <i class="fa fa-check"></i>
+                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                <b>{{ message }}</b>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                    <div class="table-toolbar">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="btn-group">
+                                    <a href="{% url 'sidebar.add' %}" class="btn green">
+                                        Add New <i class="fa fa-plus"></i>
+                                    </a>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div id="sidebarTree">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="context-menu">
+        <ul class="dropdown-menu" role="menu">
+            <li><a tabindex="-1" id="edit" href="#">Edit</a></li>
+        </ul>
+    </div>
+{% endblock %}
+{% block pluginjs %}
+    <script type="text/javascript"
+            src="{% static 'assets/global/plugins/bootstrap-contextmenu/bootstrap-contextmenu.js' %}"></script>
+    <script type="text/javascript"
+            src="{% static 'assets/global/plugins/jstree/dist/jstree.min.js' %}"></script>
+
+{% endblock %}
+{% block script %}
+    <script>
+        $(function () {
+
+            var objects = JSON.parse('{{ sidebarsJson | escapejs }}');
+            data = [];
+            for (var i = 0; i < objects.length; i++) {
+                data.push({
+                    "id": objects[i].pk.toString(),
+                    "parent": objects[i].fields.parent ? objects[i].fields.parent : '#',
+                    "text": objects[i].fields.text,
+                    "state": {
+                        opened: true,
+                        selected: false
+                    }
+                })
+            }
+            $("#sidebarTree").jstree({
+                "core": {
+                    "themes": {
+                        "responsive": false
+                    },
+                    "data": data
+                },
+                "types": {
+                    "default": {
+                        "icon": "fa fa-folder icon-state-warning icon-lg"
+                    },
+                    "file": {
+                        "icon": "fa fa-file icon-state-warning icon-lg"
+                    }
+                },
+                //"state": {"key": "demo3"},
+                "plugins": ["dnd", "state", "types"]
+            }).on('ready.jstree', function () {
+                $('a.jstree-anchor').contextmenu({
+                    target: '#context-menu',
+                    before: function (e, context) {
+                        $('#edit').attr('href', ('/system/sidebar/mod/' + $(context).parent().attr('id')));
+                        return true;
+                    },
+                    onItem: function () {
+                        window.location.href = $('#edit').attr('href');
+                        return true;
+                    }
+                });
+            });
+
+
+        }());
+
+
+        {#        (function () {#}
+        {#            $('#portlet-body').contextmenu({#}
+        {#                target: '#context-menu',#}
+        {#                before: function (e, context) {#}
+        {#                    e.preventDefault();#}
+        {#                    //$('#edit').attr('href', ('/system/sidebar/mod/' + $(context).id));#}
+        {#                    return true;#}
+        {#                },#}
+        {#                onItem: function () {#}
+        {#                    window.location.href = $('#edit').attr('href');#}
+        {#                    return true;#}
+        {#                }#}
+        {#            })#}
+        {#        }())#}
+    </script>
+{% endblock %}
