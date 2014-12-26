@@ -23,7 +23,7 @@
             <i class="fa fa-circle"></i>
         </li>
         <li>
-            <a href="{% url 'stage.list' %}">Stage</a>
+            <a href="{% url 'client.stage.list' %}">Stage</a>
         </li>
     </ul>
 {% endblock %}
@@ -45,7 +45,7 @@
 
                     {% if spec_stage %}
                         {% if perms.systen.delete_stage %}
-                            <a href="{% url 'stage.delete'  spec_stage.id %}" class="btn btn-danger">Delete</a>
+                            <a href="{% url 'client.stage.delete'  spec_stage.id %}" class="btn btn-danger">Delete</a>
                         {% endif %}
                     {% endif %}
                 </div>
