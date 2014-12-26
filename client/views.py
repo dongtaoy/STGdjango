@@ -25,7 +25,7 @@ def clientList(request):
     return render(request, "client/client.list.html", {"clients": clients})
 
 
-def clienDetails(request):
+def clientDetails(request):
     clients = [
         {
             "name": "George Cai",
