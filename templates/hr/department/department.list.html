@@ -1,0 +1,132 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block title %}
+    Visa Configuration
+{% endblock %}
+{% block plugincss %}
+    <link rel="stylesheet" type="text/css"
+          href="{% static 'assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css' %}"/>
+
+{% endblock %}
+{% block header %}
+    Visa Configuration
+{% endblock %}
+{% block subHeader %}
+    ## Visa Configuration
+{% endblock %}
+{% block breadcrumb %}
+    <ul class="page-breadcrumb breadcrumb">
+        <li>
+            <a href="{% url 'dashboard' %}">Home</a>
+            <i class="fa fa-circle"></i>
+        </li>
+        <li>
+            <a href="#">Client</a>
+            <i class="fa fa-circle"></i>
+        </li>
+        <li>
+            <a href="#">Visa</a>
+        </li>
+    </ul>
+{% endblock %}
+{% block content %}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="portlet box green-haze">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="fa fa-globe"></i>Visas
+                    </div>
+                </div>
+                <div class="portlet-body">
+                    <div class="table-toolbar">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="btn-group">
+                                    <a href="{% url 'department.add' %}" class="btn green">
+{#                                    <a href="#" class="btn green">#}
+                                        Add New <i class="fa fa-plus"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <table class="table table-striped table-bordered table-hover">
+                        <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Label</th>
+                            <th>Group</th>
+                            <th>Description</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for department in departments %}
+                            <tr>
+                                {#                            <tr>#}
+                                <td>{{ department.id }}</td>
+
+                                <td>{{ department.label }}</td>
+
+                                <td>{{ department.group }}</td>
+
+                                <td>{{ department.description }}</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% if perms.system.change_department %}
+        <div id="context-menu">
+            <ul class="dropdown-menu" role="menu">
+                <li><a tabindex="-1" id="edit" href="#">Edit</a></li>
+            </ul>
+        </div>
+    {% endif %}
+{% endblock %}
+{% block pluginjs %}
+
+    <script type="text/javascript"
+            src="{% static 'assets/global/plugins/bootstrap-contextmenu/bootstrap-contextmenu.js' %}"></script>
+    <script type="text/javascript"
+            src="{% static 'assets/global/plugins/datatables/media/js/jquery.dataTables.min.js' %}"></script>
+    <script type="text/javascript"
+            src="{% static 'assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js' %}"></script>
+
+{% endblock %}
+{% block script %}
+    <script>
+        (function () {
+            $('.table').dataTable();
+
+            {% if perms.system.change_department %}
+                $('.table tbody tr').contextmenu({
+                    target: '#context-menu',
+                    before: function (e, context) {
+                        $('#edit').attr('href', ('/hr/department/mod/' + $(context).children('td:first').text()));
+                        return true;
+                    },
+                    onItem: function () {
+                        window.location.href = $('#edit').attr('href');
+                        return true;
+                    }
+                });
+            {% endif %}
+
+        }());
+
+        {#            (function () {#}
+        {#                $(".table tbody").on("contextmenu", "tr", function (e) {#}
+        {##}
+        {##}
+        {#                    var id = ($(this)).children('td:first').text();#}
+        {#                    //window.location.href = "/system/label/mod/" + id;#}
+        {#                });#}
+        {#            }());#}
+        {#        {% endif %}#}
+    </script>
+{% endblock %}
