@@ -11,5 +11,5 @@ urlpatterns = patterns('',
     url(r'^details/$', 'client.views.clientDetails'),
     url(r'^visa/', include("client.visa.urls")),
     url(r'^stage/', include("client.stage.urls")),
-    #XXX
+
 )
