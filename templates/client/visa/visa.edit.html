@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% load bootstrap3 %}
+
+{% block plugincss %}
+{% endblock %}
+{% block header %}
+    Label Configuration
+{% endblock %}
+{% block subHeader %}
+    ## Label Configuration
+{% endblock %}
+{% block breadcrumb %}
+    <ul class="page-breadcrumb breadcrumb">
+        <li>
+            <a href="{% url 'dashboard' %}">Home</a>
+            <i class="fa fa-circle"></i>
+        </li>
+        <li>
+            System
+            <i class="fa fa-circle"></i>
+        </li>
+        <li>
+            <a href="{% url 'label.list' %}">Sidebar</a>
+        </li>
+    </ul>
+{% endblock %}
+{% block content %}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="portlet box green-haze">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="fa fa-globe"></i>Client Edit
+                    </div>
+                </div>
+                <div class="portlet-body">
+                    <form method="POST">
+                        {% csrf_token %}
+                        {% bootstrap_form form %}
+                        {% buttons submit='OK' reset="Reset" %}{% endbuttons %}
+                    </form>
+
+                    {% if spec_visa %}
+                        {% if perms.systen.delete_visa %}
+                            <a href="{% url 'visa.delete'  spec_visa.id %}" class="btn btn-danger">Delete</a>
+                        {% endif %}
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+{% block pluginjs %}
+    <script type="text/javascript"
+            src="{% static 'assets/global/plugins/datatables/media/js/jquery.dataTables.min.js' %}"></script>
+    <script type="text/javascript"
+            src="{% static 'assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js' %}"></script>
+
+{% endblock %}
+{% block script %}
+    <script>
+        (function () {
+            $('.table').dataTable();
+        }());
+    </script>
+{% endblock %}
