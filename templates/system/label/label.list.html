@@ -6,7 +6,6 @@
 {% block plugincss %}
     <link rel="stylesheet" type="text/css"
           href="{% static 'assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css' %}"/>
-
 {% endblock %}
 {% block header %}
     Label Configuration
@@ -25,7 +24,7 @@
             <i class="fa fa-circle"></i>
         </li>
         <li>
-            <a href="#">Sidebar</a>
+            <a href="#">Label</a>
         </li>
     </ul>
 {% endblock %}
@@ -40,6 +39,16 @@
                     </div>
                 </div>
                 <div class="portlet-body">
+
+                    {% if messages %}
+                        {% for message in messages %}
+                            <div class="alert alert-success alert-dismissable">
+                                <i class="fa fa-check"></i>
+                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                <b>{{ message }}</b>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
                     <div class="table-toolbar">
                         <div class="row">
                             <div class="col-md-6">
@@ -87,7 +96,6 @@
     {% endif %}
 {% endblock %}
 {% block pluginjs %}
-
     <script type="text/javascript"
             src="{% static 'assets/global/plugins/bootstrap-contextmenu/bootstrap-contextmenu.js' %}"></script>
     <script type="text/javascript"
