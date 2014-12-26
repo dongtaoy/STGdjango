@@ -23,9 +23,9 @@ class Sidebar(models.Model):
         return self.text
 
 
-class Glyphicons(models.Model):
+class Icon(models.Model):
     name = models.CharField(max_length=50)
-    css = models.CharField(max_length='50', null=True, blank=True)
+    css = models.CharField(max_length=50, null=True, blank=True)
 
     def __unicode__(self):
         return self.name

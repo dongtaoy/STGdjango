@@ -155,9 +155,15 @@
       <primary-key name="PRIMARY" columns="id"/>
       <foreign-key name="hr_employee_user_id_2d0c16d9789a20b_fk_auth_user_id" columns="user_id" ref-table="auth_user" ref-schema="" ref-catalog="STG" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
     </table>
+    <table name="system_glyphicons" schema="" catalog="STG" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="name" sqlType="VARCHAR" precision="50" scale="0" nullable="false" jdbcType="12"/>
+      <column name="css" sqlType="VARCHAR" precision="50" scale="0" nullable="true" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="id"/>
+    </table>
     <table name="system_label" schema="" catalog="STG" type="TABLE">
       <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
-      <column name="name" sqlType="VARCHAR" precision="50" scale="0" nullable="true" jdbcType="12"/>
+      <column name="name" sqlType="VARCHAR" precision="50" scale="0" nullable="false" jdbcType="12"/>
       <column name="css" sqlType="VARCHAR" precision="50" scale="0" nullable="true" jdbcType="12"/>
       <primary-key name="PRIMARY" columns="id"/>
       <exported-key name="hr_department_label_id_5d52f6223a2b2279_fk_system_label_id" table="hr_department" schema="" catalog="STG" columns="label_id"/>
