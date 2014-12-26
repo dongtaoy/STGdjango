@@ -31,14 +31,14 @@ class SidebarUpdateView(SuccessMessageMixin, UpdateView):
     form_class = SidebarForm
     template_name = 'system/sidebar/sidebar.edit.html'
     success_url = '/system/sidebar/'
-    context_object_name = 'sidebar'
+    context_object_name = 'spec_sidebar'
     pk_url_kwarg = 'sidebar'
     model = Sidebar
     success_message = '%(text)s Sidebar updated'
 
 
 class SidebarDeleteView(DeleteView):
-    model = SidebarForm
+    model = Sidebar
     template_name = 'common/delete.confirmation.html'
     success_url = '/system/sidebar/'
     pk_url_kwarg = 'sidebar'
