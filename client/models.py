@@ -19,7 +19,7 @@ class Stage(models.Model):
     description = models.TextField()
 
     def __unicode__(self):
-        return "Stage %d - %s" % self.order, self.title
+        return "Stage %d - %s" % (self.order, self.title)
 
 
         # class StageDocuments(models.Model):

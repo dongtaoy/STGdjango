@@ -2,15 +2,15 @@
 {% load staticfiles %}
 {% load bootstrap3 %}
 {% block title %}
-    Visa Configuration
+    Stage Configuration
 {% endblock %}
 {% block plugincss %}
 {% endblock %}
 {% block header %}
-    Visa Configuration
+    Stage Configuration
 {% endblock %}
 {% block subHeader %}
-    ## Visa Configuration
+    ## Stage Configuration
 {% endblock %}
 {% block breadcrumb %}
     <ul class="page-breadcrumb breadcrumb">
@@ -43,9 +43,9 @@
                         {% buttons submit='OK' reset="Reset" %}{% endbuttons %}
                     </form>
 
-                    {% if spec_visa %}
-                        {% if perms.systen.delete_visa %}
-                            <a href="{% url 'visa.delete'  spec_visa.id %}" class="btn btn-danger">Delete</a>
+                    {% if spec_stage %}
+                        {% if perms.systen.delete_stage %}
+                            <a href="{% url 'stage.delete'  spec_stage.id %}" class="btn btn-danger">Delete</a>
                         {% endif %}
                     {% endif %}
                 </div>
