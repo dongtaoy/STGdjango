@@ -3,19 +3,14 @@ from django.db import models
 
 
 class Employee(models.Model):
+    name = models.CharField(max_length=50, default=None, null=True)
     phone = models.CharField(max_length=45, blank=True, null=True)
     dob = models.DateField(blank=True, null=True)
-    description = models.TextField(blank=True, null=True)
+    email = models.EmailField(default=None, null=True)
     user = models.OneToOneField('auth.User')
 
-    class Meta:
-        permissions = (('change_own_password', 'Can change own password'),)
-
     def __unicode__(self):
-        return self.user.last_name + self.user.first_name
-
-    def full_name(self):
-        return self.user.last_name + self.user.first_name
+        return self.name
 
 
 class Department(models.Model):

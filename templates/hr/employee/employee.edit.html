@@ -1,20 +1,17 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
 {% load bootstrap3 %}
-{% block title %}
-    Sidebar Configuration
-{% endblock %}
+
 {% block plugincss %}
-    <link rel="stylesheet" type="text/css"
-          href="{% static 'assets/global/plugins/select2/select2.css' %}"/>
-    <link rel="stylesheet" type="text/css"
-          href="{% static 'assets/global/plugins/select2/select2-bootstrap.css' %}"/>
+{% endblock %}
+{% block title %}
+    Employee Edit
 {% endblock %}
 {% block header %}
-    Sidebar Configuration
+    Employee Edit
 {% endblock %}
 {% block subHeader %}
-    ## Sidebar Configuration
+    ## Employee Edit
 {% endblock %}
 {% block breadcrumb %}
     <ul class="page-breadcrumb breadcrumb">
@@ -23,11 +20,11 @@
             <i class="fa fa-circle"></i>
         </li>
         <li>
-            System
+            <a href="#">System</a>
             <i class="fa fa-circle"></i>
         </li>
         <li>
-            <a href="{% url 'sidebar.list' %}">Sidebar</a>
+            <a href="{% url 'employee.list' %}">employee</a>
         </li>
     </ul>
 {% endblock %}
@@ -37,7 +34,7 @@
             <div class="portlet box green-haze">
                 <div class="portlet-title">
                     <div class="caption">
-                        <i class="fa fa-globe"></i>Sidebar Edit
+                        <i class="fa fa-globe"></i>Employee Edit
                     </div>
                 </div>
                 <div class="portlet-body">
@@ -47,9 +44,9 @@
                         {% buttons submit='OK' reset="Reset" %}{% endbuttons %}
                     </form>
 
-                    {% if spec_sidebar %}
-                        {% if perms.systen.delete_sidebar %}
-                            <a href="{% url 'sidebar.delete'  spec_sidebar.id %}" class="btn btn-danger">Delete</a>
+                    {% if spec_employee %}
+                        {% if perms.systen.delete_employee %}
+                            <a href="{% url 'employee.delete'  spec_employee.id %}" class="btn btn-danger">Delete</a>
                         {% endif %}
                     {% endif %}
                 </div>
@@ -59,11 +56,6 @@
 
 {% endblock %}
 {% block pluginjs %}
-    <script type="application/javascript"
-            src="{% static 'assets/global/plugins/select2/select2.min.js' %}"></script>
 {% endblock %}
 {% block script %}
-    <script>
-        $('form select').select2();
-    </script>
 {% endblock %}

@@ -249,6 +249,7 @@ var Demo = function () {
 
         $('#style_components').attr("href", Metronic.getGlobalCssPath() + file + ".css");
 
+
         if ($.cookie) {
             $.cookie('layout-style-option', style);
         }
@@ -263,6 +264,7 @@ var Demo = function () {
 
             // handle layout style change
             $('.theme-panel .layout-style-option').change(function() {
+                console.log($(this).val());
                  setThemeStyle($(this).val());
             });
 

@@ -126,3 +126,14 @@ LOGIN_URL = '/login/'
 
 LOGOUT_URL = '/logout/'
 
+
+# bootstrap3
+
+BOOTSTRAP3 = {
+    # Label class to use in horizontal forms
+    'horizontal_label_class': 'col-md-3',
+
+    # Field class to use in horizontal forms
+    'horizontal_field_class': 'col-md-4',
+}
+

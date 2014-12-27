@@ -19,7 +19,7 @@
                             <li>
                         {% endif %}
                     <a href="javascript:;">
-                        <i class="icon-basket"></i>
+                        <i class="{{ sidebar.icon.css }}"></i>
                         <span class="title">{{ sidebar.text }}</span>
                         <span class="arrow "></span>
                     </a>
@@ -27,7 +27,7 @@
                         {% for child in sidebar.children.all %}
                             <li>
                                 <a href="{{ child.url }}">
-                                    <i class="icon-home"></i>
+                                    <i class="{{ child.icon.css }}"></i>
                                     {{ child.text }}</a>
                             </li>
                         {% endfor %}
@@ -40,7 +40,7 @@
                             <li>
                         {% endif %}
                     <a href="{{ sidebar.url }}">
-                        <i class="icon-home"></i>
+                        <i class="{{ sidebar.icon.css }}"></i>
                         <span class="title">{{ sidebar.text }}</span>
                     </a>
                     </li>
