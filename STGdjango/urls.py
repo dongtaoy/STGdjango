@@ -20,7 +20,7 @@ urlpatterns = patterns(
     url(r'^admin/', include(admin.site.urls)),
 
     # hr urls
-    url('r^hr/', include('hr.urls')),
+    url(r'^hr/', include('hr.urls')),
 )
 
 admin.autodiscover()

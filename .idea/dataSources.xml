@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="DataSourceManagerImpl" format="xml" hash="2242510483">
+  <component name="DataSourceManagerImpl" format="xml" hash="1884433966">
     <data-source source="LOCAL" name="Django default" uuid="29d9f2f1-75fb-4182-9406-0fe60a3186a2">
       <driver-ref>mysql</driver-ref>
       <synchronize>true</synchronize>
@@ -15,10 +15,10 @@
       </driver-properties>
       <libraries>
         <library>
-          <url>file://$USER_HOME$/Library/Preferences/PyCharm30/jdbc-drivers/mysql-connector-license.txt</url>
+          <url>file://$APPLICATION_CONFIG_DIR$/jdbc-drivers/mysql-connector-license.txt</url>
         </library>
         <library>
-          <url>file://$USER_HOME$/Library/Preferences/PyCharm30/jdbc-drivers/mysql-connector-java-5.1.31-bin.jar</url>
+          <url>file://$APPLICATION_CONFIG_DIR$/jdbc-drivers/mysql-connector-java-5.1.34-bin.jar</url>
         </library>
       </libraries>
     </data-source>

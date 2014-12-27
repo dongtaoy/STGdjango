@@ -5,6 +5,10 @@
     Sidebar Configuration
 {% endblock %}
 {% block plugincss %}
+    <link rel="stylesheet" type="text/css"
+          href="{% static 'assets/global/plugins/select2/select2.css' %}"/>
+    <link rel="stylesheet" type="text/css"
+          href="{% static 'assets/global/plugins/select2/select2-bootstrap.css' %}"/>
 {% endblock %}
 {% block header %}
     Sidebar Configuration
@@ -55,6 +59,11 @@
 
 {% endblock %}
 {% block pluginjs %}
+    <script type="application/javascript"
+            src="{% static 'assets/global/plugins/select2/select2.min.js' %}"></script>
 {% endblock %}
 {% block script %}
+    <script>
+        $('form select').select2();
+    </script>
 {% endblock %}
