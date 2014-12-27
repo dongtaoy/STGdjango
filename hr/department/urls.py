@@ -1,9 +1,9 @@
-__author__ = 'dongtaoy'
+__author__ = 'georgecai904'
 from django.conf.urls import patterns, url
 from django.views.generic import ListView
 from django.contrib.auth.decorators import permission_required, login_required
 from hr.models import Department
-from hr.department.views import DepartmentCreateView, DepartmentUpdateView, DepartmentDeleteView, GroupCreateView
+from hr.department.views import DepartmentWizard, DepartmentUpdateView, DepartmentDeleteView, FORMS
 
 urlpatterns = patterns(
     '',
@@ -18,7 +18,7 @@ urlpatterns = patterns(
         template_name='hr/department/department.list.html')), name='department.list'),
 
     url(r'^add/$',
-        permission_required('hr.add_department')(DepartmentCreateView.as_view()), name='department.add'),
+        DepartmentWizard.as_view(FORMS), name='department.add'),
 
     url(r'^mod/(?P<department>\d+)/$',
         permission_required('hr.change_department')(DepartmentUpdateView.as_view()), name='department.mod'),

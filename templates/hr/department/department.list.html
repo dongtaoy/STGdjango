@@ -1,7 +1,8 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
+{% load bootstrap3 %}
 {% block title %}
-    Visa Configuration
+    Department Configuration
 {% endblock %}
 {% block plugincss %}
     <link rel="stylesheet" type="text/css"
@@ -9,10 +10,10 @@
 
 {% endblock %}
 {% block header %}
-    Visa Configuration
+    Department Configuration
 {% endblock %}
 {% block subHeader %}
-    ## Visa Configuration
+    ## Department Configuration
 {% endblock %}
 {% block breadcrumb %}
     <ul class="page-breadcrumb breadcrumb">
@@ -25,7 +26,7 @@
             <i class="fa fa-circle"></i>
         </li>
         <li>
-            <a href="#">Visa</a>
+            <a href="#">Department</a>
         </li>
     </ul>
 {% endblock %}
@@ -35,16 +36,17 @@
             <div class="portlet box green-haze">
                 <div class="portlet-title">
                     <div class="caption">
-                        <i class="fa fa-globe"></i>Visas
+                        <i class="fa fa-globe"></i>Department List
                     </div>
                 </div>
                 <div class="portlet-body">
+
+                    {% bootstrap_messages %}
                     <div class="table-toolbar">
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="btn-group">
                                     <a href="{% url 'department.add' %}" class="btn green">
-{#                                    <a href="#" class="btn green">#}
                                         Add New <i class="fa fa-plus"></i>
                                     </a>
                                 </div>

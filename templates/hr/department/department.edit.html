@@ -1,16 +1,17 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
 {% load bootstrap3 %}
-{% block title %}
-    Department
-{% endblock %}
+
 {% block plugincss %}
 {% endblock %}
+{% block title %}
+    Department Edit
+{% endblock %}
 {% block header %}
-    Label Configuration
+    Department Edit
 {% endblock %}
 {% block subHeader %}
-    ## Label Configuration
+    ## Department Edit
 {% endblock %}
 {% block breadcrumb %}
     <ul class="page-breadcrumb breadcrumb">
@@ -19,11 +20,11 @@
             <i class="fa fa-circle"></i>
         </li>
         <li>
-            System
+            <a href="#">System</a>
             <i class="fa fa-circle"></i>
         </li>
         <li>
-            <a href="{% url 'label.list' %}">Sidebar</a>
+            <a href="{% url 'department.list' %}">department</a>
         </li>
     </ul>
 {% endblock %}
@@ -33,7 +34,7 @@
             <div class="portlet box green-haze">
                 <div class="portlet-title">
                     <div class="caption">
-                        <i class="fa fa-globe"></i>Client Edit
+                        <i class="fa fa-globe"></i>Department Edit
                     </div>
                 </div>
                 <div class="portlet-body">
@@ -43,9 +44,9 @@
                         {% buttons submit='OK' reset="Reset" %}{% endbuttons %}
                     </form>
 
-                    {% if spec_visa %}
-                        {% if perms.systen.delete_visa %}
-                            <a href="{% url 'visa.delete'  spec_visa.id %}" class="btn btn-danger">Delete</a>
+                    {% if spec_department %}
+                        {% if perms.systen.delete_department %}
+                            <a href="{% url 'department.delete'  spec_department.id %}" class="btn btn-danger">Delete</a>
                         {% endif %}
                     {% endif %}
                 </div>
@@ -55,16 +56,6 @@
 
 {% endblock %}
 {% block pluginjs %}
-    <script type="text/javascript"
-            src="{% static 'assets/global/plugins/datatables/media/js/jquery.dataTables.min.js' %}"></script>
-    <script type="text/javascript"
-            src="{% static 'assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js' %}"></script>
-
 {% endblock %}
 {% block script %}
-    <script>
-        (function () {
-            $('.table').dataTable();
-        }());
-    </script>
 {% endblock %}
