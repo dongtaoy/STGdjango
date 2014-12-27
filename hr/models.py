@@ -3,10 +3,10 @@ from django.db import models
 
 
 class Employee(models.Model):
-    name = models.CharField(max_length=50, blank=True, null=True)
+    name = models.CharField(max_length=50, default=None, null=True)
     phone = models.CharField(max_length=45, blank=True, null=True)
     dob = models.DateField(blank=True, null=True)
-    email = models.EmailField(blank=True, null=True)
+    email = models.EmailField(default=None, null=True)
     user = models.OneToOneField('auth.User')
 
     def __unicode__(self):
