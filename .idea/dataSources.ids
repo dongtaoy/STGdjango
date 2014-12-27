@@ -150,8 +150,8 @@
       <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
       <column name="phone" sqlType="VARCHAR" precision="45" scale="0" nullable="true" jdbcType="12"/>
       <column name="dob" sqlType="DATE" precision="10" scale="0" nullable="true" jdbcType="91"/>
-      <column name="description" sqlType="LONGTEXT" precision="2147483647" scale="0" nullable="true" jdbcType="-1"/>
       <column name="user_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="email" sqlType="VARCHAR" precision="75" scale="0" nullable="true" jdbcType="12"/>
       <primary-key name="PRIMARY" columns="id"/>
       <foreign-key name="hr_employee_user_id_2d0c16d9789a20b_fk_auth_user_id" columns="user_id" ref-table="auth_user" ref-schema="" ref-catalog="STG" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
     </table>
@@ -174,10 +174,12 @@
       <column name="url" sqlType="VARCHAR" precision="100" scale="0" nullable="false" jdbcType="12"/>
       <column name="order" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
       <column name="parent_id" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="icon_id" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
       <primary-key name="PRIMARY" columns="id"/>
       <foreign-key name="system_sidebar_parent_id_542811cecb52cff4_fk_system_sidebar_id" columns="parent_id" ref-table="system_sidebar" ref-schema="" ref-catalog="STG" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
       <exported-key name="system_sidebar_parent_id_542811cecb52cff4_fk_system_sidebar_id" table="system_sidebar" schema="" catalog="STG" columns="parent_id"/>
       <index name="system_sidebar_6be37982" unique="false" columns="parent_id"/>
+      <index name="system_sidebar_icon_id_fc35ef93adfa747_fk_system_icon_id_idx" unique="false" columns="icon_id"/>
     </table>
     <table name="CHARACTER_SETS" schema="" catalog="information_schema" type="SYSTEM VIEW">
       <column name="CHARACTER_SET_NAME" sqlType="VARCHAR" precision="32" scale="0" nullable="false" jdbcType="12" def="Jyc="/>
