@@ -67,9 +67,7 @@
                         <tbody>
                         {% for employee in employees %}
                             <tr>
-                                <td>
-                                    {{ employee.id }}
-                                </td>
+                                <td>{{ employee.id }}</td>
                                 <td>
                                     {{ employee.name }}
                                 </td>
@@ -116,7 +114,7 @@
                 $('.table tbody tr').contextmenu({
                     target: '#context-menu',
                     before: function (e, context) {
-                        $('#edit').attr('href', ('/system/employee/mod/' + $(context).children('td:first').text()));
+                        $('#edit').attr('href', ('/hr/employee/mod/' + $(context).children('td:first').text()));
                         return true;
                     },
                     onItem: function () {

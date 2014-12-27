@@ -1,9 +1,10 @@
 __author__ = 'dongtaoy'
-from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from django.core.urlresolvers import reverse
+from django.views.generic.edit import UpdateView, DeleteView
+
 from django.contrib.formtools.wizard.views import SessionWizardView
 from django.contrib.messages.views import SuccessMessageMixin
 from django.shortcuts import redirect
+from django.contrib import messages
 from hr.forms import EmployeeForm
 from hr.models import Employee
 from django.db.transaction import atomic
@@ -31,6 +32,7 @@ class EmployeeWizard(SessionWizardView):
             employee = form_list[1].save(commit=False)
             employee.user = form_list[0].save()
             employee.save()
+        messages.success(self.request, ("%s Employee Created" % employee.name))
         return redirect('/hr/employee/')
 
 
@@ -48,3 +50,12 @@ class EmployeeDeleteView(DeleteView):
     template_name = 'common/delete.confirmation.html'
     success_url = '/hr/employee/'
     pk_url_kwarg = 'employee'
+
+    def delete(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        user = self.object.user
+        with atomic():
+            self.object.delete()
+            user.delete()
+        messages.success(self.request, 'Employee deleted')
+        return redirect(self.get_success_url())

@@ -10,7 +10,7 @@ class Employee(models.Model):
     user = models.OneToOneField('auth.User')
 
     def __unicode__(self):
-        return self.user.last_name + self.user.first_name
+        return self.name
 
 
 class Department(models.Model):
