@@ -1,9 +1,9 @@
+__author__ = 'georgecai904'
 from django.contrib import messages
 from django.contrib.formtools.wizard.views import SessionWizardView
 from django.db.transaction import atomic
 from django.shortcuts import redirect
-from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from django.contrib.auth.admin import Group
+from django.views.generic.edit import UpdateView, DeleteView
 from django.contrib.messages.views import SuccessMessageMixin
 from hr.forms import DepartmentForm, GroupCreationForm
 from hr.models import Department
@@ -39,6 +39,7 @@ class DepartmentUpdateView(SuccessMessageMixin, UpdateView):
     context_object_name = 'spec_department'
     pk_url_kwarg = 'department'
     model = Department
+    success_message = "%(group.name)s Department updated"
 
 
 class DepartmentDeleteView(DeleteView):
@@ -46,3 +47,7 @@ class DepartmentDeleteView(DeleteView):
     template_name = 'common/delete.confirmation.html'
     success_url = '/hr/department/'
     pk_url_kwarg = 'department'
+
+    def delete(self, request, *args, **kwargs):
+        messages.success(self.request, "Department deleted")
+        return super(DepartmentDeleteView, self).delete(self, request, *args, **kwargs)
