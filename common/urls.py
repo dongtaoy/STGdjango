@@ -19,8 +19,8 @@ urlpatterns = patterns(
     url(r'^$', login_required(TemplateView.as_view(template_name='dashboard.html')), name='dashboard'),
 
     # common page testing
-    # url(r'^403$', login_required(TemplateView.as_view(template_name='common/403.html'))),
-    # url(r'^404$', login_required(TemplateView.as_view(template_name='common/404.html'))),
-    # url(r'^500$', login_required(TemplateView.as_view(template_name='common/500.html'))),
+    url(r'^403$', login_required(TemplateView.as_view(template_name='common/403.html'))),
+    url(r'^404$', login_required(TemplateView.as_view(template_name='common/404.html'))),
+    url(r'^500$', login_required(TemplateView.as_view(template_name='common/500.html'))),
     # url(r'^delconfirm/$', login_required(TemplateView.as_view(template_name='common/delete.confirmation.html')), name='delete.confirmation'),
 )
