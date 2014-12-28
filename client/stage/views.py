@@ -9,7 +9,7 @@ class StageCreateView(SuccessMessageMixin, CreateView):
     form_class = StageForm
     template_name = "client/stage/stage.edit.html"
     success_url = "/client/stage/"
-    success_message = "%(title) Stage created"
+    success_message = "%(title)s Stage created"
 
 
 class StageUpdateView(SuccessMessageMixin, UpdateView):

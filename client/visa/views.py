@@ -10,7 +10,7 @@ class VisaCreateView(SuccessMessageMixin, CreateView):
     form_class = VisaForm
     template_name = 'client/visa/visa.edit.html'
     success_url = '/client/visa/'
-    success_message = "%(subClass) Visa created"
+    success_message = "%(subClass)s Visa created"
 
 
 class VisaUpdateView(SuccessMessageMixin, UpdateView):
