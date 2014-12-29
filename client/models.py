@@ -2,34 +2,6 @@ from django.db import models
 from hr.models import Employee
 
 
-class Client(models.Model):
-    # Personal Information
-    name = models.CharField(max_length=100)
-    preferredName = models.CharField(max_length=100, blank=True, null=True)
-    DoB = models.DateField()
-    nationality = models.CharField(max_length=100)
-    Email = models.EmailField(blank=True, null=True)
-    contactNumber = models.CharField(max_length=20, blank=True, null=True)
-    onshore = models.BooleanField(blank=True, null=True)
-
-    # Visa Information
-    visa = models.ForeignKey(Visa)
-    expiryDate = models.DateField(blank=True, null=True)
-
-    # Service Information
-    status = models.CharField(max_length=100)
-    referal = models.ForeignKey(Employee, blank=True, null=True)
-    Consultant = models.ForeignKey(Employee, blank=True, null=True)
-    clientManager = models.ForeignKey(Employee, blank=True, null=True)
-    stage = models.ManyToManyField(Stage)
-    serviceFee = models.FloatField()
-    thirdPartyFeeReceived = models.FloatField(blank=True, null=True)
-    thirdPartyFeePaid = models.FloatField(blank=True, null=True)
-
-    # Others
-    note = models.TextField(blank=True, null=True)
-
-
 class Visa(models.Model):
     subClass = models.IntegerField(max_length=3)
     description = models.TextField(max_length=100, null=True, blank=True)
@@ -47,10 +19,30 @@ class Stage(models.Model):
         return "Stage %d - %s" % (self.order, self.title)
 
 
-        # class StageDocuments(models.Model):
-        # stage = models.ForeignKey(Stage)
-        # title = models.CharField(max_length=100, null=True, blank=False)
-        # path = models.CharField(max_length=150, null=True, blank=False)
-        #
-        # def __unicode__(self):
-        # return self.title
+class Client(models.Model):
+    # Personal Information
+    name = models.CharField(max_length=100)
+    preferredName = models.CharField(max_length=100, blank=True, null=True)
+    dob = models.DateField(blank=True, null=True)
+    nationality = models.CharField(max_length=100, blank=True, null=True)  ## ChoiceField???? todo
+    email = models.EmailField(blank=True, null=True)
+    phone = models.CharField(max_length=20, blank=True, null=True)
+    onshore = models.BooleanField(default=True)
+
+    # Visa Information
+    visa = models.ForeignKey(Visa)
+    expire = models.DateField(blank=True, null=True)
+
+    # Service Information
+    status = models.CharField(max_length=100)  ## ChoiceField todo
+    referal = models.ForeignKey(Employee, blank=True, null=True, related_name="ref")  # todo
+    consultant = models.ForeignKey(Employee, blank=True, null=True, related_name="con")  # todo
+    clientManager = models.ForeignKey(Employee, blank=True, null=True, related_name="c")  # todo
+    # stage = models.ManyToManyField(Stage) ## todo
+    serviceFee = models.FloatField(blank=True, null=True)
+    thirdPartyFeeReceived = models.FloatField(blank=True, null=True)
+    thirdPartyFeePaid = models.FloatField(blank=True, null=True)
+
+    # Others
+    note = models.TextField(blank=True, null=True)
+
