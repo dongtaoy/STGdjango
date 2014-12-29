@@ -34,10 +34,15 @@ class Client(models.Model):
     expire = models.DateField(blank=True, null=True)
 
     # Service Information
-    status = models.CharField(max_length=100)  ## ChoiceField todo
+    STATUS_CHOICES = (
+        ("Ongoing", "Ongoing"),
+        ("Existing", "Existing"),
+        ("Close", "Close")
+    )
+    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default="Ongoing")  ## ChoiceField todo
     referal = models.ForeignKey(Employee, blank=True, null=True, related_name="ref")  # todo
     consultant = models.ForeignKey(Employee, blank=True, null=True, related_name="con")  # todo
-    clientManager = models.ForeignKey(Employee, blank=True, null=True, related_name="c")  # todo
+    clientManager = models.ForeignKey(Employee, blank=True, null=True, related_name="cm")  # todo
     # stage = models.ManyToManyField(Stage) ## todo
     serviceFee = models.FloatField(blank=True, null=True)
     thirdPartyFeeReceived = models.FloatField(blank=True, null=True)
