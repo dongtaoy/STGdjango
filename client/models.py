@@ -19,42 +19,6 @@ class Stage(models.Model):
         return "Stage %d - %s" % (self.order, self.title)
 
 
-class Institution(models.Model):
-    name = models.CharField(max_length=100)
-    description = models.TextField(blank=True, null=True)
-
-
-class Coe(models.Model):
-    client = models.ForeignKey(Client)
-    institution = models.ForeignKey(Institution)
-    start = models.DateField()
-    end = models.DateField()
-
-    totalTuitionFee = models.FloatField(blank=True, null=True)
-    totalReceivedFee = models.FloatField(blank=True, null=True)
-    totalPaymentFee = models.FloatField(blank=True, null=True)
-    totalCommissionClaimed = models.FloatField(blank=True, null=True)
-    totalCommissionRecevied = models.FloatField(blank=True, null=True)
-    bonus = models.FloatField(blank=True, null=True)
-    referalCommission = models.FloatField(blank=True, null=True)
-    consultantCommission = models.FloatField(blank=True, null=True)
-
-    description = models.TextField(blank=True, null=True)
-
-
-class Payment(models.Model):
-    coe = models.ForeignKey(Coe)
-
-    receivedAmount = models.FloatField(blank=True, null=True)
-    receivedDate = models.DateField(blank=True, null=True)
-    paidAmount = models.FloatField(blank=True, null=True)
-    paidDate = models.DateField(blank=True, null=True)
-    commssionClaimed = models.FloatField(blank=True, null=True)
-    commssionRecevied = models.FloatField(blank=True, null=True)
-
-    nextDueDate = models.DateField(blank=True, null=True)
-
-
 class Client(models.Model):
     # Personal Information
     name = models.CharField(max_length=100)
@@ -88,3 +52,41 @@ class Client(models.Model):
     # Others
     note = models.TextField(blank=True, null=True)
 
+
+#
+# class Institution(models.Model):
+# name = models.CharField(max_length=100)
+#     description = models.TextField(blank=True, null=True)
+#
+#
+# class Coe(models.Model):
+#     client = models.ForeignKey(Client)
+#     institution = models.ForeignKey(Institution)
+#     start = models.DateField()
+#     end = models.DateField()
+#
+#     totalTuitionFee = models.FloatField(blank=True, null=True)
+#     totalReceivedFee = models.FloatField(blank=True, null=True)
+#     totalPaymentFee = models.FloatField(blank=True, null=True)
+#     totalCommissionClaimed = models.FloatField(blank=True, null=True)
+#     totalCommissionRecevied = models.FloatField(blank=True, null=True)
+#     bonus = models.FloatField(blank=True, null=True)
+#     referalCommission = models.FloatField(blank=True, null=True)
+#     consultantCommission = models.FloatField(blank=True, null=True)
+#
+#     description = models.TextField(blank=True, null=True)
+
+#
+#
+#
+# class Payment(models.Model):
+#     coe = models.ForeignKey(Coe)
+#
+#     receivedAmount = models.FloatField(blank=True, null=True)
+#     receivedDate = models.DateField(blank=True, null=True)
+#     paidAmount = models.FloatField(blank=True, null=True)
+#     paidDate = models.DateField(blank=True, null=True)
+#     commssionClaimed = models.FloatField(blank=True, null=True)
+#     commssionRecevied = models.FloatField(blank=True, null=True)
+#
+#     nextDueDate = models.DateField(blank=True, null=True)
