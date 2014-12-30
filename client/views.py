@@ -6,7 +6,7 @@ from django.shortcuts import render
 # Create your views here.
 from django.views.generic import CreateView, UpdateView, DeleteView, DetailView
 from client.forms import ClientForm, StageForm
-from client.models import Client
+from client.models import Client, Coe
 
 
 def get_custom_form(customModel, customFields):
@@ -78,5 +78,12 @@ class ClientDeleteView(DeleteView):
 
 class ClientDetailView(DetailView):
     model = Client
-    template_name = "client/client.details.html"
+    template_name = "client/client.info.html"
     pk_url_kwarg = "client"
+
+    def get_context_data(self, **kwargs):
+        context = super(ClientDetailView, self).get_context_data(**kwargs)
+        client = context["client"]
+        coes = Coe.objects.filter(client=client)
+        context["coes"] = coes
+        return context

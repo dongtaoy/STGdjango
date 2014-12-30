@@ -52,6 +52,9 @@ class Client(models.Model):
     # Others
     note = models.TextField(blank=True, null=True)
 
+    def __unicode__(self):
+        return self.name
+
 
 class Institution(models.Model):
     name = models.CharField(max_length=100)
@@ -72,6 +75,9 @@ class Coe(models.Model):
     referalCommission = models.FloatField(blank=True, null=True)
     consultantCommission = models.FloatField(blank=True, null=True)
     description = models.TextField(blank=True, null=True)
+
+    def __unicode__(self):
+        return "%d - %s - %s " % (self.id, self.client.name, self.institution.name)
 
 #
 #

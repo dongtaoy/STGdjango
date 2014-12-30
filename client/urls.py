@@ -2,13 +2,11 @@ from django.conf.urls import patterns, include, url
 from django.contrib import admin
 from django.contrib.auth.decorators import login_required, permission_required
 from django.views.generic import ListView, DetailView
+from client.coe.views import CoeCreateView, CoeUpdateView, CoeDeleteView
 from client.models import Client
 from client.views import ClientCreateView, ClientUpdateView, ClientDeleteView, ClientDetailView
 
 urlpatterns = patterns('',
-    # Examples:
-    # url(r'^$', 'STGdjango.views.home', name='home'),
-    # url(r'^blog/', include('blog.urls')),
 
     url(r'^$', login_required(ListView.as_view(
             model=Client,
@@ -23,10 +21,11 @@ urlpatterns = patterns('',
         permission_required("client.delete_client")(ClientDeleteView.as_view()), name="client.delete"),
     url(r'^details/(?P<client>\d+)/$', login_required(ClientDetailView.as_view()), name="client.details"),
 
-
-     # url(r'^details/$', 'client.views.clientDetails'),
-
     url(r'^visa/', include("client.visa.urls")),
     url(r'^stage/', include("client.stage.urls")),
     url(r'^institution/', include('client.institution.urls')),
+    url(r'^coe/', include('client.coe.urls')),
+
+
+
 )
