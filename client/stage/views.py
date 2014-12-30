@@ -19,7 +19,7 @@ class StageUpdateView(SuccessMessageMixin, UpdateView):
     context_object_name = "spec_stage"
     pk_url_kwarg = "stage"
     model = Stage
-    success_message = "%(title)s stage updated"
+    success_message = "%(title)s Stage updated"
 
 
 class StageDeleteView(DeleteView):

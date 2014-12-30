@@ -28,4 +28,5 @@ urlpatterns = patterns('',
 
     url(r'^visa/', include("client.visa.urls")),
     url(r'^stage/', include("client.stage.urls")),
+    url(r'^institution/', include('client.institution.urls')),
 )

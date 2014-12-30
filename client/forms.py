@@ -1,6 +1,6 @@
 __author__ = 'dongtaoy'
 from django.forms import ModelForm
-from client.models import Visa, Stage, Client
+from client.models import Visa, Stage, Client, Institution
 
 
 class VisaForm(ModelForm):
@@ -15,6 +15,12 @@ class StageForm(ModelForm):
         fields = '__all__'
 
 
+class InstitutionForm(ModelForm):
+    class Meta:
+        model = Institution
+        fields = '__all__'
+
+
 class ClientForm(ModelForm):
     class Meta:
         model = Client
@@ -26,6 +32,7 @@ def get_custom_form(customModel, customFields):
         class Meta:
             model = customModel
             fields = customFields
+
     return _customForm
 
 
