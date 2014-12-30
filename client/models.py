@@ -1,6 +1,6 @@
 from django.db import models
 from hr.models import Employee
-
+from system.models import Label
 
 class Visa(models.Model):
     subClass = models.IntegerField(max_length=3)
@@ -53,11 +53,11 @@ class Client(models.Model):
     note = models.TextField(blank=True, null=True)
 
 
-#
-# class Institution(models.Model):
-# name = models.CharField(max_length=100)
-#     description = models.TextField(blank=True, null=True)
-#
+class Institution(models.Model):
+    name = models.CharField(max_length=100)
+    label = models.ForeignKey(Label, null=True, blank=True)
+    description = models.TextField(blank=True, null=True)
+
 #
 # class Coe(models.Model):
 #     client = models.ForeignKey(Client)

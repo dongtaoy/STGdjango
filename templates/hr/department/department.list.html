@@ -58,7 +58,6 @@
                         <thead>
                         <tr>
                             <th>ID</th>
-                            <th>Label</th>
                             <th>Group</th>
                             <th>Description</th>
                         </tr>
@@ -69,9 +68,13 @@
                                 {#                            <tr>#}
                                 <td>{{ department.id }}</td>
 
-                                <td>{{ department.label }}</td>
-
-                                <td>{{ department.group }}</td>
+                                <td>
+                                    {% if department.label %}
+                                        <span class="label {{ department.label.css }}">{{ department.group }}</span>
+                                    {% else %}
+                                        {{ department.group }}
+                                    {% endif %}
+                                </td>
 
                                 <td>{{ department.description }}</td>
                             </tr>
