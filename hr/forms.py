@@ -13,6 +13,13 @@ class DepartmentForm(ModelForm):
         exclude = ('group',)
 
 
+
+# class DepartmentEditForm(ModelForm):
+# class Meta:
+#         model = (Department, Group)
+#         fields = '__all__'
+
+
 class GroupCreationForm(ModelForm):
     class Meta:
         model = Group
@@ -31,3 +38,9 @@ class EmployeeForm(ModelForm):
     class Meta:
         model = Employee
         exclude = ('user',)
+
+
+class GroupForm(ModelForm):
+    class Meta:
+        model = Group
+        fields = "__all__"
