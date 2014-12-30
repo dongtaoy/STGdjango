@@ -58,6 +58,9 @@ class Institution(models.Model):
     label = models.ForeignKey(Label, null=True, blank=True)
     description = models.TextField(blank=True, null=True)
 
+    def __unicode__(self):
+        return self.name
+
 
 class Coe(models.Model):
     client = models.ForeignKey(Client)
