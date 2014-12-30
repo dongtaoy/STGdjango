@@ -2,15 +2,14 @@
 {% load staticfiles %}
 {% load bootstrap3 %}
 {% block title %}
-    Visa List
+    Institution List
 {% endblock %}
 {% block plugincss %}
     <link rel="stylesheet" type="text/css"
           href="{% static 'assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css' %}"/>
-
-{% endblock %}
+{% endblock %}s
 {% block header %}
-    Visa
+    Institution
 {% endblock %}
 {% block subHeader %}
     List
@@ -26,7 +25,7 @@
             <i class="fa fa-circle"></i>
         </li>
         <li>
-            <a href="{% url 'visa.list' %}">Visa</a>
+            <a href="{% url 'institution.list' %}">Institution</a>
         </li>
     </ul>
 {% endblock %}
@@ -36,7 +35,7 @@
             <div class="portlet box green-haze">
                 <div class="portlet-title">
                     <div class="caption">
-                        <i class="fa fa-globe"></i>Visas
+                        <i class="fa fa-globe"></i>Institutions
                     </div>
                 </div>
                 <div class="portlet-body">
@@ -45,7 +44,7 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="btn-group">
-                                    <a href="{% url 'visa.add' %}" class="btn green">
+                                    <a href="{% url 'institution.add' %}" class="btn green">
 {#                                    <a href="#" class="btn green">#}
                                         Add New <i class="fa fa-plus"></i>
                                     </a>
@@ -58,19 +57,22 @@
                         <thead>
                         <tr>
                             <th>ID</th>
-                            <th>Visa Subclass</th>
-                            <th>Visa Description</th>
+                            <th>Name</th>
+                            <th>Label</th>
+                            <th>Description</th>
                         </tr>
                         </thead>
                         <tbody>
-                        {% for visa in visas %}
+                        {% for institution in institutions %}
                             <tr>
                                 {#                            <tr>#}
-                                <td>{{ visa.id }}</td>
+                                <td>{{ institution.id }}</td>
 
-                                <td>{{ visa.subClass }}</td>
+                                <td>{{ institution.name }}</td>
 
-                                <td>{{ visa.description }}</td>
+                                <td>{{ institution.label }}</td>
+
+                                <td>{{ institution.description }}</td>
                             </tr>
                         {% endfor %}
                         </tbody>
@@ -79,7 +81,7 @@
             </div>
         </div>
     </div>
-    {% if perms.system.change_visa %}
+    {% if perms.system.change_institution %}
         <div id="context-menu">
             <ul class="dropdown-menu" role="menu">
                 <li><a tabindex="-1" id="edit" href="#">Edit</a></li>
@@ -102,11 +104,11 @@
         (function () {
             $('.table').dataTable();
 
-            {% if perms.system.change_visa %}
+            {% if perms.system.change_institution %}
                 $('.table tbody tr').contextmenu({
                     target: '#context-menu',
                     before: function (e, context) {
-                        $('#edit').attr('href', ('/client/visa/mod/' + $(context).children('td:first').text()));
+                        $('#edit').attr('href', ('/client/institution/mod/' + $(context).children('td:first').text()));
                         return true;
                     },
                     onItem: function () {

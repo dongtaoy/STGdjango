@@ -2,19 +2,19 @@
 {% load staticfiles %}
 {% load bootstrap3 %}
 {% block title %}
-    {% if spec_stage.title %}
-        Stage Configuration
+    {% if spec_institution.name %}
+        Institution Configuration
     {% else %}
-        Stage Addition
+        Institution Addition
     {% endif %}
 {% endblock %}
 {% block plugincss %}
 {% endblock %}
 {% block header %}
-    Stage
+    Institution
 {% endblock %}
 {% block subHeader %}
-    {% if spec_stage.title %}
+    {% if spec_institution.name %}
         Configuration
     {% else %}
         Addition
@@ -31,7 +31,7 @@
             <i class="fa fa-circle"></i>
         </li>
         <li>
-            <a href="{% url 'stage.list' %}">Stage</a>
+            <a href="{% url 'institution.list' %}">Institution</a>
         </li>
     </ul>
 {% endblock %}
@@ -42,10 +42,10 @@
                 <div class="portlet-title">
                     <div class="caption">
                         <i class="fa fa-globe"></i>
-                        {% if spec_stage.title %}
-                            Stage Configuration
+                        {% if spec_institution.name %}
+                            Institution Configuration
                         {% else %}
-                            Stage Addition
+                            Institution Addition
                         {% endif %}
                     </div>
                 </div>
@@ -56,9 +56,9 @@
                         {% buttons submit='OK' reset="Reset" %}{% endbuttons %}
                     </form>
 
-                    {% if spec_stage %}
-                        {% if perms.systen.delete_stage %}
-                            <a href="{% url 'stage.delete'  spec_stage.id %}" class="btn btn-danger">Delete</a>
+                    {% if spec_institution %}
+                        {% if perms.systen.delete_institution %}
+                            <a href="{% url 'institution.delete'  spec_institution.id %}" class="btn btn-danger">Delete</a>
                         {% endif %}
                     {% endif %}
                 </div>

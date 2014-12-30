@@ -2,15 +2,27 @@
 {% load staticfiles %}
 {% load bootstrap3 %}
 {% block title %}
-    {{ spec_client.name }}'s {{ section|capfirst }} Configuration
+    {% if spec_client.name %}
+        {{ spec_client.name }}'s {{ section|capfirst }} Configuration
+    {% else %}
+        New Client
+    {% endif %}
 {% endblock %}
 {% block plugincss %}
 {% endblock %}
 {% block header %}
-    {{ spec_client.name }}'s {{ section|capfirst }}
+    {% if spec_client.name %}
+        {{ spec_client.name }}'s {{ section|capfirst }}
+    {% else %}
+        New Client
+    {% endif %}
 {% endblock %}
 {% block subHeader %}
-    Configuration
+    {% if spec_client.name %}
+        Configuration
+    {% else %}
+        Addition
+    {% endif %}
 {% endblock %}
 {% block breadcrumb %}
     <ul class="page-breadcrumb breadcrumb">
@@ -23,7 +35,7 @@
             <i class="fa fa-circle"></i>
         </li>
         <li>
-            <a href="/client/details/{{ spec_client.id }}">{{ spec_client.name }}</a>
+            <a href="#">New Client</a>
 {#            <i class="fa fa-circle"></i>#}
         </li>
 {#        <li>#}
@@ -37,7 +49,12 @@
             <div class="portlet box green-haze">
                 <div class="portlet-title">
                     <div class="caption">
-                        <i class="fa fa-globe"></i>{{ section|capfirst }} Information
+                        <i class="fa fa-globe"></i>
+                        {% if spec_client.name %}
+                            {{ section|capfirst }} Information
+                        {% else %}
+                            Add New Client
+                        {% endif %}
                     </div>
                 </div>
                 <div class="portlet-body">
