@@ -16,7 +16,7 @@ class DepartmentForm(ModelForm):
 class GroupCreationForm(ModelForm):
     class Meta:
         model = Group
-        field = "__all__"
+        fields = "__all__"
 
     def save(self, commit=True):
         group = super(GroupCreationForm, self).save(commit=False)

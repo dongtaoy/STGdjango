@@ -1,47 +1,59 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
-
+{% load bootstrap3 %}
 {% block title %}
     Client List
 {% endblock %}
-
 {% block plugincss %}
-    <link rel="stylesheet" type="text/css" href="{% static 'assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css' %}"/>
-{% endblock %}
+    <link rel="stylesheet" type="text/css"
+          href="{% static 'assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css' %}"/>
 
-{#page content#}
+{% endblock %}
 {% block header %}
-    Client List
+    Client
 {% endblock %}
 {% block subHeader %}
-    subtitle
+    List
 {% endblock %}
 {% block breadcrumb %}
     <ul class="page-breadcrumb breadcrumb">
-            <li>
-                <a href="{% url 'dashboard' %}">Home</a>
-                <i class="fa fa-circle"></i>
-            </li>
-            <li>
-                <a href="{% url 'client' %}">Client</a>
-{#                <i class="fa fa-circle"></i>#}
-            </li>
-        </ul>
+        <li>
+            <a href="{% url 'dashboard' %}">Home</a>
+            <i class="fa fa-circle"></i>
+        </li>
+        <li>
+            <a href="{% url 'client.list' %}">Client</a>
+            <i class="fa fa-circle"></i>
+        </li>
+    </ul>
 {% endblock %}
-
 {% block content %}
     <div class="row">
         <div class="col-md-12">
-                <div class="portlet box green-haze">
-                    <div class="portlet-title">
-                        <div class="caption">
-                            <i class="fa fa-globe"></i>Clients
+            <div class="portlet box green-haze">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="fa fa-globe"></i>Client List
+                    </div>
+                </div>
+                <div class="portlet-body">
+                    {% bootstrap_messages %}
+                    <div class="table-toolbar">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="btn-group">
+                                    <a href="{% url 'client.add' %}" class="btn green">
+{#                                    <a href="#" class="btn green">#}
+                                        Add New <i class="fa fa-plus"></i>
+                                    </a>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="portlet-body">
-                        <table class="table table-striped table-bordered table-hover" id="sample_2">
+                    <table class="table table-striped table-bordered table-hover" id="sample_2">
                         <thead>
                         <tr>
+                            <th>ID</th>
                             <th>Name</th>
                             <th>DoB</th>
                             <th>Status</th>
@@ -55,14 +67,16 @@
                         <tbody>
                             {% for client in clients %}
                             <tr >
+                                <td>{{ client.id }}</td>
                                 <td>{{ client.name }}</td>
-                                <td>{{ client.DoB }}</td>
+                                <td>{{ client.dob }}</td>
                                 <td>{{ client.status }}</td>
                                 <td>{{ client.nationality }}</td>
                                 <td>{{ client.consultant }}</td>
                                 <td>{{ client.clientManager }}</td>
-                                <td>{{ client.stage }}</td>
-                                <td>{{ client.visa }}</td>
+{#                                <td>{{ client.stage.title }}</td>#}
+                                <td>Not Ready Yet</td>
+                                <td>{{ client.visa.subClass }}</td>
                             </tr>
                             {% endfor %}
                         </tbody>
@@ -70,21 +84,62 @@
                     </div>
                 </div>
             </div>
+        </div>
     </div>
-{% endblock %}
-{#end page content#}
+{#    {% if perms.system.change_client %}#}
+{#        <div id="context-menu">#}
+{#            <ul class="dropdown-menu" role="menu">#}
+{#                <li><a tabindex="-1" id="edit" href="#">Edit</a></li>#}
+{#                <li><a tabindex="-2" id="details" href="#">Details</a></li>#}
+{#            </ul>#}
+{#        </div>#}
+    <div id="context-menu">
+        <ul class="dropdown-menu" role="menu">
+            <li><a tabindex="-1" id="details" href="#">Details</a></li>
+        </ul>
+    </div>
 
+{% endblock %}
 {% block pluginjs %}
 
-    <script type="text/javascript" src="{% static 'assets/global/plugins/datatables/media/js/jquery.dataTables.min.js' %}"></script>
-    <script type="text/javascript" src="{% static 'assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js' %}"></script>
+    <script type="text/javascript"
+            src="{% static 'assets/global/plugins/bootstrap-contextmenu/bootstrap-contextmenu.js' %}"></script>
+    <script type="text/javascript"
+            src="{% static 'assets/global/plugins/datatables/media/js/jquery.dataTables.min.js' %}"></script>
+    <script type="text/javascript"
+            src="{% static 'assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js' %}"></script>
 
 {% endblock %}
-
 {% block script %}
     <script>
         (function () {
             $('.table').dataTable();
+{#            {% if perms.system.change_client %}#}
+{#                $('.table tbody tr').contextmenu({#}
+{#                    target: '#context-menu',#}
+{#                    before: function (e, context) {#}
+{#                        $('#edit').attr('href', ('/client/mod/' + $(context).children('td:first').text() + '/notes/'));#}
+{#                        return true;#}
+{#                    },#}
+{#                    onItem: function () {#}
+{#                        window.location.href = $('#edit').attr('href');#}
+{#                        return true;#}
+{#                    }#}
+{#                });#}
+{#            {% endif %}#}
+            $('.table tbody tr').contextmenu({
+                target: '#context-menu',
+                before: function (e, context) {
+                    $('#details').attr('href', ('/client/details/' + $(context).children('td:first').text()));
+                    return true;
+                },
+                onItem: function () {
+                    window.location.href = $('#details').attr('href');
+                    return true;
+                }
+            });
+
         }());
+
     </script>
 {% endblock %}

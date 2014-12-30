@@ -1,3 +1,36 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% load bootstrap3 %}
+{% block title %}
+    {{ client.name }}'s Details
+{% endblock %}
+{% block plugincss %}
+{% endblock %}
+
+{#page content#}
+{% block header %}
+    {{ client.name }}'s
+{% endblock %}
+{% block subHeader %}
+    Details
+{% endblock %}
+{% block breadcrumb %}
+    <ul class="page-breadcrumb breadcrumb">
+        <li>
+            <a href="{% url 'dashboard' %}">Home</a>
+            <i class="fa fa-circle"></i>
+        </li>
+        <li>
+            <a href="{% url 'client.list' %}">Client</a>
+            <i class="fa fa-circle"></i>
+        </li>
+        <li>
+            <a href="/client/details/{{ client.id }}">Details</a>
+        </li>
+    </ul>
+{% endblock %}
+{% block content %}
+{% bootstrap_messages %}
 <div class="row">
     <div class="col-md-6 col-sm-12">
         <div class="portlet blue-madison box">
@@ -6,7 +39,7 @@
                     <i class="fa fa-cogs"></i>Personal Information
                 </div>
                 <div class="actions">
-                    <a href="#" class="btn btn-default btn-sm">
+                    <a href="/client/mod/personal/{{ client.id }}" class="btn btn-default btn-sm">
                     <i class="fa fa-pencil"></i> Edit </a>
                 </div>
             </div>
@@ -16,7 +49,7 @@
                          Name
                     </div>
                     <div class="col-md-7 value">
-                         {{ clients.0.name }}
+                         {{ client.name }}
                     </div>
                 </div>
                 <div class="row static-info">
@@ -24,6 +57,7 @@
                          Preferred Name
                     </div>
                     <div class="col-md-7 value">
+                        {{ client.preferredName }}
                     </div>
                 </div>
                 <div class="row static-info">
@@ -31,7 +65,7 @@
                          DoB
                     </div>
                     <div class="col-md-7 value">
-                        1993-11-05
+                        {{ client.dob }}
                     </div>
                 </div>
                 <div class="row static-info">
@@ -39,7 +73,7 @@
                          Contact Number
                     </div>
                     <div class="col-md-7 value">
-                         0415752434
+                         {{ client.phone }}
                     </div>
                 </div>
                 <div class="row static-info">
@@ -47,7 +81,7 @@
                          Email
                     </div>
                     <div class="col-md-7 value">
-                         caiweiwei3366@163.com
+                         {{ client.email }}
                     </div>
                 </div>
                 <div class="row static-info">
@@ -55,7 +89,7 @@
                          Nationality
                     </div>
                     <div class="col-md-7 value">
-                         China
+                         {{ client.nationality }}
                     </div>
                 </div>
                 <div class="row static-info">
@@ -64,7 +98,10 @@
                     </div>
                     <div class="col-md-7 value">
                         <span class="label label-primary">
-                        Onshore </span>
+                            {% if client.onshore %}Onshore
+                            {% else %}Offshore
+                            {% endif %}
+                        </span>
                     </div>
                 </div>
             </div>
@@ -77,7 +114,7 @@
                     <i class="fa fa-cogs"></i>Visa Information
                 </div>
                 <div class="actions">
-                    <a href="#" class="btn btn-default btn-sm">
+                    <a href="/client/mod/visa/{{ client.id }}" class="btn btn-default btn-sm">
                     <i class="fa fa-pencil"></i> Edit </a>
                 </div>
             </div>
@@ -88,7 +125,7 @@
                          Visa SubClass
                     </div>
                     <div class="col-md-7 value">
-                         163
+                         {{ client.subClass }}
                     </div>
                 </div>
                 <div class="row static-info">
@@ -96,7 +133,7 @@
                          Visa Expiry Date
                     </div>
                     <div class="col-md-7 value">
-                         2020-05-30
+                         {{ client.expire }}
                     </div>
                 </div>
                 <div class="row static-info">
@@ -120,7 +157,7 @@
                     <i class="fa fa-cogs"></i>Service Information
                 </div>
                 <div class="actions">
-                    <a href="#" class="btn btn-default btn-sm">
+                    <a href="/client/mod/service/{{ client.id }}" class="btn btn-default btn-sm">
                     <i class="fa fa-pencil"></i> Edit </a>
                 </div>
             </div>
@@ -131,7 +168,8 @@
                     </div>
                     <div class="col-md-7 value">
                          <span class="label label-success">
-                        Ongoing </span>
+                            {{ client.status }}
+                         </span>
                     </div>
                 </div>
                 <div class="row static-info">
@@ -139,7 +177,7 @@
                          Referal
                     </div>
                     <div class="col-md-7 value">
-                         Tim Wang
+                         {{ client.referal.name }}
                     </div>
                 </div>
                 <div class="row static-info">
@@ -147,7 +185,7 @@
                          Consultant
                     </div>
                     <div class="col-md-7 value">
-                         Cecilia Han
+                         {{ client.consultant.name }}
                     </div>
                 </div>
                 <div class="row static-info">
@@ -155,7 +193,7 @@
                          Client Manager
                     </div>
                     <div class="col-md-7 value">
-                         Eric Liu
+                         {{ client.clientManager.name }}
                     </div>
                 </div>
                 <div class="row static-info">
@@ -172,7 +210,7 @@
                          Serivce Fee
                     </div>
                     <div class="col-md-7 value">
-                         $1980.50
+                         {{ client.serviceFee }}
                     </div>
                 </div>
                 <div class="row static-info">
@@ -180,7 +218,7 @@
                          Third Partey Fee Recevied
                     </div>
                     <div class="col-md-7 value">
-                         $227.56
+                         {{ client.thirdPartyFeeReceived }}
                     </div>
                 </div>
                 <div class="row static-info">
@@ -188,7 +226,7 @@
                          Thired Party Fee Paid
                     </div>
                     <div class="col-md-7 value">
-                         $1214.98
+                         {{ client.thirdPartyFeePaid }}
                     </div>
                 </div>
             </div>
@@ -201,26 +239,26 @@
                     <i class="fa fa-cogs"></i>Notes
                 </div>
                 <div class="actions">
-                    <a href="#" class="btn btn-default btn-sm">
+                    <a href="/client/mod/notes/{{ client.id }}" class="btn btn-default btn-sm">
                     <i class="fa fa-pencil"></i> Edit </a>
                 </div>
             </div>
             <div class="portlet-body">
                 <div class="row static-info">
                     <div class="col-md-12 value">
-                        .... <br>
-                        .... <br>
-                        .... <br>
-                        .... <br>
-                        .... <br>
-                        .... <br>
-                        .... <br>
-                        .... <br>
-                        .... <br>
-                        .... <br>
+                        {{ client.note }}
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+{% endblock %}
+{#end page content#}
+
+{% block pluginjs %}
+{% endblock %}
+{% block script %}
+{% endblock %}
+
+

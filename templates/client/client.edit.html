@@ -2,15 +2,15 @@
 {% load staticfiles %}
 {% load bootstrap3 %}
 {% block title %}
-    Stage Configuration
+    {{ spec_client.name }}'s {{ section|capfirst }} Configuration
 {% endblock %}
 {% block plugincss %}
 {% endblock %}
 {% block header %}
-    Stage Configuration
+    {{ spec_client.name }}'s {{ section|capfirst }}
 {% endblock %}
 {% block subHeader %}
-    ## Stage Configuration
+    Configuration
 {% endblock %}
 {% block breadcrumb %}
     <ul class="page-breadcrumb breadcrumb">
@@ -23,8 +23,12 @@
             <i class="fa fa-circle"></i>
         </li>
         <li>
-            <a href="{% url 'stage.list' %}">Stage</a>
+            <a href="/client/details/{{ spec_client.id }}">{{ spec_client.name }}</a>
+{#            <i class="fa fa-circle"></i>#}
         </li>
+{#        <li>#}
+{#            <a href="#">{{ section|capfirst }} Configuration</a>#}
+{#        </li>#}
     </ul>
 {% endblock %}
 {% block content %}
@@ -33,7 +37,7 @@
             <div class="portlet box green-haze">
                 <div class="portlet-title">
                     <div class="caption">
-                        <i class="fa fa-globe"></i>Stage Edit
+                        <i class="fa fa-globe"></i>{{ section|capfirst }} Information
                     </div>
                 </div>
                 <div class="portlet-body">
@@ -43,9 +47,9 @@
                         {% buttons submit='OK' reset="Reset" %}{% endbuttons %}
                     </form>
 
-                    {% if spec_stage %}
-                        {% if perms.systen.delete_stage %}
-                            <a href="{% url 'stage.delete'  spec_stage.id %}" class="btn btn-danger">Delete</a>
+                    {% if spec_client %}
+                        {% if perms.systen.delete_client %}
+                            <a href="{% url 'client.delete'  spec_client.id %}" class="btn btn-danger">Delete</a>
                         {% endif %}
                     {% endif %}
                 </div>
