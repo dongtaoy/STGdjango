@@ -19,6 +19,42 @@ class Stage(models.Model):
         return "Stage %d - %s" % (self.order, self.title)
 
 
+class Institution(models.Model):
+    name = models.CharField(max_length=100)
+    description = models.TextField(blank=True, null=True)
+
+
+class Coe(models.Model):
+    client = models.ForeignKey(Client)
+    institution = models.ForeignKey(Institution)
+    start = models.DateField()
+    end = models.DateField()
+
+    totalTuitionFee = models.FloatField(blank=True, null=True)
+    totalReceivedFee = models.FloatField(blank=True, null=True)
+    totalPaymentFee = models.FloatField(blank=True, null=True)
+    totalCommissionClaimed = models.FloatField(blank=True, null=True)
+    totalCommissionRecevied = models.FloatField(blank=True, null=True)
+    bonus = models.FloatField(blank=True, null=True)
+    referalCommission = models.FloatField(blank=True, null=True)
+    consultantCommission = models.FloatField(blank=True, null=True)
+
+    description = models.TextField(blank=True, null=True)
+
+
+class Payment(models.Model):
+    coe = models.ForeignKey(Coe)
+
+    receivedAmount = models.FloatField(blank=True, null=True)
+    receivedDate = models.DateField(blank=True, null=True)
+    paidAmount = models.FloatField(blank=True, null=True)
+    paidDate = models.DateField(blank=True, null=True)
+    commssionClaimed = models.FloatField(blank=True, null=True)
+    commssionRecevied = models.FloatField(blank=True, null=True)
+
+    nextDueDate = models.DateField(blank=True, null=True)
+
+
 class Client(models.Model):
     # Personal Information
     name = models.CharField(max_length=100)
@@ -30,7 +66,7 @@ class Client(models.Model):
     onshore = models.BooleanField(default=True)
 
     # Visa Information
-    visa = models.ForeignKey(Visa)
+    visa = models.ForeignKey(Visa, blank=True, null=True)
     expire = models.DateField(blank=True, null=True)
 
     # Service Information
@@ -39,7 +75,8 @@ class Client(models.Model):
         ("Existing", "Existing"),
         ("Close", "Close")
     )
-    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default="Ongoing")  ## ChoiceField todo
+    status = models.CharField(max_length=10, blank=True, null=True, choices=STATUS_CHOICES,
+                              default="Ongoing")  ## ChoiceField todo
     referal = models.ForeignKey(Employee, blank=True, null=True, related_name="ref")  # todo
     consultant = models.ForeignKey(Employee, blank=True, null=True, related_name="con")  # todo
     clientManager = models.ForeignKey(Employee, blank=True, null=True, related_name="cm")  # todo
