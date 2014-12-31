@@ -58,26 +58,17 @@ class Institution(models.Model):
     label = models.ForeignKey(Label, null=True, blank=True)
     description = models.TextField(blank=True, null=True)
 
-    def __unicode__(self):
-        return str(self.name)
 
-#
-# class Coe(models.Model):
-#     client = models.ForeignKey(Client)
-#     institution = models.ForeignKey(Institution)
-#     start = models.DateField()
-#     end = models.DateField()
-#
-#     totalTuitionFee = models.FloatField(blank=True, null=True)
-#     totalReceivedFee = models.FloatField(blank=True, null=True)
-#     totalPaymentFee = models.FloatField(blank=True, null=True)
-#     totalCommissionClaimed = models.FloatField(blank=True, null=True)
-#     totalCommissionRecevied = models.FloatField(blank=True, null=True)
-#     bonus = models.FloatField(blank=True, null=True)
-#     referalCommission = models.FloatField(blank=True, null=True)
-#     consultantCommission = models.FloatField(blank=True, null=True)
-#
-#     description = models.TextField(blank=True, null=True)
+class Coe(models.Model):
+    client = models.ForeignKey(Client)
+    institution = models.ForeignKey(Institution, blank=True, null=True)
+    start = models.DateField(blank=True, null=True)
+    end = models.DateField(blank=True, null=True)
+    totalTuitionFee = models.FloatField(blank=True, null=True)
+    bonus = models.FloatField(blank=True, null=True)
+    referalCommission = models.FloatField(blank=True, null=True)
+    consultantCommission = models.FloatField(blank=True, null=True)
+    description = models.TextField(blank=True, null=True)
 
 #
 #
