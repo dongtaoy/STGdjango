@@ -2,15 +2,15 @@
 {% load staticfiles %}
 {% load bootstrap3 %}
 {% block title %}
-    Department Wizward
+    New Department Addition
 {% endblock %}
 {% block plugincss %}
 {% endblock %}
 {% block header %}
-    Department Wizward
+    New Department
 {% endblock %}
 {% block subHeader %}
-    ## Department Wizward
+    Addition
 {% endblock %}
 {% block breadcrumb %}
     <ul class="page-breadcrumb breadcrumb">
@@ -33,7 +33,7 @@
             <div class="portlet box blue" id="form_wizard_1">
                 <div class="portlet-title">
                     <div class="caption">
-                        <i class="fa fa-gift"></i> Department Wizard - <span class="step-title">
+                        <i class="fa fa-gift"></i> New Department Addition - <span class="step-title">
 								Step {{ wizard.steps.step1 }} of {{ wizard.steps.count }} </span>
                     </div>
                 </div>
@@ -70,7 +70,7 @@
                                     <div class="tab-pane active" id="tab2">
                                         {{ wizard.management_form }}
                                         {% bootstrap_messages %}
-                                        <h3 class="block">Provide your personal details</h3>
+                                        <h3 class="block">Provide new department's details</h3>
                                         {% bootstrap_form form layout="horizontal" %}
                                     </div>
                                 </div>

@@ -5,13 +5,13 @@
 {% block plugincss %}
 {% endblock %}
 {% block title %}
-    Department Edit
+    {{ spec_department.group.name }} Configuration
 {% endblock %}
 {% block header %}
-    Department Edit
+    {{ spec_department.group.name }}
 {% endblock %}
 {% block subHeader %}
-    ## Department Edit
+    Configuration
 {% endblock %}
 {% block breadcrumb %}
     <ul class="page-breadcrumb breadcrumb">
@@ -20,11 +20,11 @@
             <i class="fa fa-circle"></i>
         </li>
         <li>
-            <a href="#">System</a>
+            <a href="#">Human Resource</a>
             <i class="fa fa-circle"></i>
         </li>
         <li>
-            <a href="{% url 'department.list' %}">department</a>
+            <a href="{% url 'department.list' %}">Department</a>
         </li>
     </ul>
 {% endblock %}
@@ -34,13 +34,15 @@
             <div class="portlet box green-haze">
                 <div class="portlet-title">
                     <div class="caption">
-                        <i class="fa fa-globe"></i>Department Edit
+                        <i class="fa fa-globe"></i>
+                            {{ spec_department.group.name }} Configuration
                     </div>
                 </div>
                 <div class="portlet-body">
-                    <form method="POST">
+                    <form method="POST" enctype="multipart/form-data">
                         {% csrf_token %}
-                        {% bootstrap_form form %}
+                        {% bootstrap_form group %}
+                        {% bootstrap_form department %}
                         {% buttons submit='OK' reset="Reset" %}{% endbuttons %}
                     </form>
 

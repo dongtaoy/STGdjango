@@ -2,7 +2,7 @@
 {% load staticfiles %}
 {% load bootstrap3 %}
 {% block title %}
-    Department Configuration
+    Department List
 {% endblock %}
 {% block plugincss %}
     <link rel="stylesheet" type="text/css"
@@ -10,10 +10,10 @@
 
 {% endblock %}
 {% block header %}
-    Department Configuration
+    Department
 {% endblock %}
 {% block subHeader %}
-    ## Department Configuration
+    List
 {% endblock %}
 {% block breadcrumb %}
     <ul class="page-breadcrumb breadcrumb">
@@ -22,11 +22,11 @@
             <i class="fa fa-circle"></i>
         </li>
         <li>
-            <a href="#">Client</a>
+            <a href="#">Human Resource</a>
             <i class="fa fa-circle"></i>
         </li>
         <li>
-            <a href="#">Department</a>
+            <a href="{% url 'department.list' %}">Department</a>
         </li>
     </ul>
 {% endblock %}
