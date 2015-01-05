@@ -1,6 +1,6 @@
 __author__ = 'dongtaoy'
 from django.forms import ModelForm
-from client.models import Visa, Stage, Client, Institution
+from client.models import Visa, Stage, Client, Institution, Coe
 
 
 class VisaForm(ModelForm):
@@ -34,5 +34,26 @@ def get_custom_form(customModel, customFields):
             fields = customFields
 
     return _customForm
+
+
+class CoeForm(ModelForm):
+    class Meta:
+        model = Coe
+        fields = "__all__"
+
+        labels = {
+            'totalTuitionFee': "Total Tuition Fee",
+            "referalCommission": "Referal's Commission",
+            "consultantCommission": "Consultant's Commission",
+        }
+
+    # def __init__(self):
+    #     super(CoeForm, self).__init__(ModelForm)
+    #     self.fields['client'].widget.attrs['readonly'] = True
+
+
+
+
+
 
 
