@@ -6,7 +6,7 @@ from django.shortcuts import render
 # Create your views here.
 from django.views.generic import CreateView, UpdateView, DeleteView, DetailView
 from client.forms import ClientForm, StageForm
-from client.models import Client, Coe
+from client.models import Client, Coe, Payment
 
 
 def get_custom_form(customModel, customFields):
@@ -53,7 +53,7 @@ class ClientUpdateView(SuccessMessageMixin, UpdateView):
 
     def get_success_url(self):
         id = self.kwargs["client"]
-        return "/client/details/"+id
+        return "/client/details/" + id
 
     def get_success_message(self, cleaned_data):
         print cleaned_data
@@ -85,5 +85,9 @@ class ClientDetailView(DetailView):
         context = super(ClientDetailView, self).get_context_data(**kwargs)
         client = context["client"]
         coes = Coe.objects.filter(client=client)
+        coe=Coe.objects.get(id="5")
+        payments = Payment.objects.filter(coe=coe)
+        print coe
         context["coes"] = coes
+        context["paymens"] = payments
         return context

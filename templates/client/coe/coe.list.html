@@ -49,8 +49,7 @@
                             <div class="col-md-6">
                                 <div class="btn-group">
                                     <a href="{% url 'stage.add' %}" class="btn green">
-{#                                    <a href="#" class="btn green">#}
-                                        Add New <i class="fa fa-plus"></i>
+                                        Add New COE<i class="fa fa-plus"></i>
                                     </a>
                                 </div>
                             </div>
@@ -112,7 +111,7 @@
                 $('.table tbody tr').contextmenu({
                     target: '#context-menu',
                     before: function (e, context) {
-                        $('#edit').attr('href', ('/client/coe/mod/{{  }}' + $(context).children('td:first').text()));
+                        $('#edit').attr('href', ('/client/coe/mod/' + $(context).children('td:first').text()));
                         return true;
                     },
                     onItem: function () {

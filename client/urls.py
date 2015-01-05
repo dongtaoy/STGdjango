@@ -25,7 +25,7 @@ urlpatterns = patterns('',
     url(r'^stage/', include("client.stage.urls")),
     url(r'^institution/', include('client.institution.urls')),
     url(r'^coe/', include('client.coe.urls')),
-
+    url(r"^payment/", include("client.payment.urls")),
 
 
 )

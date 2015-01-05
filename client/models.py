@@ -70,6 +70,9 @@ class Coe(models.Model):
     consultantCommission = models.FloatField(blank=True, null=True)
     description = models.TextField(blank=True, null=True)
 
+    def __unicode__(self):
+        return "%s - COE %d" % (self.client.name, self.id)
+
 
 class Payment(models.Model):
     coe = models.ForeignKey(Coe)
