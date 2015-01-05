@@ -70,17 +70,17 @@ class Coe(models.Model):
     consultantCommission = models.FloatField(blank=True, null=True)
     description = models.TextField(blank=True, null=True)
 
-#
-#
-#
-# class Payment(models.Model):
-#     coe = models.ForeignKey(Coe)
-#
-#     receivedAmount = models.FloatField(blank=True, null=True)
-#     receivedDate = models.DateField(blank=True, null=True)
-#     paidAmount = models.FloatField(blank=True, null=True)
-#     paidDate = models.DateField(blank=True, null=True)
-#     commssionClaimed = models.FloatField(blank=True, null=True)
-#     commssionRecevied = models.FloatField(blank=True, null=True)
-#
-#     nextDueDate = models.DateField(blank=True, null=True)
+
+class Payment(models.Model):
+    coe = models.ForeignKey(Coe)
+    receivedAmount = models.FloatField(blank=True, null=True)
+    receivedDate = models.DateField(blank=True, null=True)
+    paidAmount = models.FloatField(blank=True, null=True)
+    paidDate = models.DateField(blank=True, null=True)
+    commssionClaimed = models.FloatField(blank=True, null=True)
+    commssionRecevied = models.FloatField(blank=True, null=True)
+
+    #
+    # class Document(models.Model):
+    # title = models.CharField()
+    #     file = models.FileField
