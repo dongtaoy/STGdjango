@@ -117,23 +117,9 @@
 											 {{ coe.description }}
 										</div>
 									</div>
-
 							</div>
 						</div>
-					</div>
-					<div class="col-md-12 col-sm-12">
-						<div class="portlet grey-cascade box">
-							<div class="portlet-title">
-								<div class="caption">
-									<i class="fa fa-cogs"></i>Payment Information
-								</div>
-								<div class="actions">
-									<a href="#" class="btn btn-default btn-sm">
-									<i class="fa fa-pencil"></i> Edit </a>
-								</div>
-							</div>
-							{% include "client/client.payment.html" %}
-						</div>
+						{% include "client/client.payment.html" %}
 					</div>
 				</div>
             	{% endfor %}

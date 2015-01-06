@@ -52,16 +52,22 @@ class Client(models.Model):
     # Others
     note = models.TextField(blank=True, null=True)
 
+    def __unicode__(self):
+        return self.name
+
 
 class Institution(models.Model):
     name = models.CharField(max_length=100)
     label = models.ForeignKey(Label, null=True, blank=True)
     description = models.TextField(blank=True, null=True)
 
+    def __unicode__(self):
+        return self.name
 
 class Coe(models.Model):
     client = models.ForeignKey(Client)
     institution = models.ForeignKey(Institution, blank=True, null=True)
+    coeNumber = models.CharField(max_length=30, blank=True, null=True)
     start = models.DateField(blank=True, null=True)
     end = models.DateField(blank=True, null=True)
     totalTuitionFee = models.FloatField(blank=True, null=True)
@@ -82,7 +88,11 @@ class Payment(models.Model):
     paidDate = models.DateField(blank=True, null=True)
     commssionClaimed = models.FloatField(blank=True, null=True)
     commssionRecevied = models.FloatField(blank=True, null=True)
+    nextDueDate = models.DateField(blank=True, null=True)
 
+
+    def __unicode__(self):
+        return self.coe
     #
     # class Document(models.Model):
     # title = models.CharField()
