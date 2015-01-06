@@ -63,7 +63,9 @@
 {% endblock %}
 {% block script %}
     <script>
-        $('form select').select2();
+        (function () {
+            $('form select').select2();
+        }());
     </script>
 {% endblock %}
 {% block pluginjs %}

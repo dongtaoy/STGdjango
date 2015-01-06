@@ -3,6 +3,11 @@
 {% load bootstrap3 %}
 
 {% block plugincss %}
+<link rel="stylesheet" type="text/css"
+          href="{% static 'plugins/select2/select2.css' %}"/>
+<link rel="stylesheet" type="text/css"
+      href="{% static 'plugins/select2/select2-bootstrap.css' %}"/>
+
 {% endblock %}
 {% block title %}
     Label Configuration
@@ -56,6 +61,13 @@
 
 {% endblock %}
 {% block pluginjs %}
+    <script type="application/javascript"
+            src="{% static 'assets/global/plugins/select2/select2.min.js' %}"></script>
 {% endblock %}
 {% block script %}
+    <script>
+        (function () {
+            $('form select').select2();
+        }());
+    </script>
 {% endblock %}
