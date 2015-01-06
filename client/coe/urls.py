@@ -14,4 +14,5 @@ urlpatterns = patterns(
         permission_required("client.delete_coe")(CoeDeleteView.as_view()), name="coe.delete"),
     url(r'^details/(?P<coe>\d+)/$', login_required(CoeDetailView.as_view()), name="coe.details"),
 
+    url(r'^upload/$', 'client.coe.views.upload', name='document.upload')
 )

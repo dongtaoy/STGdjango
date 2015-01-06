@@ -1,9 +1,11 @@
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic.detail import DetailView
 from django.contrib import messages
+from django.shortcuts import redirect
 from django.contrib.messages.views import SuccessMessageMixin
-from client.forms import CoeForm
-from client.models import Coe, Client
+from client.forms import CoeForm, DocumentForm
+from client.models import Coe, Client, Stage
+
 
 
 class CoeCreateView(SuccessMessageMixin, CreateView):
@@ -70,6 +72,15 @@ class CoeDetailView(DetailView):
         context = super(CoeDetailView, self).get_context_data(**kwargs)
         coe = context["coe"]
         context["client"] = coe.client
+        context["stages"] = Stage.objects.all()
         return context
 
+
+def upload(request):
+    if request.method == 'POST':
+        form = DocumentForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('/')
+    return redirect('/')
 

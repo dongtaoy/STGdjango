@@ -1,6 +1,6 @@
 __author__ = 'dongtaoy'
 from django.forms import ModelForm
-from client.models import Visa, Stage, Client, Institution, Coe, Payment
+from client.models import Visa, Stage, Client, Institution, Coe, Payment, Document
 
 
 class VisaForm(ModelForm):
@@ -49,7 +49,7 @@ class CoeForm(ModelForm):
 
         # def __init__(self):
         # super(CoeForm, self).__init__(ModelForm)
-        #     self.fields['client'].widget.attrs['readonly'] = True
+        # self.fields['client'].widget.attrs['readonly'] = True
 
 
 class PaymentForm(ModelForm):
@@ -67,4 +67,7 @@ class PaymentForm(ModelForm):
         }
 
 
+class DocumentForm(ModelForm):
+    class Meta:
+        model = Document
 

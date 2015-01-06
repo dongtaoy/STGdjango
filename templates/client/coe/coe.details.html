@@ -119,16 +119,17 @@
 
 {% block pluginjs %}
     <script type="text/javascript" src="{% static 'assets/global/plugins/datatables/media/js/jquery.dataTables.min.js' %}"></script>
-	<script type="text/javascript" src="{% static 'assets/global/plugins/datatascript>
-	<script src="{% static 'assets/admin/pages/scripts/form-dropzone.js' %}">bles/plugins/bootstrap/dataTables.bootstrap.js' %}"></script>
-	<script src="{% static 'assets/global/plugins/dropzone/dropzone.js' %}"></</script>
+    <script type="text/javascript"
+            src="{% static 'assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js' %}"></script>
+    <script src="{% static 'assets/admin/pages/scripts/form-dropzone.js' %}"></script>
+    <script src="{% static 'assets/global/plugins/dropzone/dropzone.js' %}"></script>
     <script type="text/javascript"
             src="{% static 'assets/global/plugins/bootstrap-contextmenu/bootstrap-contextmenu.js' %}"></script>
 {% endblock %}
 {% block script %}
     <script>
         (function () {
-            $('.table').dataTable();
+            {#            $('.table').dataTable();#}
 
             {% if perms.client.change_payment %}
                 $('.table tbody tr').contextmenu({

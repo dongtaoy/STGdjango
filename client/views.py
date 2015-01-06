@@ -1,12 +1,10 @@
 from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin
 from django.forms import ModelForm
-from django.shortcuts import render
-
-# Create your views here.
+from django.shortcuts import render_to_response
 from django.views.generic import CreateView, UpdateView, DeleteView, DetailView
 from client.forms import ClientForm, StageForm
-from client.models import Client, Coe, Payment
+from client.models import Client, Coe, Payment, Stage
 
 
 def get_custom_form(customModel, customFields):
@@ -81,8 +79,11 @@ class ClientDetailView(DetailView):
     template_name = "client/client.info.html"
     pk_url_kwarg = "client"
 
-    def get_context_data(self, **kwargs):
-        context = super(ClientDetailView, self).get_context_data(**kwargs)
-        client = context["client"]
-        context["coes"] = client.coes.all
-        return context
+    # def get_context_data(self, **kwargs):
+    # context = super(ClientDetailView, self).get_context_data(**kwargs)
+    #     context["stages"] = Stage.objects.all()
+    #     return context
+
+
+def uploadtest(request):
+    return render_to_response('client/client.upload.html')

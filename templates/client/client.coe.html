@@ -29,7 +29,7 @@
         </div>
         <div class="col-md-9">
             <div class="tab-content">
-                {% for coe in coes %}
+                {% for coe in client.coes.all %}
                     {% if forloop.counter == 1 %}
                         <div id="tab_{{ forloop.counter }}-{{ forloop.counter }}" class="tab-pane active">
                     {% else %}

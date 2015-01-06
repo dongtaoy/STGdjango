@@ -16,6 +16,9 @@ class Stage(models.Model):
     title = models.CharField(max_length=50)
     description = models.TextField()
 
+    class Meta:
+        ordering = ['order']
+
     def __unicode__(self):
         return "Stage %d - %s" % (self.order, self.title)
 
@@ -77,6 +80,7 @@ class Coe(models.Model):
     referalCommission = models.FloatField(blank=True, null=True)
     consultantCommission = models.FloatField(blank=True, null=True)
     description = models.TextField(blank=True, null=True)
+    documents = models.ManyToManyField(Stage, through='Document', through_fields=('coe', 'stage'))
 
     def __unicode__(self):
         return "%s - COE %d" % (self.client.name, self.id)
@@ -98,8 +102,7 @@ class Payment(models.Model):
 
 
 class Document(models.Model):
-    title = models.CharField(max_length=100)
+    title = models.CharField(max_length=100, null=True, blank=True)
     file = models.FileField()
-    coe = models.ForeignKey(Coe)
+    coe = models.ForeignKey(Coe, related_name="files")
     stage = models.ForeignKey(Stage)
-    client = models.ForeignKey(Client)

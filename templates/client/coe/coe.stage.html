@@ -2,50 +2,30 @@
     <div class="row profile-account">
         <div class="col-md-3">
             <ul class="ver-inline-menu tabbable margin-bottom-10">
-                <li class="active">
-                    <a data-toggle="tab" href="#tab_1-1">
-                    <i class="fa fa-cog"></i> Stage 1 - Applying Offer </a>
-                    <span class="after">
+                {% for stage in stages %}
+                    {% if stages.0 == stage %}
+                        <li class="active">
+                            {% else %}
+                        <li>
+                    {% endif %}
+                <a data-toggle="tab" href="#tab_{{ stage.order }}">
+                    <i class="fa fa-cog"></i> {{ stage.order }}. {{ stage.title }} </a>
+                <span class="after">
                     </span>
                 </li>
-                <li>
-                    <a data-toggle="tab" href="#tab_2-2">
-                    <i class="fa fa-picture-o"></i> Stage 2 - Offer Received </a>
-                </li>
-                <li>
-                    <a data-toggle="tab" href="#tab_3-3">
-                    <i class="fa fa-lock"></i> Stage 3 - Applying COE</a>
-                </li>
-                <li>
-                    <a data-toggle="tab" href="#tab_4-4">
-                    <i class="fa fa-eye"></i> Stage 4 - COE Received </a>
-                </li>
-                <li>
-                    <a data-toggle="tab" href="#tab_5-5">
-                    <i class="fa fa-eye"></i> Stage 5 - VISA Lodged </a>
-                </li>
-                <li>
-                    <a data-toggle="tab" href="#tab_6-6">
-                    <i class="fa fa-eye"></i> Stage 6 - Further Details Prepare </a>
-                </li>
-                <li>
-                    <a data-toggle="tab" href="#tab_7-7">
-                    <i class="fa fa-eye"></i> Stage 7 - Details Submitted </a>
-                </li>
-                <li>
-                    <a data-toggle="tab" href="#tab_8-8">
-                    <i class="fa fa-eye"></i> Stage 8 - VISA Approval </a>
-                </li>
-                <li>
-                    <a data-toggle="tab" href="#tab_9-9">
-                    <i class="fa fa-eye"></i> Stage 9 - VISA Refused </a>
-                </li>
+                {% endfor %}
             </ul>
         </div>
         <div class="col-md-9">
             <div class="tab-content">
-                <div id="tab_1-1" class="tab-pane active">
-                    <div class="col-md-6 col-sm-12">
+                {% for stage in stages %}
+                    {% if stage == stages.0 %}
+                        <div id="tab_{{ stage.order }}" class="tab-pane active">
+                    {% else %}
+                        <div id="tab_{{ stage.order }}" class="tab-pane">
+
+                    {% endif %}
+                    <div class="col-md-12">
                         <div class="portlet purple-plum box">
                             <div class="portlet-title">
                                 <div class="caption">
@@ -53,46 +33,35 @@
                                 </div>
                                 <div class="actions">
                                     <a href="#" class="btn btn-default btn-sm">
-                                    <i class="fa fa-pencil"></i> Edit </a>
+                                        <i class="fa fa-pencil"></i> Edit </a>
                                 </div>
                             </div>
                             <div class="portlet-body">
-                                <div class="row static-info">
-                                    <div class="col-md-12 value">
-                                        <ol>
-                                            <li><a href="#">VISA Application</a></li>
-                                            <li><a href="#">Passbook Scan File</a></li>
-                                            <li>....</li>
-                                            <li>....</li>
-                                            <li>....</li>
-                                            <li>....</li>
-                                            <li>....</li>
-                                        </ol>
+                                <form id="my-awesome-dropzone" action="{% url 'document.upload' %}" class="dropzone">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="stage" value="{{ stage.id }}">
+                                    <input type="hidden" name="coe" value="{{ coe.id }}">
+
+                                    <div class="row static-info">
+                                        <div class="col-md-12 value">
+                                            <ol>
+                                                {% for document in coe.documents.all %}
+                                                    <li>{{ document }}</li>
+                                                {% endfor %}
+                                            </ol>
+                                        </div>
                                     </div>
-                                </div>
+                                </form>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6 col-sm-12">
-                        <div class="portlet green-meadow box">
-                            <div class="portlet-title">
-                                <div class="caption">
-                                    <i class="fa fa-cogs"></i>Dropzone File
-                                </div>
-                                <div class="actions">
-                                    <a href="#" class="btn btn-default btn-sm">
-                                    <i class="fa fa-pencil"></i> Edit </a>
-                                </div>
-                            </div>
-                            <div class="portlet-body">
-                                <form action="../../assets/global/plugins/dropzone/upload.php" class="dropzone" id="my-dropzone">
-                            </div>
-                        </div>
-                    </div>
+
+                {% endfor %}
+                </div>
+
+                <!--end col-md-9-->
                 </div>
             </div>
         </div>
-
-        <!--end col-md-9-->
     </div>
 </div>

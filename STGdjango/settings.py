@@ -141,3 +141,6 @@ BOOTSTRAP3 = {
     'horizontal_field_class': 'col-md-4',
 }
 
+# Media root
+
+MEDIA_ROOT = '/upload'
