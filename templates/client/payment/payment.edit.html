@@ -64,7 +64,7 @@
                     {% if spec_payment %}
                         {% if perms.systen.delete_payment %}
 {#                            {{ client.id }}#}
-                            <a href="{% url "payment.delete" client.id spec_payment.id %}" class="btn btn-danger">Delete</a>
+                            <a href="{% url "payment.delete" coe.id spec_payment.id %}" class="btn btn-danger">Delete</a>
                         {% endif %}
                     {% endif %}
                 </div>
