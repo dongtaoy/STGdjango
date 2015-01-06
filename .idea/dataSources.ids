@@ -128,6 +128,7 @@
       <primary-key name="PRIMARY" columns="id"/>
       <foreign-key name="client__institution_id_2f70a8c98c1944c2_fk_client_institution_id" columns="institution_id" ref-table="client_institution" ref-schema="" ref-catalog="STG" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
       <foreign-key name="client_coe_client_id_5cf8599c90533bf0_fk_client_client_id" columns="client_id" ref-table="client_client" ref-schema="" ref-catalog="STG" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <exported-key name="client_payment_coe_id_5f2994ff5f4c59fe_fk_client_coe_id" table="client_payment" schema="" catalog="STG" columns="coe_id"/>
       <index name="client_coe_2bfe9d72" unique="false" columns="client_id"/>
       <index name="client_coe_a964baeb" unique="false" columns="institution_id"/>
     </table>
@@ -140,6 +141,19 @@
       <foreign-key name="client_institution_label_id_75358fe108618569_fk_system_label_id" columns="label_id" ref-table="system_label" ref-schema="" ref-catalog="STG" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
       <exported-key name="client__institution_id_2f70a8c98c1944c2_fk_client_institution_id" table="client_coe" schema="" catalog="STG" columns="institution_id"/>
       <index name="client_institution_abec2aca" unique="false" columns="label_id"/>
+    </table>
+    <table name="client_payment" schema="" catalog="STG" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="receivedAmount" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8"/>
+      <column name="receivedDate" sqlType="DATE" precision="10" scale="0" nullable="true" jdbcType="91"/>
+      <column name="paidAmount" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8"/>
+      <column name="paidDate" sqlType="DATE" precision="10" scale="0" nullable="true" jdbcType="91"/>
+      <column name="commssionClaimed" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8"/>
+      <column name="commssionRecevied" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8"/>
+      <column name="coe_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <foreign-key name="client_payment_coe_id_5f2994ff5f4c59fe_fk_client_coe_id" columns="coe_id" ref-table="client_coe" ref-schema="" ref-catalog="STG" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="client_payment_c00f9437" unique="false" columns="coe_id"/>
     </table>
     <table name="client_stage" schema="" catalog="STG" type="TABLE">
       <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>

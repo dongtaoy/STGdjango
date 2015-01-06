@@ -93,7 +93,11 @@ class Payment(models.Model):
 
     def __unicode__(self):
         return self.coe
-    #
-    # class Document(models.Model):
-    # title = models.CharField()
-    #     file = models.FileField
+
+
+class Document(models.Model):
+    title = models.CharField(max_length=100)
+    file = models.FileField()
+    coe = models.ForeignKey(Coe)
+    stage = models.ForeignKey(Stage)
+    client = models.ForeignKey(Client)
