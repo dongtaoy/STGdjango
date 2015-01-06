@@ -2,6 +2,7 @@ from django.db import models
 from hr.models import Employee
 from system.models import Label
 
+
 class Visa(models.Model):
     subClass = models.IntegerField(max_length=3)
     description = models.TextField(max_length=100, null=True, blank=True)
@@ -63,6 +64,7 @@ class Institution(models.Model):
 
     def __unicode__(self):
         return self.name
+
 
 class Coe(models.Model):
     client = models.ForeignKey(Client, related_name="coes")

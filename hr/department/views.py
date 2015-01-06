@@ -1,47 +1,55 @@
-from django.contrib.auth.models import Group
-
-__author__ = 'georgecai904'
+from django.contrib.auth.models import Group, Permission
 from django.contrib import messages
-from django.contrib.formtools.wizard.views import SessionWizardView
-from django.db.transaction import atomic
-from django.shortcuts import redirect
-from django.views.generic.edit import UpdateView, DeleteView
 from django.contrib.messages.views import SuccessMessageMixin
-from hr.forms import DepartmentForm, GroupCreationForm, GroupForm
+from django.db import transaction
+from django.db.transaction import atomic
+from django.shortcuts import render, redirect
+from django.views.generic import CreateView, UpdateView, DeleteView
+from hr.forms import DepartmentForm, GroupCreationForm
 from hr.models import Department
 
-FORMS = [
-    ("group", GroupCreationForm),
-    ("profile", DepartmentForm)
-]
 
-TEMPLATES = {
-    "group": "hr/department/department.group.wizard.html",
-    "profile": "hr/department/department.profile.wizard.html"
-}
+class DepartmentCreateView(SuccessMessageMixin, CreateView):
+    form_class = DepartmentForm
+    second_form_class = GroupCreationForm
+    template_name = "hr/department/department.edit.html"
+    success_message = "Department created"
+    success_url = "/hr/department"
 
+    def get_context_data(self, **kwargs):
+        context = super(DepartmentCreateView, self).get_context_data(**kwargs)
+        context["group"] = GroupCreationForm()
+        context["department"] = DepartmentForm()
+        return context
 
-class DepartmentWizard(SessionWizardView):
-    def get_template_names(self):
-        return [TEMPLATES[self.steps.current]]
-
-    def done(self, form_list, **kwargs):
-        with atomic():
-            department = form_list[1].save(commit=False)
-            department.group = form_list[0].save()
+    def form_valid(self, form):
+        with transaction.atomic():
+            group = Group.objects.create(name=self.request.POST.get('name'))
+            data = dict(self.request.POST.iterlists())
+            if data['name']:
+                group.name = self.request.POST['name']
+            if 'permissions' in data.keys():
+                perms = []
+                for i in data["permissions"]:
+                    perms.append(Permission.objects.get(id=i))
+                group.permissions = perms
+            else:
+                group.permissions = ""
+            department = DepartmentForm(self.request.POST).save(commit=False)
+            department.group = group
             department.save()
-        messages.success(self.request, ("%s Department Created" % department.group.name))
-        return redirect('/hr/department/')
+        messages.success(self.request, self.success_message)
+        return redirect(self.success_url)
 
 
 class DepartmentUpdateView(SuccessMessageMixin, UpdateView):
     form_class = DepartmentForm
-    second_form_class = GroupForm
-    template_name = 'hr/department/department.edit.html'
-    success_url = '/hr/department/'
-    context_object_name = 'spec_department'
-    pk_url_kwarg = 'department'
+    second_form_class = GroupCreationForm
     model = Department
+    template_name = "hr/department/department.edit.html"
+    pk_url_kwarg = "department"
+    context_object_name = "spec_department"
+    success_url = "/hr/department"
 
     def get_success_message(self, cleaned_data):
         department = Department.objects.get(id=self.kwargs["department"])
@@ -62,23 +70,32 @@ class DepartmentUpdateView(SuccessMessageMixin, UpdateView):
 
     def post(self, request, *args, **kwargs):
         post = super(DepartmentUpdateView, self).post(self, request, *args, **kwargs)
-        data = request.POST
+        data = dict(request.POST.iterlists())
         context = self.get_context_data()
         group = Group.objects.get(name=context['spec_department'])
         if data['name']:
-            group.name = data['name']
-        if data['permissions']:
-            group.permissions = data['permissions']
+            group.name = request.POST['name']
+        if 'permissions' in data.keys():
+            perms = []
+            for i in data["permissions"]:
+                perms.append(Permission.objects.get(id=i))
+            group.permissions = perms
+        else:
+            group.permissions = ""
         group.save()
         return post
 
 
 class DepartmentDeleteView(DeleteView):
     model = Department
-    template_name = 'common/delete.confirmation.html'
-    success_url = '/hr/department/'
-    pk_url_kwarg = 'department'
+    pk_url_kwarg = "department"
+    success_url = "/hr/department"
+    template_name = "common/delete.confirmation.html"
 
     def delete(self, request, *args, **kwargs):
-        messages.success(self.request, "Department deleted")
-        return super(DepartmentDeleteView, self).delete(self, request, *args, **kwargs)
+        self.object = self.get_object()
+        with atomic():
+            self.object.delete()
+            Group.delete(self.object.group)
+        messages.success(self.request, 'Department deleted')
+        return redirect(self.get_success_url())
