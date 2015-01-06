@@ -118,10 +118,10 @@
 {#end page content#}
 
 {% block pluginjs %}
-    <script type="text/javascript" src="{% static 'assets/global/plugins/datatables/media/js/jquery.dataTables.min.js' %}"></script>
-	<script type="text/javascript" src="{% static 'assets/global/plugins/datatascript>
-	<script src="{% static 'assets/admin/pages/scripts/form-dropzone.js' %}">bles/plugins/bootstrap/dataTables.bootstrap.js' %}"></script>
-	<script src="{% static 'assets/global/plugins/dropzone/dropzone.js' %}"></</script>
+	<script type="text/javascript" src="{% static 'assets/global/plugins/datatables/media/js/jquery.dataTables.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js' %}"></script>
+	<script src="{% static 'assets/global/plugins/dropzone/dropzone.js' %}"></script>
+	<script src="{% static 'assets/admin/pages/scripts/form-dropzone.js' %}"></script>
     <script type="text/javascript"
             src="{% static 'assets/global/plugins/bootstrap-contextmenu/bootstrap-contextmenu.js' %}"></script>
 {% endblock %}
@@ -134,7 +134,7 @@
                 $('.table tbody tr').contextmenu({
                     target: '#context-menu',
                     before: function (e, context) {
-                        $('#edit').attr('href', ('/client/payment/mod/{{ client.id }}/' + $(context).children('td:first').text()));
+                        $('#edit').attr('href', ('/client/payment/mod/{{ coe.id }}/' + $(context).children('td:first').text()));
                         return true;
                     },
                     onItem: function () {

@@ -92,9 +92,8 @@ class Payment(models.Model):
     commssionRecevied = models.FloatField(blank=True, null=True)
     nextDueDate = models.DateField(blank=True, null=True)
 
-
     def __unicode__(self):
-        return self.coe
+        return "%s - %s - Payment %d" % (self.coe.client.name, self.coe.coeNumber, self.id)
 
 
 class Document(models.Model):

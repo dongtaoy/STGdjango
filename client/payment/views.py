@@ -38,8 +38,11 @@ class PaymentUpdateView(SuccessMessageMixin, UpdateView):
 
     def get_context_data(self, **kwargs):
         context = super(PaymentUpdateView, self).get_context_data(**kwargs)
-        context["client"] = Client.objects.get(id=self.kwargs["client"])
+        coe = Coe.objects.get(id=self.kwargs["coe"])
+        context["client"] = coe.client
+        context["coe"] = coe
         return context
+
 
 class PaymentDeleteView(DeleteView):
     model = Payment
@@ -51,5 +54,5 @@ class PaymentDeleteView(DeleteView):
         return super(PaymentDeleteView, self).delete(self, request, *args, **kwargs)
 
     def get_success_url(self):
-        id = int(self.kwargs["client"])
-        return "/client/details/%d" % id
+        coe = Coe.objects.get(id=self.kwargs["coe"])
+        return "/client/coe/details/%d" % coe.id

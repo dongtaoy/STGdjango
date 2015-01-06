@@ -5,10 +5,7 @@
     {{ client.name }}'s Details
 {% endblock %}
 {% block plugincss %}
-	<link rel="stylesheet" type="text/css" href="{% static 'assets/global/plugins/select2/select2.css' %}"/>
 	<link rel="stylesheet" type="text/css" href="{% static 'assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css' %}"/>
-	<link rel="stylesheet" type="text/css" href="{% static 'assets/global/plugins/bootstrap-datepicker/css/datepicker.css' %}"/>
-	<link rel="stylesheet" type="text/css" href="{% static 'assets/global/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css' %}"/>
 	<link href="{% static 'assets/global/plugins/dropzone/css/dropzone.css' %}" rel="stylesheet"/>
 {% endblock %}
 
@@ -318,7 +315,7 @@
 												<i class="fa fa-cogs"></i>COE Information
 											</div>
 											<div class="actions">
-												<a href="#" class="btn btn-default btn-sm">
+												<a href="{% url "coe.add" client.id %}" class="btn btn-default btn-sm">
 												<i class="fa fa-pencil"></i> Add </a>
 											</div>
 										</div>
@@ -365,17 +362,19 @@
         </div>
     </div>
 </div>
+{% if perms.client.change_coe %}
+	<div id="context-menu">
+		<ul class="dropdown-menu" role="menu">
+			<li><a tabindex="-1" id="edit" href="#">Edit</a></li>
+		</ul>
+	</div>
+{% endif %}
 {% endblock %}
 {#end page content#}
 
 {% block pluginjs %}
-    <script type="text/javascript" src="{% static 'assets/global/plugins/select2/select2.min.js' %}"></script>
 	<script type="text/javascript" src="{% static 'assets/global/plugins/datatables/media/js/jquery.dataTables.min.js' %}"></script>
 	<script type="text/javascript" src="{% static 'assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js' %}"></script>
-	<script type="text/javascript" src="{% static 'assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js' %}"></script>
-	<script type="text/javascript" src="{% static 'assets/global/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js' %}"></script>
-	<script src="{% static 'assets/global/plugins/dropzone/dropzone.js' %}"></script>
-	<script src="{% static 'assets/admin/pages/scripts/form-dropzone.js' %}"></script>
     <script type="text/javascript"
             src="{% static 'assets/global/plugins/bootstrap-contextmenu/bootstrap-contextmenu.js' %}"></script>
 {% endblock %}
@@ -384,11 +383,11 @@
         (function () {
             $('.table').dataTable();
 
-            {% if perms.system.change_payment %}
+            {% if perms.system.change_coe %}
                 $('.table tbody tr').contextmenu({
                     target: '#context-menu',
                     before: function (e, context) {
-                        $('#edit').attr('href', ('/client/payment/mod/{{ client.id }}/' + $(context).children('td:first').text()));
+                        $('#edit').attr('href', ('/client/coe/mod/' + $(context).children('td:first').text()));
                         return true;
                     },
                     onItem: function () {
