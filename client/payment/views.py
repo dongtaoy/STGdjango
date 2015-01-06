@@ -14,9 +14,7 @@ class PaymentCreateView(SuccessMessageMixin, CreateView):
         return "%s's Payment updated" % name
 
     def get_success_url(self):
-        coe = Coe.objects.get(id=self.request.POST["coe"])
-        id = coe.client.id
-        return "/client/details/%d" % id
+        return "/client/coe/details/%d" % int(self.kwargs["coe"])
 
     def get_initial(self):
         return {
@@ -36,9 +34,7 @@ class PaymentUpdateView(SuccessMessageMixin, UpdateView):
         return "%s's Payment updated" % name
 
     def get_success_url(self):
-        coe = Coe.objects.get(id=self.request.POST["coe"])
-        id = coe.client.id
-        return "/client/details/%d" % id
+        return "/client/coe/details/%d" % int(self.kwargs["coe"])
 
     def get_context_data(self, **kwargs):
         context = super(PaymentUpdateView, self).get_context_data(**kwargs)

@@ -1,0 +1,54 @@
+<div class="row">
+    <div class="col-md-12 col-sm-12">
+        <div class="portlet grey-cascade box">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-cogs"></i>Payment Information
+                </div>
+                <div class="actions">
+                    <a href="{% url "payment.add" coe.id %}" class="btn btn-default btn-sm">
+                    <i class="fa fa-pencil"></i> Add </a>
+                </div>
+            </div>
+            <div class="portlet-body">
+                <div class="table-responsive">
+                    <table class="table table-hover table-bordered table-striped">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Amount received</th>
+                        <th>Received Date</th>
+                        <th>Amount Paid</th>
+                        <th>Payment Date</th>
+                        <th>Commission Claimed</th>
+                        <th>Commission Received</th>
+            {#            <th>Next Due Date</th>#}
+                    </tr>
+                    </thead>
+                    <tbody>
+                        {% for payment in coe.payments.all %}
+                            <tr>
+                                <td>{{ payment.id }}</td>
+                                <td>{{ payment.receivedAmount }}</td>
+                                <td>{{ payment.receivedDate }}</td>
+                                <td>{{ payment.paidAmount }}</td>
+                                <td>{{ payment.paidDate }}</td>
+                                <td>{{ payment.commssionClaimed }}</td>
+                                <td>{{ payment.commssionRecevied }}</td>
+                                <td>{{ payment.nextDueDate }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        {% if perms.client.change_payment %}
+            <div id="context-menu">
+                <ul class="dropdown-menu" role="menu">
+                    <li><a tabindex="-1" id="edit" href="#">Edit</a></li>
+                </ul>
+            </div>
+        {% endif %}
+    </div>
+</div>

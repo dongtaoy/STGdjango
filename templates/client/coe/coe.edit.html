@@ -62,7 +62,7 @@
                     </form>
 {#                    {{ client.id }}#}
                     {% if spec_coe %}
-                        {% if perms.systen.delete_coe %}
+                        {% if perms.client.delete_coe %}
 {#                            {{ client.id }}#}
                             <a href="{% url "coe.delete" client.id spec_coe.id %}" class="btn btn-danger">Delete</a>
                         {% endif %}

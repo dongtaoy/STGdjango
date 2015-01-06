@@ -1,0 +1,149 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% load bootstrap3 %}
+{% block title %}
+    {{ client.name }}'s Details
+{% endblock %}
+{% block plugincss %}
+	<link rel="stylesheet" type="text/css" href="{% static 'assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css' %}"/>
+	<link rel="stylesheet" type="text/css" href="{% static 'assets/global/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css' %}"/>
+	<link href="{% static 'assets/global/plugins/dropzone/css/dropzone.css' %}" rel="stylesheet"/>
+{% endblock %}
+
+{#page content#}
+{% block header %}
+    {{ client.name }}'s
+{% endblock %}
+{% block subHeader %}
+    Details
+{% endblock %}
+{% block breadcrumb %}
+    <ul class="page-breadcrumb breadcrumb">
+        <li>
+            <a href="{% url 'dashboard' %}">Home</a>
+            <i class="fa fa-circle"></i>
+        </li>
+        <li>
+            <a href="{% url 'client.list' %}">Client</a>
+            <i class="fa fa-circle"></i>
+        </li>
+        <li>
+            <a href="/client/details/{{ client.id }}">Details</a>
+        </li>
+    </ul>
+{% endblock %}
+
+{% block content %}
+<div class="row">
+	<div class="col-md-12">
+		<!-- Begin: life time stats -->
+		<div class="portlet light">
+			<div class="portlet-title">
+				<div class="caption">
+					<i class="icon-user font-green-sharp"></i>
+					<span class="caption-subject font-green-sharp bold uppercase">
+					{{ client.name }}'s </span>
+					<span class="caption-helper">COE</span>
+				</div>
+				<div class="actions">
+					<a href="#" class="btn btn-default btn-circle">
+					<i class="fa fa-angle-left"></i>
+					<span class="hidden-480">
+					Back </span>
+					</a>
+					<div class="btn-group">
+						<a class="btn btn-default btn-circle" href="#" data-toggle="dropdown">
+						<i class="fa fa-cog"></i>
+						<span class="hidden-480">
+						Tools </span>
+						<i class="fa fa-angle-down"></i>
+						</a>
+						<ul class="dropdown-menu pull-right">
+							<li>
+								<a href="#">
+								Export to Excel </a>
+							</li>
+							<li>
+								<a href="#">
+								Export to CSV </a>
+							</li>
+							<li>
+								<a href="#">
+								Export to XML </a>
+							</li>
+							<li class="divider">
+							</li>
+							<li>
+								<a href="#">
+								Print Invoice </a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="portlet-body">
+				<div class="tabbable">
+                    <ul class="nav nav-tabs nav-tabs-lg">
+                        <li class="active">
+                            <a href="#tab_1" data-toggle="tab">
+                            Overview </a>
+                        </li>
+                        <li>
+                            <a href="#tab_2" data-toggle="tab">
+                            Payment</a>
+                        </li>
+                        <li>
+                            <a href="#tab_3" data-toggle="tab">
+                            Stage</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content">
+                        {% bootstrap_messages %}
+                        <div class="tab-pane active" id="tab_1">
+                            {% include "client/coe/coe.overview.html" %}
+                        </div>
+                        <div class="tab-pane" id="tab_2">
+                            {% include "client/coe/coe.payment.html" %}
+                        </div>
+                        <div class="tab-pane" id="tab_3">
+                            {% include "client/coe/coe.stage.html" %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{#end page content#}
+
+{% block pluginjs %}
+    <script type="text/javascript" src="{% static 'assets/global/plugins/datatables/media/js/jquery.dataTables.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'assets/global/plugins/datatascript>
+	<script src="{% static 'assets/admin/pages/scripts/form-dropzone.js' %}">bles/plugins/bootstrap/dataTables.bootstrap.js' %}"></script>
+	<script src="{% static 'assets/global/plugins/dropzone/dropzone.js' %}"></</script>
+    <script type="text/javascript"
+            src="{% static 'assets/global/plugins/bootstrap-contextmenu/bootstrap-contextmenu.js' %}"></script>
+{% endblock %}
+{% block script %}
+    <script>
+        (function () {
+            $('.table').dataTable();
+
+            {% if perms.client.change_payment %}
+                $('.table tbody tr').contextmenu({
+                    target: '#context-menu',
+                    before: function (e, context) {
+                        $('#edit').attr('href', ('/client/payment/mod/{{ client.id }}/' + $(context).children('td:first').text()));
+                        return true;
+                    },
+                    onItem: function () {
+                        window.location.href = $('#edit').attr('href');
+                        return true;
+                    }
+                });
+            {% endif %}
+
+        }());
+    </script>
+{% endblock %}

@@ -32,19 +32,18 @@ class CoeUpdateView(SuccessMessageMixin, UpdateView):
     context_object_name = "spec_coe"
 
     def get_success_url(self):
-        print self.request.POST["client"]
-        return "/client/details/%d" % int(self.request.POST["client"])
-
+        return "/client/coe/details/%d" % int(self.kwargs["coe"])
 
     def get_context_data(self, **kwargs):
         context = super(CoeUpdateView, self).get_context_data(**kwargs)
-        context["client"] = Client.objects.get(id=self.kwargs["client"])
+        coe = Coe.objects.get(id=self.kwargs["coe"])
+        context["client"] = coe.client
         return context
 
     def get_success_message(self, cleaned_data):
-        id = int(self.request.POST["client"])
-        client = Client.objects.get(id=id)
-        return "%s's COE updated" % client.name
+        coe = Coe.objects.get(id=self.kwargs["coe"])
+        name = coe.client.name
+        return "%s's COE updated" % name
 
 
 class CoeDeleteView(DeleteView):
@@ -54,12 +53,23 @@ class CoeDeleteView(DeleteView):
     # success_url = "/client"
 
     def get_success_url(self):
-        return "/client/details/%d" % int(self.kwargs["client"])
+        coe = Coe.objects.get(id=self.kwargs["coe"])
+        return "/client/details/%d" % coe.client.id
 
     def delete(self, request, *args, **kwargs):
         messages.success(self.request, "COE deleted")
         return super(CoeDeleteView, self).delete(self, request, *args, **kwargs)
 
 
+class CoeDetailView(DetailView):
+    model = Coe
+    template_name = "client/coe/coe.details.html"
+    pk_url_kwarg = "coe"
+
+    def get_context_data(self, **kwargs):
+        context = super(CoeDetailView, self).get_context_data(**kwargs)
+        coe = context["coe"]
+        context["client"] = coe.client
+        return context
 
 
