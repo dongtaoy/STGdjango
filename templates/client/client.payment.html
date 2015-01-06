@@ -25,22 +25,18 @@
             </tr>
             </thead>
             <tbody>
-            {% for key, payments in allPayments.items %}
-                {% if key|to_int == coe.id  %}
-                    {% for payment in payments %}
-                        <tr>
-                            <td>{{ payment.id }}</td>
-                            <td>{{ payment.receivedAmount }}</td>
-                            <td>{{ payment.receivedDate }}</td>
-                            <td>{{ payment.paidAmount }}</td>
-                            <td>{{ payment.paidDate }}</td>
-                            <td>{{ payment.commssionClaimed }}</td>
-                            <td>{{ payment.commssionRecevied }}</td>
-                    {#                <td>{{ payment.nextDueDate }}</td>#}
-                        </tr>
-                    {% endfor %}
-                {% endif %}
-            {% endfor %}
+                {% for payment in coe.payments.all %}
+                    <tr>
+                        <td>{{ payment.id }}</td>
+                        <td>{{ payment.receivedAmount }}</td>
+                        <td>{{ payment.receivedDate }}</td>
+                        <td>{{ payment.paidAmount }}</td>
+                        <td>{{ payment.paidDate }}</td>
+                        <td>{{ payment.commssionClaimed }}</td>
+                        <td>{{ payment.commssionRecevied }}</td>
+                                <td>{{ payment.nextDueDate }}</td>
+                    </tr>
+                {% endfor %}
             </tbody>
             </table>
         </div>

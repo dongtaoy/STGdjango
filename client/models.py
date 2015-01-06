@@ -65,7 +65,7 @@ class Institution(models.Model):
         return self.name
 
 class Coe(models.Model):
-    client = models.ForeignKey(Client)
+    client = models.ForeignKey(Client, related_name="coes")
     institution = models.ForeignKey(Institution, blank=True, null=True)
     coeNumber = models.CharField(max_length=30, blank=True, null=True)
     start = models.DateField(blank=True, null=True)
@@ -81,7 +81,7 @@ class Coe(models.Model):
 
 
 class Payment(models.Model):
-    coe = models.ForeignKey(Coe)
+    coe = models.ForeignKey(Coe, related_name="payments")
     receivedAmount = models.FloatField(blank=True, null=True)
     receivedDate = models.DateField(blank=True, null=True)
     paidAmount = models.FloatField(blank=True, null=True)

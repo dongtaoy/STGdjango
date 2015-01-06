@@ -84,11 +84,5 @@ class ClientDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super(ClientDetailView, self).get_context_data(**kwargs)
         client = context["client"]
-        coes = Coe.objects.filter(client=client)
-        payments = {}
-        for coe in coes:
-            payments[str(coe.id)] = Payment.objects.filter(coe=coe)
-        context["allPayments"] = payments
-        # payments = Payment.objects.filter(coe=coes)
-        context["coes"] = coes
+        context["coes"] = client.coes.all
         return context
