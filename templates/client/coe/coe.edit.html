@@ -10,9 +10,9 @@
 {% endblock %}
 {% block plugincss %}
 <link rel="stylesheet" type="text/css"
-          href="{% static 'plugins/select2/select2.css' %}"/>
+          href="{% static 'assets/global/plugins/select2/select2.css' %}"/>
 <link rel="stylesheet" type="text/css"
-      href="{% static 'plugins/select2/select2-bootstrap.css' %}"/>
+          href="{% static 'assets/global/plugins/select2/select2-bootstrap.css' %}"/>
 {% endblock %}
 {% block header %}
     Coe
@@ -87,9 +87,6 @@
 {% endblock %}
 {% block script %}
     <script>
-        (function () {
-            $('.table').dataTable();
-            $('form select').select2();
-        }());
+        $('form select').select2();
     </script>
 {% endblock %}
