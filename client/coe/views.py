@@ -4,7 +4,10 @@ from django.contrib import messages
 from django.shortcuts import redirect
 from django.contrib.messages.views import SuccessMessageMixin
 from client.forms import CoeForm, DocumentForm
-from client.models import Coe, Client, Stage
+from client.models import Coe, Client, Stage, Document
+from django.http import HttpResponse, HttpResponseRedirect
+from django.shortcuts import redirect
+from django.core.urlresolvers import reverse
 
 
 
@@ -80,7 +83,15 @@ def upload(request):
     if request.method == 'POST':
         form = DocumentForm(request.POST, request.FILES)
         if form.is_valid():
-            form.save()
-            return redirect('/')
-    return redirect('/')
+            document = form.save(commit=False)
+            document.title = document.file.name
+            document.save()
+            return HttpResponse()
+    return HttpResponse()
 
+
+def delete(request, document):
+    document = Document.objects.get(id=document)
+    coe = document.coe
+    document.delete()
+    return redirect(reverse("coe.details", kwargs={"coe": coe.id}) + "#tab_3")

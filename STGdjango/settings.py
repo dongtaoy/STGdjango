@@ -64,11 +64,11 @@ WSGI_APPLICATION = 'STGdjango.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'HOST': '54.66.143.201',
+        'HOST': '127.0.0.1',
         'PORT': '3306',
         'NAME': 'STG',
-        'USER': 'root',
-        'PASSWORD': 'yudanny1'
+        # 'USER': 'root',
+        # 'PASSWORD': 'yudanny1'
 
     }
 }
@@ -95,10 +95,6 @@ STATIC_URL = '/static/'
 
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
-)
-
-TEMPLATE_DIRS = (
-    os.path.join(BASE_DIR, 'templates'),
 )
 
 TEMPLATE_DIRS = (
@@ -142,5 +138,6 @@ BOOTSTRAP3 = {
 }
 
 # Media root
-
-MEDIA_ROOT = '/upload'
+#
+MEDIA_ROOT = 'upload/'
+MEDIA_URL = '/media/'

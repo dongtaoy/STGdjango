@@ -70,4 +70,5 @@ class PaymentForm(ModelForm):
 class DocumentForm(ModelForm):
     class Meta:
         model = Document
+        fields = "__all__"
 

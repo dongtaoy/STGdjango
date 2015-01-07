@@ -100,8 +100,14 @@ class Payment(models.Model):
         return "%s - %s - Payment %d" % (self.coe.client.name, self.coe.coeNumber, self.id)
 
 
+def rename_file(instance, filename):
+    return "%s/%s/%s/%s" % (instance.coe.client.id, instance.coe.id, instance.stage.id, filename )
+
 class Document(models.Model):
     title = models.CharField(max_length=100, null=True, blank=True)
-    file = models.FileField()
+    file = models.FileField(upload_to=rename_file)
     coe = models.ForeignKey(Coe, related_name="files")
     stage = models.ForeignKey(Stage)
+
+
+

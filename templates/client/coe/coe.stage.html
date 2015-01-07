@@ -37,18 +37,43 @@
                                 </div>
                             </div>
                             <div class="portlet-body">
-                                <form id="my-awesome-dropzone" action="{% url 'document.upload' %}" class="dropzone">
+                                <form id="dropzone" action="{% url 'document.upload' %}" class="dropzone">
                                     {% csrf_token %}
                                     <input type="hidden" name="stage" value="{{ stage.id }}">
                                     <input type="hidden" name="coe" value="{{ coe.id }}">
 
                                     <div class="row static-info">
                                         <div class="col-md-12 value">
-                                            <ol>
-                                                {% for document in coe.documents.all %}
-                                                    <li>{{ document }}</li>
+                                            <table class="table table-condensed table-hover">
+                                                <thead>
+                                                <tr>
+                                                    <th style="display: none;">
+                                                        #
+                                                    </th>
+                                                    <th>
+                                                        Filename
+                                                    </th>
+                                                    <th>
+                                                        Size (k)
+                                                    </th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                {% for file in coe.files.all %}
+                                                    <tr>
+                                                        <td style="display: none;">{{ file.id }}</td>
+                                                        <td>
+                                                            <a href="{{ file.file.url }}">{{ file.title }}</a>
+                                                        </td>
+                                                        <td>
+                                                            {{ file.file.size }}
+                                                        </td>
+                                                    </tr>
+
                                                 {% endfor %}
-                                            </ol>
+                                                </tbody>
+                                            </table>
+
                                         </div>
                                     </div>
                                 </form>
@@ -64,4 +89,9 @@
             </div>
         </div>
     </div>
+</div>
+<div id="file-contextmenu">
+    <ul class="dropdown-menu" role="menu">
+        <li><a tabindex="-1" id="delete" href="#">Delete</a></li>
+    </ul>
 </div>

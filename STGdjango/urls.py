@@ -1,5 +1,6 @@
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
+import settings
 
 urlpatterns = patterns(
     '',
@@ -21,6 +22,8 @@ urlpatterns = patterns(
 
     # hr urls
     url(r'^hr/', include('hr.urls')),
+
+    url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT}),
 )
 
 admin.autodiscover()
