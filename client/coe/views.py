@@ -93,5 +93,6 @@ def upload(request):
 def delete(request, document):
     document = Document.objects.get(id=document)
     coe = document.coe
+    document.file.delete()
     document.delete()
     return redirect(reverse("coe.details", kwargs={"coe": coe.id}) + "#tab_3")
