@@ -80,7 +80,8 @@ class Coe(models.Model):
     referalCommission = models.FloatField(blank=True, null=True)
     consultantCommission = models.FloatField(blank=True, null=True)
     description = models.TextField(blank=True, null=True)
-    documents = models.ManyToManyField(Stage, through='Document', through_fields=('coe', 'stage'))
+    documents = models.ManyToManyField(Stage, through='Document', through_fields=('coe', 'stage'), null=True,
+                                       blank=True)
 
     def __unicode__(self):
         return "%s - COE %d" % (self.client.name, self.id)

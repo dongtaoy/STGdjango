@@ -39,8 +39,8 @@ def get_custom_form(customModel, customFields):
 class CoeForm(ModelForm):
     class Meta:
         model = Coe
-        fields = "__all__"
-
+        # fields = "__all__"
+        exclude = "document"
         labels = {
             'totalTuitionFee': "Total Tuition Fee",
             "referalCommission": "Referal's Commission",
