@@ -66,6 +66,10 @@ class PaymentForm(ModelForm):
             "commssionRecevied": "Commssion Recevied",
         }
 
+    def __init__(self, *args, **kwargs):
+        super(PaymentForm, self).__init__(*args, **kwargs)
+        self.fields['nextDueDate'].widget.attrs['class'] = 'datepicker'
+
 
 class DocumentForm(ModelForm):
     class Meta:

@@ -1,3 +1,5 @@
+import datetime
+from django.views.generic import ListView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin
@@ -56,3 +58,14 @@ class PaymentDeleteView(DeleteView):
     def get_success_url(self):
         coe = Coe.objects.get(id=self.kwargs["coe"])
         return "/client/coe/details/%d" % coe.id
+
+
+class PaymentListView(ListView):
+    model = Payment
+    template_name = "client/payment/payment.dueDate.html"
+    context_object_name = "payments"
+
+    def get_context_data(self, **kwargs):
+        context = super(PaymentListView, self).get_context_data(**kwargs)
+        context["now"] = datetime.datetime.now().date()
+        return context

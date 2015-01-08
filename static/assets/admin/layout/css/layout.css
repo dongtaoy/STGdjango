@@ -365,7 +365,7 @@ Page Header
   font-size: 12px;
   font-weight: 400;
   opacity: 0.5;
-  filter: alpha(opacity=50);
+  /*filter: alpha(opacity=100);*/
   float: right;
 }
 .page-header.navbar .top-menu .navbar-nav > li.dropdown-inbox > .dropdown-menu .dropdown-menu-list > li .message {

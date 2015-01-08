@@ -3,7 +3,9 @@ from django.contrib.messages.views import SuccessMessageMixin
 from django.forms import ModelForm
 from django.shortcuts import render_to_response
 from django.views.generic import CreateView, UpdateView, DeleteView, DetailView
-from client.forms import ClientForm, StageForm
+from django.views.generic import ListView
+from client.models import Payment
+import datetime
 from client.models import Client, Coe, Payment, Stage
 
 
@@ -81,9 +83,11 @@ class ClientDetailView(DetailView):
 
     # def get_context_data(self, **kwargs):
     # context = super(ClientDetailView, self).get_context_data(**kwargs)
-    #     context["stages"] = Stage.objects.all()
+    # context["stages"] = Stage.objects.all()
     #     return context
 
 
 def uploadtest(request):
     return render_to_response('client/client.upload.html')
+
+
