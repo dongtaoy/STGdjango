@@ -40,7 +40,7 @@ class CoeForm(ModelForm):
     class Meta:
         model = Coe
         # fields = "__all__"
-        exclude = "document"
+        exclude = ("documents", )
         labels = {
             'totalTuitionFee': "Total Tuition Fee",
             "referalCommission": "Referal's Commission",

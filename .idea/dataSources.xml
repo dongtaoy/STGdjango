@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="DataSourceManagerImpl" format="xml" hash="4200057270">
+  <component name="DataSourceManagerImpl" format="xml" hash="4277024333">
     <data-source source="LOCAL" name="Django default" uuid="29d9f2f1-75fb-4182-9406-0fe60a3186a2">
       <driver-ref>mysql</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
-      <jdbc-url>jdbc:mysql://54.66.143.201:3306/STG</jdbc-url>
+      <jdbc-url>jdbc:mysql://127.0.0.1:3306/STG</jdbc-url>
       <driver-properties>
         <property name="zeroDateTimeBehavior" value="convertToNull" />
         <property name="tinyInt1isBit" value="false" />
