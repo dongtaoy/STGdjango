@@ -98,27 +98,27 @@
 {% block script %}
     <script>
         (function () {
-            {#            $('.table').dataTable();#}
 
-            {#            {% if perms.client.change_payment %}#}
-            {#                $('.table tbody tr').contextmenu({#}
-            {#                    target: '#context-menu',#}
-            {#                    before: function (e, context) {#}
-            {#                        $('#edit').attr('href', ('/client/payment/mod/{{ client.id }}/' + $(context).children('td:first').text()));#}
-            {#                        return true;#}
-            {#                    },#}
-            {#                    onItem: function () {#}
-            {#                        window.location.href = $('#edit').attr('href');#}
-            {#                        return true;#}
-            {#                    }#}
-            {#                });#}
-            {#            {% endif %}#}
 
         }());
     </script>
     <script>
         (function () {
-            $('.table-condensed tbody tr').contextmenu({
+            $('.table').dataTable();
+            {% if perms.client.change_payment %}
+                $('.table-payment tbody tr').contextmenu({
+                    target: '#context-menu',
+                    before: function (e, context) {
+                        $('#edit').attr('href', ('/client/payment/mod/{{ coe.id }}/' + $(context).children('td:first').text()));
+                        return true;
+                    },
+                    onItem: function () {
+                        window.location.href = $('#edit').attr('href');
+                        return true;
+                    }
+                });
+            {% endif %}
+            $('.table-stage tbody tr').contextmenu({
                 target: '#file-contextmenu',
                 before: function (e, context) {
                     $('#delete').attr('href', ('/client/coe/file/delete/' + $(context).children('td:first').text()));
