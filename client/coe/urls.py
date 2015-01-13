@@ -17,4 +17,6 @@ urlpatterns = patterns(
 
     url(r'^file/upload/$', 'client.coe.views.upload', name='document.upload'),
     url(r'^file/delete/(?P<document>\d+)$', 'client.coe.views.delete', name='document.delete'),
+
+    url(r'^invoice/', 'client.coe.views.generate_invoice'),
 )
