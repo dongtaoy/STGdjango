@@ -96,3 +96,7 @@ def delete(request, document):
     document.file.delete()
     document.delete()
     return redirect(reverse("coe.details", kwargs={"coe": coe.id}) + "#tab_3")
+
+
+def generate_invoice(request):
+    return redirect("/")
