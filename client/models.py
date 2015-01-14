@@ -111,4 +111,10 @@ class Document(models.Model):
     stage = models.ForeignKey(Stage)
 
 
+class Invoice(models.Model):
+    number = models.CharField(max_length=20)
+    issueDate = models.DateField(blank=True, null=True)
+    payments = models.ManyToManyField(Payment)
+    employee = models.ForeignKey(Employee)
+
 
