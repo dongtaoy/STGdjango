@@ -1,5 +1,6 @@
-from django.conf.urls import patterns, include, url
+from django.conf.urls import patterns, include, url, handler403, handler404, handler500
 from django.contrib import admin
+from django.views.generic import TemplateView
 import settings
 
 urlpatterns = patterns(
@@ -25,5 +26,9 @@ urlpatterns = patterns(
 
     url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT}),
 )
+
+handler404 = TemplateView.as_view(template_name="common/404.html")
+handler500 = TemplateView.as_view(template_name="common/500.html")
+handler403 = TemplateView.as_view(template_name="common/403.html")
 
 admin.autodiscover()
