@@ -7,8 +7,8 @@ from client.stage.views import StageCreateView, StageUpdateView, StageDeleteView
 urlpatterns = patterns(
     '',
     url(r'^$', login_required(ListView.as_view(
-        model = Stage,
-        context_object_name= "stages",
+        model=Stage,
+        context_object_name="stages",
         template_name="client/stage/stage.list.html")), name="stage.list"),
 
     url(r'^add/$',

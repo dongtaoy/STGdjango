@@ -5,6 +5,8 @@
     Employee Wizward
 {% endblock %}
 {% block plugincss %}
+    <link rel="stylesheet" type="text/css"
+          href="{% static 'assets/global/plugins/bootstrap-datepicker/css/datepicker.css' %}"/>
 {% endblock %}
 {% block header %}
     Employee Wizward
@@ -97,9 +99,13 @@
     </div>
 {% endblock %}
 {% block pluginjs %}
-
+<script type="text/javascript"
+        src="{% static 'assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js' %}"></script>
 {% endblock %}
 {% block script %}
     <script>
+        (function () {
+            $('.datepicker').datepicker();
+        }());
     </script>
 {% endblock %}

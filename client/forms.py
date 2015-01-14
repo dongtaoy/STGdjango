@@ -28,7 +28,9 @@ class ClientForm(ModelForm):
         fields = "__all__"
 
 
+
 def get_custom_form(customModel, customFields):
+
     class _customForm(ModelForm):
         class Meta:
             model = customModel
@@ -48,9 +50,10 @@ class CoeForm(ModelForm):
             "consultantCommission": "Consultant's Commission",
         }
 
-        # def __init__(self):
-        # super(CoeForm, self).__init__(ModelForm)
-        # self.fields['client'].widget.attrs['readonly'] = True
+    def __init__(self, *args, **kwargs):
+        super(CoeForm, self).__init__(*args, **kwargs)
+        self.fields['start'].widget.attrs['class'] = 'datepicker'
+        self.fields['end'].widget.attrs['class'] = 'datepicker'
 
 
 class PaymentForm(ModelForm):
