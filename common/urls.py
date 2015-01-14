@@ -27,3 +27,4 @@ urlpatterns = patterns(
     url(r'^500$', login_required(TemplateView.as_view(template_name='common/500.html'))),
     # url(r'^delconfirm/$', login_required(TemplateView.as_view(template_name='common/delete.confirmation.html')), name='delete.confirmation'),
 )
+
