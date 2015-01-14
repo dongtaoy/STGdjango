@@ -82,7 +82,7 @@
             initDrag(html);
         }
 
-        function initCalendar(){
+        function initCalendar() {
             if (!jQuery().fullCalendar) {
                 return;
             }
@@ -129,12 +129,11 @@
             }
 
 
-
-            var addEvent = function(title) {
+            var addEvent = function (title) {
 
             };
 
-            $('#event_add').unbind('click').click(function() {
+            $('#event_add').unbind('click').click(function () {
                 var title = $('#event_title').val();
                 addEvent(title);
             });
@@ -146,8 +145,11 @@
                 header: h,
                 defaultView: 'month', // change default view with available options from http://arshaw.com/fullcalendar/docs/views/Available_Views/
                 slotMinutes: 15,
-                editable: true
-
+                editable: true,
+                timezone: 'Australia/Melbourne',
+                eventClick: function (calEvent, jsEvent, view) {
+                    window.location.href = "/system/calendarevent/mod/" + calEvent.id;
+                }
             });
 
         }

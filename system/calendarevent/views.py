@@ -5,7 +5,10 @@ from django.contrib.messages.views import SuccessMessageMixin
 from system.forms import CalendarEventForm
 from system.models import CalendarEvent
 from django.http import HttpResponse
-from fullcalendar.util import events_to_json
+from django.utils.timezone import localtime
+# from fullcalendar.util import events_to_json
+import json
+
 
 class CalendarEventCreateView(SuccessMessageMixin, CreateView):
     form_class = CalendarEventForm
@@ -24,7 +27,6 @@ class CalendarEventUpdateView(SuccessMessageMixin, UpdateView):
     success_message = '%(title)s Calendar Event created'
 
 
-
 class CalendarEventDeleteView(DeleteView):
     model = CalendarEvent
     template_name = 'common/delete.confirmation.html'
@@ -37,6 +39,16 @@ class CalendarEventDeleteView(DeleteView):
 
 
 def feed_events(request):
-    print request
-    events = CalendarEvent.objects.all()
-    return HttpResponse(events_to_json(events), content_type='application/json')
+    # print request
+    # events = CalendarEvent.objects.all()
+    events = CalendarEvent.objects.filter(start__gt=request.GET['start'], end__lt=request.GET['end'])
+    json_list = []
+
+    json_list = []
+    for event in events:
+        json_list.append(
+            {'id': event.id, 'start': localtime(event.start).strftime("%Y-%m-%dT%H:%M:%S"),
+             'end': localtime(event.end).strftime("%Y-%m-%dT%H:%M:%S"), 'allDay': event.all_day,
+             'title': event.title})
+    return HttpResponse(json.dumps(json_list), content_type='application/json')
+    # return HttpResponse(events_to_json(events), content_type='application/json')
