@@ -68,16 +68,6 @@
 
 {% endblock %}
 {% block pluginjs %}
-    <script type="text/javascript"
-            src="{% static 'assets/global/plugins/datatables/media/js/jquery.dataTables.min.js' %}"></script>
-    <script type="text/javascript"
-            src="{% static 'assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js' %}"></script>
-
 {% endblock %}
 {% block script %}
-    <script>
-        (function () {
-            $('.table').dataTable();
-        }());
-    </script>
 {% endblock %}

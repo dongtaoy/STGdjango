@@ -7,7 +7,6 @@
 {% block plugincss %}
     <link rel="stylesheet" type="text/css"
           href="{% static 'assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css' %}"/>
-
 {% endblock %}
 {% block header %}
     Visa
@@ -100,8 +99,6 @@
 {% block script %}
     <script>
         (function () {
-            $('.table').dataTable();
-
             {% if perms.system.change_visa %}
                 $('.table tbody tr').contextmenu({
                     target: '#context-menu',
@@ -115,17 +112,7 @@
                     }
                 });
             {% endif %}
-
+            $('.table').dataTable();
         }());
-
-        {#            (function () {#}
-        {#                $(".table tbody").on("contextmenu", "tr", function (e) {#}
-        {##}
-        {##}
-        {#                    var id = ($(this)).children('td:first').text();#}
-        {#                    //window.location.href = "/system/label/mod/" + id;#}
-        {#                });#}
-        {#            }());#}
-        {#        {% endif %}#}
     </script>
 {% endblock %}

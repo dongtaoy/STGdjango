@@ -381,7 +381,7 @@
 {% block script %}
     <script>
         (function () {
-            $('.table').dataTable();
+            
 
             {% if perms.system.change_coe %}
                 $('.table tbody tr').contextmenu({
@@ -396,6 +396,7 @@
                     }
                 });
             {% endif %}
+            $('.table').dataTable();
 
         }());
     </script>

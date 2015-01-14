@@ -108,8 +108,6 @@
 {% block script %}
     <script>
         (function () {
-            $('.table').dataTable();
-
             {% if perms.system.change_employee %}
                 $('.table tbody tr').contextmenu({
                     target: '#context-menu',
@@ -123,8 +121,7 @@
                     }
                 });
             {% endif %}
-
+            $('.table').dataTable();
         }());
-
     </script>
 {% endblock %}

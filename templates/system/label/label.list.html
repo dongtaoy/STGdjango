@@ -107,8 +107,6 @@
 {% block script %}
     <script>
         (function () {
-            $('.table').dataTable();
-
             {% if perms.system.change_label %}
                 $('.table tbody tr').contextmenu({
                     target: '#context-menu',
@@ -122,17 +120,7 @@
                     }
                 });
             {% endif %}
-
+            $('.table').dataTable();
         }());
-
-        {#            (function () {#}
-        {#                $(".table tbody").on("contextmenu", "tr", function (e) {#}
-        {##}
-        {##}
-        {#                    var id = ($(this)).children('td:first').text();#}
-        {#                    //window.location.href = "/system/label/mod/" + id;#}
-        {#                });#}
-        {#            }());#}
-        {#        {% endif %}#}
     </script>
 {% endblock %}

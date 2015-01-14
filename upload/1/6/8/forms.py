@@ -67,15 +67,9 @@ class PaymentForm(ModelForm):
             "commssionRecevied": "Commssion Recevied",
         }
 
-        widgets = {
-            "coe": forms.HiddenInput()
-        }
-
     def __init__(self, *args, **kwargs):
         super(PaymentForm, self).__init__(*args, **kwargs)
         self.fields['nextDueDate'].widget.attrs['class'] = 'datepicker'
-        self.fields['receivedDate'].widget.attrs['class'] = 'datepicker'
-        self.fields['paidDate'].widget.attrs['class'] = 'datepicker'
 
 
 class DocumentForm(ModelForm):
@@ -96,8 +90,6 @@ class InvoiceForm(ModelForm):
     def __init__(self, *args, **kwargs):
         super(InvoiceForm, self).__init__(*args, **kwargs)
         self.fields['issueDate'].widget.attrs['class'] = 'datepicker'
-
-
 
 
 

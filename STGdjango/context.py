@@ -6,6 +6,7 @@ __author__ = 'dongtaoy'
 def common(request):
     from system.models import Sidebar
     from client.models import Payment
+    from hr.models import Employee
     import datetime
 
     now = datetime.datetime.now()
@@ -15,4 +16,6 @@ def common(request):
             "Sidebars": Sidebar.objects.filter(parent=None),
             "Payments": Payment.objects.filter(nextDueDate__range=[now, max_date]),
             "Now": now,
+            "User": request.user
+
     }

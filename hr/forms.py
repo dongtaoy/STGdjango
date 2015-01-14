@@ -39,6 +39,10 @@ class EmployeeForm(ModelForm):
         model = Employee
         exclude = ('user',)
 
+    def __init__(self, *args, **kwargs):
+        super(EmployeeForm, self).__init__(*args, **kwargs)
+        self.fields['dob'].widget.attrs['class'] = 'datepicker'
+
 
 class GroupForm(ModelForm):
     class Meta:

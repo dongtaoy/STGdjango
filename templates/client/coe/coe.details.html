@@ -110,7 +110,7 @@
 
             {% if perms.client.change_payment %}
                 $('.table-payment tbody tr').contextmenu({
-                    target: '#context-menu',
+                    target: '#payment-contextmenu',
                     before: function (e, context) {
                         $('#edit').attr('href', ('/client/payment/mod/{{ coe.id }}/' + $(context).children('td:first').text()));
                         return true;
@@ -133,10 +133,10 @@
                     }
                     return true;
                 }
-            })
+            });
             {% if perms.system.change_invoice %}
                 $('.table-invoice tbody tr').contextmenu({
-                    target: '#context-menu',
+                    target: '#invoice-contextmenu',
                     before: function (e, context) {
                         $('#edit').attr('href', ('/client/invoice/mod/{{ coe.id }}/' + $(context).children('td:first').text()));
                         return true;

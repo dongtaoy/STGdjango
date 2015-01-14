@@ -102,7 +102,7 @@
 {% block script %}
     <script>
         (function () {
-            $('.table').dataTable();
+            
 
             {% if perms.system.change_institution %}
                 $('.table tbody tr').contextmenu({
@@ -117,6 +117,7 @@
                     }
                 });
             {% endif %}
+            $('.table').dataTable();
 
         }());
 

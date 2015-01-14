@@ -113,7 +113,7 @@
 {% block script %}
     <script>
         (function () {
-            $('.table').dataTable();
+            
 {#            {% if perms.system.change_client %}#}
 {#                $('.table tbody tr').contextmenu({#}
 {#                    target: '#context-menu',#}
@@ -138,6 +138,7 @@
                     return true;
                 }
             });
+            $('.table').dataTable();
 
         }());
 

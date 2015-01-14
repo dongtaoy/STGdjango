@@ -13,7 +13,6 @@
           href="{% static 'assets/global/plugins/select2/select2.css' %}"/>
 <link rel="stylesheet" type="text/css"
           href="{% static 'assets/global/plugins/select2/select2-bootstrap.css' %}"/>
-
 {% endblock %}
 {% block header %}
     {% if spec_client.name %}
@@ -81,17 +80,12 @@
 
 {% endblock %}
 {% block pluginjs %}
-    <script type="text/javascript"
-            src="{% static 'assets/global/plugins/datatables/media/js/jquery.dataTables.min.js' %}"></script>
-    <script type="text/javascript"
-            src="{% static 'assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js' %}"></script>
     <script type="application/javascript"
             src="{% static 'assets/global/plugins/select2/select2.min.js' %}"></script>
 {% endblock %}
 {% block script %}
     <script>
         (function () {
-            $('.table').dataTable();
             $('form select').select2();
         }());
     </script>
