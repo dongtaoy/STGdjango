@@ -107,7 +107,7 @@
 {% block script %}
     <script>
         (function () {
-            $('.table').dataTable();
+
             {% if perms.client.change_payment %}
                 $('.table-payment tbody tr').contextmenu({
                     target: '#context-menu',
@@ -147,6 +147,7 @@
                     }
                 });
             {% endif %}
+            $('.table').dataTable();
         }());
         (function () {
             {#            Dropzone.options.dropzone = {#}
