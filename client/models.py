@@ -115,6 +115,7 @@ class Invoice(models.Model):
     coe = models.ForeignKey(Coe, related_name="invoices", blank=True, null=True)
     number = models.CharField(max_length=20)
     issueDate = models.DateField(blank=True, null=True)
+    # payments = models.ManyToManyField(Payment, limit_choices_to={"coe": coe.id})
     payments = models.ManyToManyField(Payment)
     employee = models.ForeignKey(Employee)
 

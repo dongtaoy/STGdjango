@@ -53,29 +53,38 @@
                     <div class="tabbable">
                         <ul class="nav nav-tabs nav-tabs-lg">
                             <li class="active">
-                                <a href="#tab_1" data-toggle="tab">
+                                <a href="#tab_overview" data-toggle="tab">
                                     Overview </a>
                             </li>
                             <li>
-                                <a href="#tab_2" data-toggle="tab">
+                                <a href="#tab_payment" data-toggle="tab">
                                     Payment</a>
                             </li>
                             <li>
-                                <a href="#tab_3" data-toggle="tab">
+                                <a href="#tab_stage" data-toggle="tab">
                                     Stage</a>
+                            </li>
+                            <li>
+                                <a href="#tab_invoice" data-toggle="tab">
+                                    Invoice</a>
                             </li>
                         </ul>
                         <div class="tab-content">
                             {% bootstrap_messages %}
-                            <div class="tab-pane active" id="tab_1">
+
+                            <div class="tab-pane active" id="tab_overview">
                                 {% include "client/coe/coe.detail.overview.html" %}
                             </div>
-                            <div class="tab-pane" id="tab_2">
+                            <div class="tab-pane" id="tab_invoice">
+                                {% include "client/coe/coe.detail.invoice.html" %}
+                            </div>
+                            <div class="tab-pane" id="tab_payment">
                                 {% include "client/coe/coe.detail.payment.html" %}
                             </div>
-                            <div class="tab-pane" id="tab_3">
+                            <div class="tab-pane" id="tab_stage">
                                 {% include "client/coe/coe.detail.stage.html" %}
                             </div>
+
                         </div>
                     </div>
                 </div>
@@ -96,12 +105,6 @@
             src="{% static 'assets/global/plugins/bootstrap-contextmenu/bootstrap-contextmenu.js' %}"></script>
 {% endblock %}
 {% block script %}
-    <script>
-        (function () {
-
-
-        }());
-    </script>
     <script>
         (function () {
             $('.table').dataTable();
@@ -131,6 +134,19 @@
                     return true;
                 }
             })
+            {% if perms.system.change_invoice %}
+                $('.table-invoice tbody tr').contextmenu({
+                    target: '#context-menu',
+                    before: function (e, context) {
+                        $('#edit').attr('href', ('/client/invoice/mod/{{ coe.id }}/' + $(context).children('td:first').text()));
+                        return true;
+                    },
+                    onItem: function () {
+                        window.location.href = $('#edit').attr('href');
+                        return true;
+                    }
+                });
+            {% endif %}
         }());
         (function () {
             {#            Dropzone.options.dropzone = {#}

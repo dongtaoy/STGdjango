@@ -1,0 +1,158 @@
+{% load staticfiles %}
+{% load mathfilters %}
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+    "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<style type="text/css">
+    	@page {
+			size: {{ pagesize|default:"A4" }};
+			margin: 2cm;
+            margin-top: 2.8cm;
+            margin-bottom: 3.3cm;
+			size: ;
+            background-image: url("/media/img.jpg");
+
+			@frame header {
+				-pdf-frame-content:page-header;
+				margin-top: 0cm;
+				margin-right: 0cm;
+				margin-bottom: 0cm;
+				margin-left: 0cm;
+			}
+			@frame footer {
+				-pdf-frame-content:footerblock;
+				bottom: 0cm;
+				margin-left: 0cm;
+				margin-right: 0cm;
+				height: 0cm;
+			}
+        }
+        *{
+			padding: 0; margin: 0;
+		}
+		#title{
+			text-align: center;
+		}
+		#title h1{
+			font-size: 35px;
+		}
+		#company{
+			text-align: right;
+		}
+        #company h2{
+            font-size: 20px;
+            line-height: 1em;
+        }
+        #company p{
+            font-size: 13px;
+            line-height: 1em;
+            font-weight: 700;
+        }
+		#invoice{
+			text-align: left;
+            font-size: 14px;
+            line-height: 1em;
+		}
+        #service table{
+            border: 1px solid black;
+            font-size: 15px;
+        }
+        #service td{
+            padding: 5px;
+        }
+        #service th{
+            padding: 3px;
+        }
+		#amount{
+			font-size: 17px;
+            text-align: right;
+		}
+        #payment .value{
+            margin-left: 200px;
+        }
+        #payment{
+            font-size: 15px;
+        }
+    	#bank table{
+            font-size: 15px;
+        }
+    	#bank td{
+            padding: 3px;
+        }
+
+</style>
+{% block content %}
+    <div id="title">
+		<h1>Tax Invoice</h1>
+	</div>
+	<br />
+	<div id="body">
+    <div id="company">
+		<h2>STG International Service Pty Ltd</h2>
+		<p>Suite 5, 899 Whitehorse Road, Box Hill, VIC</p>
+		<p>3128 Australia</p>
+		<p>Phone: 03 9899 0212</p>
+		<p>ABN 4815 6372 986</p>
+		<p>ACN 156 372 986</p>
+	</div>
+	<div id="invoice">
+		<p>Issue Date: {{ invoice.issueDate }}</p>
+		<p>Invoice No.: {{ invoice.number }}</p>
+		<p>Invoice to: {{ invoice.coe.institution.name }}</p>
+	</div>
+	<br />
+
+	<div id="service"><table width="520">
+        <tr>
+            <th width="24">No.</th>
+            <td width="24">ID</td>
+			<th width="326">Service</th>
+			<th width="71">Price Each</th>
+			<th width="44">GST</th>
+        </tr>
+        {% for payment in invoice.payments.all %}
+        <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ payment.id }}</td>
+            <td>Commission on <b>{{ invoice.coe.client.name }}</b> <br/>${{ payment.paidAmount }}*
+                {{ payment.commssionClaimed|div:payment.paidAmount|floatformat:2 }}=
+                ${{ payment.commssionClaimed|floatformat:2 }}</td>
+            <td>{{ payment.commssionClaimed|floatformat:2 }}</td>
+            <td>{{ payment.commssionClaimed|mul:0.1|floatformat:2 }}</td>
+        </tr>
+        {% endfor %}
+        <tr>
+            <td colspan="3">Total</td>
+            <td>{{ sum|floatformat:2 }}</td>
+            <td>{{ sum|mul:0.1|floatformat:2 }}</td>
+        </tr>
+	</table></div>
+	<br />
+	<div id="amount">
+		<h2><span class="name">Total Amount:</span><span class="value">${{ sum|mul:1.1|floatformat:2 }}</span></h2>
+	</div>
+	<div id="payment">
+		<h3>Payment Method:</h3>
+		<p>Please forward a bank cheque to STG International Service to our mailing address, alternatively, you may forward funds via international transfer as follows</p>
+	</div>
+	<div id="bank"><table border="1">
+		<tr>
+			<td>Bank Name</td>
+			<td>Commonwealth Bank of Australia</td>
+		</tr>
+		<tr>
+			<td>Account Name</td>
+			<td>STG International Service</td>
+		</tr>
+		<tr>
+			<td>BSB No.</td>
+			<td>063000</td>
+		</tr>
+		<tr>
+			<td>Account No.</td>
+			<td>12215193</td>
+		</tr>
+	</table></div>
+    </div>
+{% endblock %}

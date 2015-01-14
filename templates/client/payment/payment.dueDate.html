@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% load bootstrap3 %}
+{% block title %}
+    Payment List
+{% endblock %}
+{% block plugincss %}
+    <link rel="stylesheet" type="text/css"
+          href="{% static 'assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css' %}"/>
+{% endblock %}
+{% block header %}
+    Payment
+{% endblock %}
+{% block subHeader %}
+    List
+{% endblock %}
+{% block breadcrumb %}
+    <ul class="page-breadcrumb breadcrumb">
+        <li>
+            <a href="{% url 'dashboard' %}">Home</a>
+            <i class="fa fa-circle"></i>
+        </li>
+        <li>
+            <a href="#">Payments</a>
+            <i class="fa fa-circle"></i>
+        </li>
+    </ul>
+{% endblock %}
+{% block content %}
+    <div class="row">
+    <div class="col-md-12 col-sm-12">
+        <div class="portlet grey-cascade box">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-money"></i>Payment Information
+                </div>
+                <div class="actions">
+                    <a href="#" class="btn btn-default btn-sm">
+                    <i class="fa fa-pencil"></i> Edit </a>
+                </div>
+            </div>
+            <div class="portlet-body">
+                <div class="table-responsive">
+                    <table class="table table-hover table-bordered table-striped table-payment">
+                    <thead>
+                    <tr>
+                        <th>Due Date</th>
+                        <th>Days Left</th>
+                        <th>Client Name</th>
+                        <th>COE number</th>
+                        <th>Institution</th>
+                        <th>Amount Received</th>
+                        <th>Amount Paid</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        {% for payment in payments %}
+                            {% if payment.nextDueDate > now %}
+                            <tr>
+                                <td>{{ payment.nextDueDate }}</td>
+                                <td>{{ payment.nextDueDate|timeuntil:now }}</td>
+                                <td>{{ payment.coe.client.name }}</td>
+                                <td>{{ payment.coe.coeNumber }}</td>
+                                <td>{{ payment.coe.institution.name }}</td>
+                                <td>{{ payment.receivedAmount }}</td>
+                                <td>{{ payment.paidAmount }}</td>
+                                <td><a class="btn default btn-xs green-stripe" href="{% url "coe.details" payment.coe.id %}">
+                                    View </a></td>
+                            </tr>
+                            {% endif %}
+                        {% endfor %}
+                    </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block pluginjs %}
+
+    <script type="text/javascript"
+            src="{% static 'assets/global/plugins/bootstrap-contextmenu/bootstrap-contextmenu.js' %}"></script>
+    <script type="text/javascript"
+            src="{% static 'assets/global/plugins/datatables/media/js/jquery.dataTables.min.js' %}"></script>
+    <script type="text/javascript"
+            src="{% static 'assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js' %}"></script>
+
+{% endblock %}
+{% block script %}
+    <script>
+        (function () {
+            $('.table').dataTable();
+        }());
+    </script>
+{% endblock %}

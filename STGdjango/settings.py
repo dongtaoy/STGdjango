@@ -36,6 +36,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'mathfilters',
     'bootstrap3',
     'common',
     'hr',
@@ -65,8 +66,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'HOST': '54.66.143.201',
-        #'HOST': '127.0.0.1',
-
+        # 'HOST': '127.0.0.1',
         'PORT': '3306',
         'NAME': 'STG',
         'USER': 'root',

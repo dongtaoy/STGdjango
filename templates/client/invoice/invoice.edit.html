@@ -2,28 +2,26 @@
 {% load staticfiles %}
 {% load bootstrap3 %}
 {% block title %}
-    {% if spec_payment %}
-        Payment Configuration
+    {% if spec_invoice.title %}
+        Invoice Configuration
     {% else %}
-        {{ client.name }}'s Payment Addition
+        Invoice Addition
     {% endif %}
 {% endblock %}
 {% block plugincss %}
-    <link rel="stylesheet" type="text/css"
+<link rel="stylesheet" type="text/css"
           href="{% static 'assets/global/plugins/select2/select2.css' %}"/>
-    <link rel="stylesheet" type="text/css"
+<link rel="stylesheet" type="text/css"
           href="{% static 'assets/global/plugins/select2/select2-bootstrap.css' %}"/>
     <link rel="stylesheet" type="text/css"
           href="{% static 'assets/global/plugins/bootstrap-datepicker/css/datepicker.css' %}"/>
-<link rel="stylesheet" type="text/css"
-    href="{% static 'assets/global/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css' %}"/>
 
 {% endblock %}
 {% block header %}
-    Payment
+    Invoice
 {% endblock %}
 {% block subHeader %}
-    {% if spec_payment %}
+    {% if spec_invoice.title %}
         Configuration
     {% else %}
         Addition
@@ -40,12 +38,7 @@
             <i class="fa fa-circle"></i>
         </li>
         <li>
-            {% if spec_payment %}
-                <a href="/client/details/{{ client.id }}">{{ client.name }}</a>
-            {% else %}
-                <a href="#">New Payment</a>
-            {% endif %}
-
+            <a href="{% url 'invoice.list' %}">Invoice</a>
         </li>
     </ul>
 {% endblock %}
@@ -55,11 +48,11 @@
             <div class="portlet box green-haze">
                 <div class="portlet-title">
                     <div class="caption">
-                        <i class="fa fa-money"></i>
-                        {% if spec_payment %}
-                            Payment Configuration
+                        <i class="fa fa-tags"></i>
+                        {% if spec_invoice.title %}
+                            Invoice Configuration
                         {% else %}
-                            Payment Addition
+                            Invoice Addition
                         {% endif %}
                     </div>
                 </div>
@@ -69,11 +62,10 @@
                         {% bootstrap_form form %}
                         {% buttons submit='OK' reset="Reset" %}{% endbuttons %}
                     </form>
-{#                    {{ client.id }}#}
-                    {% if spec_payment %}
-                        {% if perms.systen.delete_payment %}
-{#                            {{ client.id }}#}
-                            <a href="{% url "payment.delete" coe.id spec_payment.id %}" class="btn btn-danger">Delete</a>
+
+                    {% if spec_invoice %}
+                        {% if perms.systen.delete_invoice %}
+                            <a href="{% url 'invoice.delete' coe.id spec_invoice.id %}" class="btn btn-danger">Delete</a>
                         {% endif %}
                     {% endif %}
                 </div>
@@ -83,23 +75,17 @@
 
 {% endblock %}
 {% block pluginjs %}
-    <script type="text/javascript"
-            src="{% static 'assets/global/plugins/datatables/media/js/jquery.dataTables.min.js' %}"></script>
-    <script type="text/javascript"
-            src="{% static 'assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js' %}"></script>
     <script type="application/javascript"
             src="{% static 'assets/global/plugins/select2/select2.min.js' %}"></script>
     <script type="text/javascript"
             src="{% static 'assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js' %}"></script>
-    <script type="text/javascript" src="{% static 'assets/global/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js' %}"></script>
+
 {% endblock %}
 {% block script %}
     <script>
         (function () {
-            $('.table').dataTable();
             $('form select').select2();
-            $('.datepicker').datepicker();
+            $("datepicker").datepicker();
         }());
     </script>
-
 {% endblock %}

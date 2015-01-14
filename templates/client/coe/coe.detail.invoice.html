@@ -1,0 +1,64 @@
+<div class="row">
+    <div class="col-md-12 col-sm-12">
+        <div class="portlet grey-cascade box">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-money"></i>Invoice Information
+                </div>
+                <div class="actions">
+                    <a href="{% url "invoice.add" coe.id %}" class="btn btn-default btn-sm">
+                        <i class="fa fa-pencil"></i> Add </a>
+                </div>
+            </div>
+            <div class="portlet-body">
+                <div class="table-toolbar">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="btn-group">
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-hover table-bordered table-striped table-invoice">
+                        <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Invoice Number</th>
+                            <th>Payments</th>
+                            <th>Released Date</th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for invoice in coe.invoices.all %}
+                            <tr>
+                                <td>{{ invoice.id }}</td>
+                                <td>{{ invoice.number }}</td>
+                                <td>
+                                    <ol>
+                                    {% for payment in invoice.payments.all %}
+                                        <li>{{ payment }}</li>
+                                    {% endfor %}
+                                    </ol>
+                                </td>
+                                <td>{{ invoice.issueDate }}</td>
+                                <td><a class="btn green" href="{% url "invoice.export" invoice.id %}">export invoice</a></td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% if perms.client.change_invoice %}
+    <div id="context-menu">
+        <ul class="dropdown-menu" role="menu">
+            <li><a tabindex="-1" id="edit" href="#">Edit</a></li>
+        </ul>
+    </div>
+{% endif %}

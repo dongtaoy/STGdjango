@@ -12,22 +12,21 @@
             </div>
             <div class="portlet-body">
                 <form action="/" method="POST">{% csrf_token %}
-                    <div class="table-toolbar">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="btn-group">
-                                    <input type="submit" class="btn green" value="export invoice">
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+{#                    <div class="table-toolbar">#}
+{#                        <div class="row">#}
+{#                            <div class="col-md-6">#}
+{#                                <div class="btn-group">#}
+{#                                    <input type="submit" class="btn green" value="export invoice">#}
+{##}
+{#                                </div>#}
+{#                            </div>#}
+{#                        </div>#}
+{#                    </div>#}
                     <div class="table-responsive">
-
                         <table class="table table-hover table-bordered table-striped table-payment">
                             <thead>
                             <tr>
-                                <th></th>
+{#                                <th></th>#}
                                 <th>ID</th>
                                 <th>Amount received</th>
                                 <th>Received Date</th>
@@ -41,7 +40,7 @@
                             <tbody>
                             {% for payment in coe.payments.all %}
                                 <tr>
-                                    <td><input name="pid" type="checkbox" value="{{ payment.id }}"/></td>
+{#                                    <td><input name="pid" type="checkbox" value="{{ payment.id }}"/></td>#}
                                     <td>{{ payment.id }}</td>
                                     <td>{{ payment.receivedAmount }}</td>
                                     <td>{{ payment.receivedDate }}</td>
@@ -55,7 +54,6 @@
                             </tbody>
                         </table>
                     </div>
-
                 </form>
             </div>
         </div>

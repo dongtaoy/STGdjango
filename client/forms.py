@@ -1,6 +1,7 @@
 __author__ = 'dongtaoy'
 from django.forms import ModelForm
-from client.models import Visa, Stage, Client, Institution, Coe, Payment, Document
+from django import forms
+from client.models import Visa, Stage, Client, Institution, Coe, Payment, Document, Invoice
 
 
 class VisaForm(ModelForm):
@@ -75,4 +76,18 @@ class DocumentForm(ModelForm):
     class Meta:
         model = Document
         fields = "__all__"
+
+
+class InvoiceForm(ModelForm):
+    class Meta:
+        model = Invoice
+        fields = "__all__"
+        widgets = {
+            "coe": forms.HiddenInput(),
+            "employee": forms.HiddenInput()
+        }
+
+    def __init__(self, *args, **kwargs):
+        super(InvoiceForm, self).__init__(*args, **kwargs)
+        self.fields['issueDate'].widget.attrs['class'] = 'datepicker'
 

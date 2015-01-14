@@ -13,7 +13,7 @@ class PaymentCreateView(SuccessMessageMixin, CreateView):
 
     def get_success_message(self, cleaned_data):
         name = cleaned_data["coe"]
-        return "%s's Payment updated" % name
+        return "%s's Payment created" % name
 
     def get_success_url(self):
         return "/client/coe/details/%d" % int(self.kwargs["coe"])
