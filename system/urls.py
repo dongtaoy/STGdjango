@@ -13,5 +13,7 @@ urlpatterns = patterns(
 
     url(r'^password/', include('system.password.urls')),
 
-    url(r'^icon/',include('system.icon.urls')),
+    url(r'^icon/', include('system.icon.urls')),
+
+    url(r'^calendarevent/', include('system.calendarevent.urls')),
 )

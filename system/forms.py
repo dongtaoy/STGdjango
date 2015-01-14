@@ -1,6 +1,6 @@
 __author__ = 'dongtaoy'
 from django.forms import ModelForm
-from system.models import Label, Sidebar, Icon
+from system.models import Label, Sidebar, Icon, CalendarEvent
 
 
 class LabelForm(ModelForm):
@@ -18,4 +18,10 @@ class SidebarForm(ModelForm):
 class IconForm(ModelForm):
     class Meta:
         model = Icon
+        fields = '__all__'
+
+
+class CalendarEventForm(ModelForm):
+    class Meta:
+        model = CalendarEvent
         fields = '__all__'

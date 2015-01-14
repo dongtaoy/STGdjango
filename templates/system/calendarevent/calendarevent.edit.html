@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% load bootstrap3 %}
+
+{% block plugincss %}
+<link rel="stylesheet" type="text/css"
+          href="{% static 'assets/global/plugins/select2/select2.css' %}"/>
+<link rel="stylesheet" type="text/css"
+          href="{% static 'assets/global/plugins/select2/select2-bootstrap.css' %}"/>
+
+{% endblock %}
+{% block header %}
+    Calendar Event Configuration
+{% endblock %}
+{% block subHeader %}
+    ## Calendar Event Configuration
+{% endblock %}
+{% block breadcrumb %}
+    <ul class="page-breadcrumb breadcrumb">
+        <li>
+            <a href="{% url 'dashboard' %}">Home</a>
+            <i class="fa fa-circle"></i>
+        </li>
+        <li>
+            <a href="{% url 'calendar' %}">Calendar</a>
+        </li>
+    </ul>
+{% endblock %}
+{% block content %}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="portlet box green-haze">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="fa fa-ge"></i>Calendar Event Edit
+                    </div>
+                </div>
+                <div class="portlet-body">
+                    <form method="POST">
+                        {% csrf_token %}
+                        {% bootstrap_form form %}
+                        {% buttons submit='OK' reset="Reset" %}{% endbuttons %}
+                    </form>
+
+                    {% if spec_calendarevent %}
+                        {% if perms.systen.delete_calendarevent %}
+                            <a href="{% url 'calendarevent.delete'  spec_calendarevent.id %}" class="btn btn-danger">Delete</a>
+                        {% endif %}
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block pluginjs %}
+{% endblock %}
+{% block script %}
+    <script>
+    </script>
+{% endblock %}

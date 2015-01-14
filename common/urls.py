@@ -18,6 +18,9 @@ urlpatterns = patterns(
     # dashboard
     url(r'^$', login_required(TemplateView.as_view(template_name='dashboard.html')), name='dashboard'),
 
+    url(r'^calendar/$', 'common.views.calendar', name="calendar"),
+
+
     # common page testing
     url(r'^403$', login_required(TemplateView.as_view(template_name='common/403.html'))),
     url(r'^404$', login_required(TemplateView.as_view(template_name='common/404.html'))),
