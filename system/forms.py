@@ -22,6 +22,8 @@ class IconForm(ModelForm):
 
 
 class CalendarEventForm(ModelForm):
+
+
     class Meta:
         model = CalendarEvent
         fields = '__all__'

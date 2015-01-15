@@ -29,7 +29,7 @@ class EmployeeWizard(SessionWizardView):
 
     def done(self, form_list, **kwargs):
         with atomic():
-            employee = form_list[1]
+            employee = form_list[1].save(commit=False)
             employee.user = form_list[0].save()
             employee.save()
         messages.success(self.request, ("%s Employee Created" % employee.name))
