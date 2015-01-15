@@ -1,8 +1,6 @@
-from django.conf.urls import patterns, url, include
-from django.views.generic import ListView, TemplateView
+from django.conf.urls import patterns, url
 from django.contrib.auth.decorators import permission_required, login_required
 from client.coe.views import CoeDeleteView, CoeUpdateView, CoeCreateView, CoeDetailView
-from client.models import Coe
 
 urlpatterns = patterns(
     '',

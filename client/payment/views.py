@@ -4,7 +4,7 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin
 from client.forms import PaymentForm
-from client.models import Payment, Coe, Client
+from client.models import Payment, Coe
 
 
 class PaymentCreateView(SuccessMessageMixin, CreateView):

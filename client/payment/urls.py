@@ -1,7 +1,5 @@
 from django.conf.urls import patterns, url
-from django.views.generic import ListView, TemplateView
 from django.contrib.auth.decorators import permission_required, login_required
-from client.models import Payment
 from client.payment.views import PaymentCreateView, PaymentUpdateView, PaymentDeleteView, PaymentListView
 
 

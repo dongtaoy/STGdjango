@@ -1,11 +1,10 @@
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic.detail import DetailView
 from django.contrib import messages
-from django.shortcuts import redirect
 from django.contrib.messages.views import SuccessMessageMixin
 from client.forms import CoeForm, DocumentForm
 from client.models import Coe, Client, Stage, Document
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse
 from django.shortcuts import redirect
 from django.core.urlresolvers import reverse
 

@@ -1,6 +1,6 @@
 __author__ = 'dongtaoy'
 from django.conf.urls import patterns, url
-from django.contrib.auth.decorators import permission_required, login_required
+from django.contrib.auth.decorators import permission_required
 from system.calendarevent.views import CalendarEventCreateView, CalendarEventUpdateView, CalendarEventDeleteView
 
 urlpatterns = patterns(

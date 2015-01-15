@@ -3,7 +3,7 @@ from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin
 from django.db import transaction
 from django.db.transaction import atomic
-from django.shortcuts import render, redirect
+from django.shortcuts import redirect
 from django.views.generic import CreateView, UpdateView, DeleteView
 from hr.forms import DepartmentForm, GroupCreationForm
 from hr.models import Department

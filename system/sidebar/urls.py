@@ -1,7 +1,6 @@
 __author__ = 'dongtaoy'
-from django.conf.urls import patterns, include, url
+from django.conf.urls import patterns, url
 from django.contrib.auth.decorators import login_required, permission_required
-from system.models import Sidebar
 from system.sidebar.views import SidebarListView, SidebarCreateView, SidebarDeleteView, SidebarUpdateView
 
 urlpatterns = patterns(

@@ -4,7 +4,7 @@ from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin
 from STGdjango import settings
 from client.forms import InvoiceForm
-from client.models import Invoice, Coe, Payment
+from client.models import Invoice, Coe
 
 
 class InvoiceCreateView(SuccessMessageMixin, CreateView):
@@ -27,7 +27,7 @@ class InvoiceCreateView(SuccessMessageMixin, CreateView):
             "employee": self.request.user.employee}
 
     def get_context_data(self, **kwargs):
-        context = super(PaymentCreateView, self).get_context_data(**kwargs)
+        context = super(InvoiceCreateView, self).get_context_data(**kwargs)
         coe = Coe.objects.get(id=self.kwargs["coe"])
         context["coe"] = coe
         return context
@@ -66,6 +66,8 @@ class InvoiceDeleteView(DeleteView):
         messages.success(self.request, "invoice deleted")
         return super(InvoiceDeleteView, self).delete(self, request, *args, **kwargs)
 
+    def get_success_url(self):
+        return "/client/coe/details/%d" % int(self.kwargs["coe"])
 
 from django import http
 from django.template.loader import get_template

@@ -1,5 +1,3 @@
-from django.contrib.auth.models import User
-
 __author__ = 'dongtaoy'
 from django.views.generic.edit import UpdateView, DeleteView
 
@@ -10,7 +8,6 @@ from django.contrib import messages
 from hr.forms import EmployeeForm, UserCreationFormWithGroup
 from hr.models import Employee
 from django.db.transaction import atomic
-from django.contrib.auth.forms import UserCreationForm
 
 
 # class EmployeeCreateView(SuccessMessageMixin, CreateView):

@@ -1,7 +1,7 @@
 __author__ = 'dongtaoy'
 from django.forms import ModelForm
 from django import forms
-from client.models import Visa, Stage, Client, Institution, Coe, Payment, Document, Invoice
+from client.models import *
 
 
 class VisaForm(ModelForm):

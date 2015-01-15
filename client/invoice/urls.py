@@ -1,5 +1,5 @@
 from django.conf.urls import patterns, url
-from django.views.generic import ListView, TemplateView
+from django.views.generic import ListView
 from django.contrib.auth.decorators import permission_required, login_required
 from client.models import Invoice
 from client.invoice.views import InvoiceCreateView, InvoiceUpdateView, InvoiceDeleteView

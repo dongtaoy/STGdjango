@@ -1,8 +1,6 @@
 from django.conf.urls import patterns, include, url
-from django.contrib import admin
 from django.contrib.auth.decorators import login_required, permission_required
-from django.views.generic import ListView, DetailView
-from client.coe.views import CoeCreateView, CoeUpdateView, CoeDeleteView
+from django.views.generic import ListView
 from client.models import Client
 from client.views import ClientCreateView, ClientUpdateView, ClientDeleteView, ClientDetailView
 
