@@ -37,7 +37,6 @@ class GroupCreationForm(ModelForm):
 class EmployeeForm(ModelForm):
     class Meta:
         model = Employee
-        #fields = "__all__"
         exclude = ('user',)
 
     def __init__(self, *args, **kwargs):

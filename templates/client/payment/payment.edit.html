@@ -37,13 +37,14 @@
             <i class="fa fa-circle"></i>
         </li>
         <li>
-            {% if spec_payment %}
-                <a href="/client/details/{{ client.id }}">{{ client.name }}</a>
-            {% else %}
-                <a href="#">New Payment</a>
-            {% endif %}
-
+            <a href="{% url "coe.details" coe.id %}">COE</a>
+            {% if not spec_payment %}<i class="fa fa-circle"></i>{% endif %}
         </li>
+        {% if not spec_payment %}
+        <li>
+            <a href="#">New Payment</a>
+        </li>
+        {% endif %}
     </ul>
 {% endblock %}
 {% block content %}

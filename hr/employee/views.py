@@ -1,3 +1,5 @@
+from django.contrib.auth.models import User
+
 __author__ = 'dongtaoy'
 from django.views.generic.edit import UpdateView, DeleteView
 
@@ -13,7 +15,7 @@ from django.contrib.auth.forms import UserCreationForm
 
 # class EmployeeCreateView(SuccessMessageMixin, CreateView):
 # form_class = Group
-#     template_name = 'hr/employee/employee.edit.html'
+# template_name = 'hr/employee/employee.edit.html'
 #     success_url = '/hr/employee/'
 
 FORMS = [("account", UserCreationFormWithGroup),

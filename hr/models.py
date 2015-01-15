@@ -7,7 +7,8 @@ class Employee(models.Model):
     phone = models.CharField(max_length=45, blank=True, null=True)
     dob = models.DateField(blank=True, null=True)
     email = models.EmailField(default=None, null=True)
-    user = models.OneToOneField('auth.User', related_name="employee")
+    # user = models.OneToOneField('auth.User', related_name="employee")
+    user = models.OneToOneField('auth.User', blank=True, null=True)
 
     def __unicode__(self):
         return self.name
@@ -20,5 +21,4 @@ class Department(models.Model):
 
     def __unicode__(self):
         return self.group.name
-
 

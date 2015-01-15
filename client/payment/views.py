@@ -22,6 +22,12 @@ class PaymentCreateView(SuccessMessageMixin, CreateView):
         return {
             "coe": Coe.objects.get(id=self.kwargs["coe"])}
 
+    def get_context_data(self, **kwargs):
+        context = super(PaymentCreateView, self).get_context_data(**kwargs)
+        coe = Coe.objects.get(id=self.kwargs["coe"])
+        context["coe"] = coe
+        return context
+
 
 class PaymentUpdateView(SuccessMessageMixin, UpdateView):
     form_class = PaymentForm

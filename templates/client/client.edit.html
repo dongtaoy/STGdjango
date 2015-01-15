@@ -2,7 +2,7 @@
 {% load staticfiles %}
 {% load bootstrap3 %}
 {% block title %}
-    {% if spec_client.name %}
+    {% if spec_client %}
         {{ spec_client.name }}'s {{ section|capfirst }} Configuration
     {% else %}
         New Client
@@ -17,14 +17,14 @@
           href="{% static 'assets/global/plugins/bootstrap-datepicker/css/datepicker.css' %}"/>
 {% endblock %}
 {% block header %}
-    {% if spec_client.name %}
+    {% if spec_client %}
         {{ spec_client.name }}'s {{ section|capfirst }}
     {% else %}
         New Client
     {% endif %}
 {% endblock %}
 {% block subHeader %}
-    {% if spec_client.name %}
+    {% if spec_client %}
         Configuration
     {% else %}
         Addition
@@ -41,12 +41,14 @@
             <i class="fa fa-circle"></i>
         </li>
         <li>
-            <a href="#">New Client</a>
-{#            <i class="fa fa-circle"></i>#}
+            <a href="{% url "client.details" spec_client.id %}">Details</a>
+            {% if not spec_client %}<i class="fa fa-circle"></i>{% endif %}
         </li>
-{#        <li>#}
-{#            <a href="#">{{ section|capfirst }} Configuration</a>#}
-{#        </li>#}
+        {% if not spec_client %}
+        <li>
+            <a href="#">New Client</a>
+        </li>
+        {% endif %}
     </ul>
 {% endblock %}
 {% block content %}

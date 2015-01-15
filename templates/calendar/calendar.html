@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
+{% load bootstrap3 %}
 {% block title %}
     Client List
 {% endblock %}
@@ -24,15 +25,19 @@
     </ul>
 {% endblock %}
 {% block content %}
-    {% if messages %}
-        {% for message in messages %}
-            <div class="alert alert-success alert-dismissable">
-                <i class="fa fa-check"></i>
-                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                <b>{{ message }}</b>
+    {% bootstrap_messages %}
+    <div class="table-toolbar">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="btn-group">
+                    <a href="{% url 'calendarevent.add' %}" class="btn green">
+                        Add New <i class="fa fa-plus"></i>
+                    </a>
+                </div>
             </div>
-        {% endfor %}
-    {% endif %}
+
+        </div>
+    </div>
     <div class="row">
         <div class="col-md-12">
             <div class="portlet box green-meadow calendar">
@@ -45,7 +50,7 @@
 
                     <div class="row">
 
-                        <div class="col-md-12 col-sm-12">
+                        <div class="col-md-12 col-sm-1">
                             <div id="calendar" class="has-toolbar">
                             </div>
                         </div>

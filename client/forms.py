@@ -49,6 +49,9 @@ class CoeForm(ModelForm):
             "referalCommission": "Referal's Commission",
             "consultantCommission": "Consultant's Commission",
         }
+        widgets = {
+            "client": forms.HiddenInput()
+        }
 
     def __init__(self, *args, **kwargs):
         super(CoeForm, self).__init__(*args, **kwargs)
