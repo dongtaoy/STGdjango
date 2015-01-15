@@ -49,6 +49,21 @@
             </div>
         </div>
     </div>
+    <div class="modal-body">
+        <form action="#" class="form-horizontal">
+            <div class="form-group">
+                <label class="control-label col-md-4">Default Date Ranges</label>
+                <div class="col-md-8">
+                    <div class="input-group input-large" id="defaultrange_modal">
+                        <input type="text" class="form-control">
+                        <span class="input-group-btn">
+                        <button class="btn default date-range-toggle" type="button"><i class="fa fa-calendar"></i></button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
 {% endblock %}
 {% block pluginjs %}
     <script src="{% static 'assets/global/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js' %}"></script>

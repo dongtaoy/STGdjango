@@ -93,6 +93,7 @@
 {% block script %}
     <script>
         $('form select').select2();
-        $('.datepicker').datepicker();
+        $('input[name="start"]').datepicker();
+        $('input[name="end"]').datepicker();
     </script>
 {% endblock %}

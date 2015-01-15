@@ -9,13 +9,12 @@
     {% endif %}
 {% endblock %}
 {% block plugincss %}
-<link rel="stylesheet" type="text/css"
+    <link rel="stylesheet" type="text/css"
           href="{% static 'assets/global/plugins/select2/select2.css' %}"/>
-<link rel="stylesheet" type="text/css"
+    <link rel="stylesheet" type="text/css"
           href="{% static 'assets/global/plugins/select2/select2-bootstrap.css' %}"/>
     <link rel="stylesheet" type="text/css"
           href="{% static 'assets/global/plugins/bootstrap-datepicker/css/datepicker.css' %}"/>
-
 {% endblock %}
 {% block header %}
     Invoice
@@ -85,13 +84,12 @@
             src="{% static 'assets/global/plugins/select2/select2.min.js' %}"></script>
     <script type="text/javascript"
             src="{% static 'assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js' %}"></script>
-
 {% endblock %}
 {% block script %}
     <script>
         (function () {
             $('form select').select2();
-            $("datepicker").datepicker();
+            $(".datepicker").datepicker();
         }());
     </script>
 {% endblock %}

@@ -40,11 +40,12 @@
             <a href="{% url 'client.list' %}">Client</a>
             <i class="fa fa-circle"></i>
         </li>
+
+        {% if spec_client %}
         <li>
             <a href="{% url "client.details" spec_client.id %}">Details</a>
-            {% if not spec_client %}<i class="fa fa-circle"></i>{% endif %}
         </li>
-        {% if not spec_client %}
+        {% else %}
         <li>
             <a href="#">New Client</a>
         </li>
@@ -93,7 +94,8 @@
     <script>
         (function () {
             $('form select').select2();
-            $('.datepicker').datepicker();
+            $('input[name="dob"]').datepicker();
+            $('input[name="expire"]').datepicker();
         }());
     </script>
 {% endblock %}

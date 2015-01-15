@@ -30,7 +30,7 @@
             <i class="fa fa-circle"></i>
         </li>
         <li>
-            <a href="/client/details/{{ client.id }}">Details</a>
+            <a href="{% url 'client.details' client.id %}">Details</a>
         </li>
     </ul>
 {% endblock %}

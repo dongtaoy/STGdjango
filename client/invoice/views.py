@@ -1,3 +1,4 @@
+from django.core.urlresolvers import reverse
 import os
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib import messages
@@ -18,7 +19,7 @@ class InvoiceCreateView(SuccessMessageMixin, CreateView):
         return "%s's Invoice created" % name
 
     def get_success_url(self):
-        return "/client/coe/details/%d" % int(self.kwargs["coe"])
+        return reverse("coe.details", kwargs={"coe": int(self.kwargs["coe"])})
 
     def get_initial(self):
         coe = Coe.objects.get(id=self.kwargs["coe"])
@@ -47,7 +48,7 @@ class InvoiceUpdateView(SuccessMessageMixin, UpdateView):
         return "%s's Invoice updated" % name
 
     def get_success_url(self):
-        return "/client/coe/details/%d" % int(self.kwargs["coe"])
+        return reverse("coe.details", kwargs={"coe": int(self.kwargs["coe"])})
 
     def get_context_data(self, **kwargs):
         context = super(InvoiceUpdateView, self).get_context_data(**kwargs)
@@ -67,7 +68,8 @@ class InvoiceDeleteView(DeleteView):
         return super(InvoiceDeleteView, self).delete(self, request, *args, **kwargs)
 
     def get_success_url(self):
-        return "/client/coe/details/%d" % int(self.kwargs["coe"])
+        return reverse("coe.details", kwargs={"coe": int(self.kwargs["coe"])})
+
 
 from django import http
 from django.template.loader import get_template

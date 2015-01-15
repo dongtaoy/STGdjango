@@ -3,6 +3,7 @@ from django.contrib.auth.forms import UserCreationForm
 __author__ = 'georgecai904'
 from django.forms import ModelForm
 from hr.models import Department, Employee
+from django import forms
 
 
 class DepartmentForm(ModelForm):

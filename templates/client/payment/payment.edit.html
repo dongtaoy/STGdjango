@@ -90,7 +90,9 @@
     <script>
         (function () {
             $('form select').select2();
-            $('.datepicker').datepicker();
+            $('input[name="nextDueDate"]').datepicker();
+            $('input[name="paidDate"]').datepicker();
+            $('input[name="receivedDate"]').datepicker();
         }());
     </script>
 
