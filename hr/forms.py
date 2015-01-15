@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.models import Group
-
+from django.contrib.auth.forms import UserCreationForm
 __author__ = 'georgecai904'
 from django.forms import ModelForm
 from hr.models import Department, Employee
@@ -49,3 +49,13 @@ class GroupForm(ModelForm):
     class Meta:
         model = Group
         fields = "__all__"
+
+
+class UserCreationFormWithGroup(UserCreationForm):
+    groups = forms.ModelMultipleChoiceField(queryset=Group.objects.all(), required=False)
+
+    def save(self, commit=True):
+        user = super(UserCreationFormWithGroup, self).save(commit)
+        user.groups = self.cleaned_data["groups"]
+        user.save()
+        return user

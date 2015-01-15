@@ -5,7 +5,7 @@ from django.contrib.formtools.wizard.views import SessionWizardView
 from django.contrib.messages.views import SuccessMessageMixin
 from django.shortcuts import redirect
 from django.contrib import messages
-from hr.forms import EmployeeForm
+from hr.forms import EmployeeForm, UserCreationFormWithGroup
 from hr.models import Employee
 from django.db.transaction import atomic
 from django.contrib.auth.forms import UserCreationForm
@@ -16,7 +16,7 @@ from django.contrib.auth.forms import UserCreationForm
 #     template_name = 'hr/employee/employee.edit.html'
 #     success_url = '/hr/employee/'
 
-FORMS = [("account", UserCreationForm),
+FORMS = [("account", UserCreationFormWithGroup),
          ("personal", EmployeeForm)]
 
 TEMPLATES = {"account": "hr/employee/employee.account.wizard.html",
