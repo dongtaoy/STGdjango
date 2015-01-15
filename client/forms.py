@@ -1,3 +1,5 @@
+from django.shortcuts import get_object_or_404
+
 __author__ = 'dongtaoy'
 from django.forms import ModelForm
 from django import forms
@@ -28,8 +30,6 @@ class ClientForm(ModelForm):
         fields = "__all__"
 
 
-
-
 def get_custom_form(customModel, customFields):
     class _customForm(ModelForm):
         class Meta:
@@ -43,13 +43,6 @@ def get_custom_form(customModel, customFields):
                 "thirdPartyFeeReceived": "Third Party Fee Received",
                 "thirdPartyFeePaid": "Third Party Fee Paid"
             }
-
-        def __init__(self, *args, **kwargs):
-            super(_customForm, self).__init__(*args, **kwargs)
-            if "dob" in self.fields:
-                self.fields['dob'].widget.attrs['class'] = 'datepicker'
-            if 'expire' in self.fields:
-                self.fields['expire'].widget.attrs['class'] = 'datepicker'
 
     return _customForm
 
@@ -68,11 +61,6 @@ class CoeForm(ModelForm):
         widgets = {
             "client": forms.HiddenInput()
         }
-
-    def __init__(self, *args, **kwargs):
-        super(CoeForm, self).__init__(*args, **kwargs)
-        self.fields['start'].widget.attrs['class'] = 'datepicker'
-        self.fields['end'].widget.attrs['class'] = 'datepicker'
 
 
 class PaymentForm(ModelForm):
@@ -93,12 +81,6 @@ class PaymentForm(ModelForm):
             "coe": forms.HiddenInput()
         }
 
-    def __init__(self, *args, **kwargs):
-        super(PaymentForm, self).__init__(*args, **kwargs)
-        self.fields['nextDueDate'].widget.attrs['class'] = 'datepicker'
-        self.fields['receivedDate'].widget.attrs['class'] = 'datepicker'
-        self.fields['paidDate'].widget.attrs['class'] = 'datepicker'
-
 
 class DocumentForm(ModelForm):
     class Meta:
@@ -114,11 +96,6 @@ class InvoiceForm(ModelForm):
             "coe": forms.HiddenInput(),
             "employee": forms.HiddenInput()
         }
-
-    def __init__(self, *args, **kwargs):
-        super(InvoiceForm, self).__init__(*args, **kwargs)
-        self.fields['issueDate'].widget.attrs['class'] = 'datepicker'
-
 
 
 

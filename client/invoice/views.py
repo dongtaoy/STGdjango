@@ -5,7 +5,7 @@ from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin
 from STGdjango import settings
 from client.forms import InvoiceForm
-from client.models import Invoice, Coe
+from client.models import Invoice, Coe, Payment
 
 
 class InvoiceCreateView(SuccessMessageMixin, CreateView):
@@ -25,7 +25,8 @@ class InvoiceCreateView(SuccessMessageMixin, CreateView):
         coe = Coe.objects.get(id=self.kwargs["coe"])
         return {
             "coe": coe,
-            "employee": self.request.user.employee}
+            "employee": self.request.user.employee
+        }
 
     def get_context_data(self, **kwargs):
         context = super(InvoiceCreateView, self).get_context_data(**kwargs)
@@ -79,31 +80,11 @@ import cStringIO as StringIO
 import cgi
 
 
-def index(request):
-    return http.HttpResponse("""
-        <html><body>
-            <h1>Example 1</h1>
-            Please enter some HTML code:
-            <form action="/client/download/" method="post" enctype="multipart/form-data">
-            <textarea name="data">Hello <strong>World</strong></textarea>
-            <br />
-            <input type="submit" value="Convert HTML to PDF" />
-            </form>
-            <hr>
-            <h1>Example 2</h1>
-            <p><a href="/client/ezpdf_sample">Example with template</a>
-            <a class="btn btn-lg blue hidden-print margin-bottom-5"
-                onclick="javascript:window.print();">Print<i class="fa fa-print"></i>
-        </body></html>
-        """)
-
-
 def render_to_pdf(template_src, context_dict):
     template = get_template(template_src)
     context = Context(context_dict)
     html = template.render(context)
     result = StringIO.StringIO()
-    # pdf = pisa.pisaDocument(StringIO.StringIO(html.encode("ISO-8859-1")), result)
     links = lambda uri, rel: os.path.join(settings.MEDIA_ROOT, uri.replace(settings.MEDIA_URL, ''))
 
     pdf = pisa.pisaDocument(StringIO.StringIO(html.encode("UTF-8")), dest=result, link_callback=links)
