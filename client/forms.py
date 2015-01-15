@@ -29,14 +29,30 @@ class ClientForm(ModelForm):
 
 
 
-def get_custom_form(customModel, customFields):
 
+def get_custom_form(customModel, customFields):
     class _customForm(ModelForm):
         class Meta:
             model = customModel
             fields = customFields
+            labels = {
+                "preferredName": "Preferred Name",
+                "dob": "Date of Birth",
+                "clientManager": "Client Manager",
+                "serviceFee": "Service Fee",
+                "thirdPartyFeeReceived": "Third Party Fee Received",
+                "thirdPartyFeePaid": "Third Party Fee Paid"
+            }
+
+        def __init__(self, *args, **kwargs):
+            super(_customForm, self).__init__(*args, **kwargs)
+            if "dob" in self.fields:
+                self.fields['dob'].widget.attrs['class'] = 'datepicker'
+            if 'expire' in self.fields:
+                self.fields['expire'].widget.attrs['class'] = 'datepicker'
 
     return _customForm
+
 
 
 class CoeForm(ModelForm):

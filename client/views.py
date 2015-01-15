@@ -1,40 +1,15 @@
 from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin
-from django.forms import ModelForm
 from django.shortcuts import render_to_response
 from django.views.generic import CreateView, UpdateView, DeleteView, DetailView
-from client.models import Client, Coe, Payment, Stage
-
-
-def get_custom_form(customModel, customFields):
-    class _customForm(ModelForm):
-        class Meta:
-            model = customModel
-            fields = customFields
-            labels = {
-                "preferredName": "Preferred Name",
-                "dob": "Date of Birth",
-                "clientManager": "Client Manager",
-                "serviceFee": "Service Fee",
-                "thirdPartyFeeReceived": "Third Party Fee Received",
-                "thirdPartyFeePaid": "Third Party Fee Paid"
-            }
-
-        def __init__(self, *args, **kwargs):
-            super(_customForm, self).__init__(*args, **kwargs)
-            if "dob" in self.fields:
-                self.fields['dob'].widget.attrs['class'] = 'datepicker'
-            if 'expire' in self.fields:
-                self.fields['expire'].widget.attrs['class'] = 'datepicker'
-
-    return _customForm
-
+from client.forms import get_custom_form
+from client.models import Client
 
 CLIENT_FIELDS = {
     "personal": ("name", "preferredName", "dob", "phone", "email", "nationality", "onshore"),
     "visa": ("visa", "expire"),
     "service": (
-        "status","stage", "referal", "consultant", "clientManager", "serviceFee", "thirdPartyFeeReceived",
+        "status", "referal", "consultant", "clientManager", "serviceFee", "thirdPartyFeeReceived",
         "thirdPartyFeePaid"),
     "notes": ("note",)
 }

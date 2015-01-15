@@ -38,8 +38,14 @@
             <i class="fa fa-circle"></i>
         </li>
         <li>
-            <a href="{% url 'invoice.list' %}">Invoice</a>
+            <a href="{% url "coe.details" coe.id %}">COE</a>
+            {% if not spec_invoice %}<i class="fa fa-circle"></i>{% endif %}
         </li>
+        {% if not spec_invoice %}
+        <li>
+            <a href="#">New Invoice</a>
+        </li>
+        {% endif %}
     </ul>
 {% endblock %}
 {% block content %}

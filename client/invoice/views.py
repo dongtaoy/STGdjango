@@ -26,11 +26,11 @@ class InvoiceCreateView(SuccessMessageMixin, CreateView):
             "coe": coe,
             "employee": self.request.user.employee}
 
-    # def get_context_data(self, **kwargs):
-    #     context = super(InvoiceCreateView, self).get_context_data(**kwargs)
-    #     coe = Coe.objects.get(id=self.kwargs["coe"])
-    #     context["payments"] = Payment.objects.filter(coe=coe)
-    #     return context
+    def get_context_data(self, **kwargs):
+        context = super(PaymentCreateView, self).get_context_data(**kwargs)
+        coe = Coe.objects.get(id=self.kwargs["coe"])
+        context["coe"] = coe
+        return context
 
 
 class InvoiceUpdateView(SuccessMessageMixin, UpdateView):
