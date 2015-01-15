@@ -1,102 +1,143 @@
-<div class="table-toolbar">
-    <div class="row">
-        <div class="col-md-6">
-            <div class="btn-group">
-                <a href="#" class="btn green">
-                    Add New Stage<i class="fa fa-plus"></i>
-                </a>
-            </div>
-        </div>
-    </div>
-</div>
 <div class="row">
     <div class="row profile-account">
         <div class="col-md-3">
             <ul class="ver-inline-menu tabbable margin-bottom-10">
-                {% for stage in stages %}
+                {% for stage in stages|dictsort:"order" %}
                     {% if stages.0 == stage %}
                         <li class="active">
-                            {% else %}
+                    {% else %}
                         <li>
                     {% endif %}
-                <a data-toggle="tab" href="#tab_{{ stage.order }}">
+                    <a data-toggle="tab" href="#tab_stage_{{ stage.order }}">
                     <i class="fa fa-cog"></i> {{ stage.order }}. {{ stage.title }} </a>
-                <span class="after">
-                    </span>
                 </li>
                 {% endfor %}
             </ul>
         </div>
         <div class="col-md-9">
             <div class="tab-content">
-                {% for stage in stages %}
+                {% for stage in stages|dictsort:"order" %}
                     {% if stage == stages.0 %}
-                        <div id="tab_{{ stage.order }}" class="tab-pane active">
-                    {% else %}
-                        <div id="tab_{{ stage.order }}" class="tab-pane">
-
-                    {% endif %}
-                    <div class="col-md-12">
-                        <div class="portlet purple-plum box">
-                            <div class="portlet-title">
-                                <div class="caption">
-                                    <i class="fa fa-cogs"></i>Stage Documents
-                                </div>
-                                <div class="actions">
-                                    <a href="#" class="btn btn-default btn-sm">
-                                        <i class="fa fa-pencil"></i> Edit </a>
-                                </div>
-                            </div>
-                            <div class="portlet-body">
-                                <form id="dropzone" action="{% url 'document.upload' %}" class="dropzone">
-                                    {% csrf_token %}
-                                    <input type="hidden" name="stage" value="{{ stage.id }}">
-                                    <input type="hidden" name="coe" value="{{ coe.id }}">
-
-                                    <div class="row static-info">
-                                        <div class="col-md-12 value">
-                                            <table class="table table-condensed table-hover table-stage">
-                                                <thead>
-                                                <tr>
-                                                    <th style="display: none;">
-                                                        #
-                                                    </th>
-                                                    <th>
-                                                        Filename
-                                                    </th>
-                                                    <th>
-                                                        Size (k)
-                                                    </th>
-                                                </tr>
-                                                </thead>
-                                                <tbody>
-                                                {% for file in coe.files.all %}
-                                                    <tr>
-                                                        <td style="display: none;">{{ file.id }}</td>
-                                                        <td>
-                                                            <a href="{{ file.file.url }}">{{ file.title }}</a>
-                                                        </td>
-                                                        <td>
-                                                            {{ file.file.size }}
-                                                        </td>
-                                                    </tr>
-
-                                                {% endfor %}
-                                                </tbody>
-                                            </table>
-
+                        <div id="tab_stage_{{ stage.order }}" class="tab-pane active">
+                            <div class="col-md-12">
+                                <div class="portlet purple-plum box">
+                                    <div class="portlet-title">
+                                        <div class="caption">
+                                            <i class="fa fa-cogs"></i>Stage Documents
+                                        </div>
+                                        <div class="actions">
+                                            <a href="#" class="btn btn-default btn-sm">
+                                                <i class="fa fa-pencil"></i> Edit </a>
                                         </div>
                                     </div>
-                                </form>
+                                    <div class="portlet-body">
+                                        <form id="dropzone" action="{% url 'document.upload' %}" class="dropzone">
+                                            {% csrf_token %}
+                                            <input type="hidden" name="stage" value="{{ stage.id }}">
+                                            <input type="hidden" name="coe" value="{{ coe.id }}">
+
+                                            <div class="row static-info">
+                                                <div class="col-md-12 value">
+                                                    <table class="table table-condensed table-hover table-stage">
+                                                        <thead>
+                                                        <tr>
+                                                            <th style="display: none;">
+                                                                #
+                                                            </th>
+                                                            <th>
+                                                                Filename
+                                                            </th>
+                                                            <th>
+                                                                Size (k)
+                                                            </th>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        {% for file in coe.files.all %}
+                                                            {% if file.stage == stage %}
+                                                            <tr>
+                                                                <td style="display: none;">{{ file.id }}</td>
+                                                                <td>
+                                                                    <a href="{{ file.file.url }}">{{ file.title }}</a>
+                                                                </td>
+                                                                <td>
+                                                                    {{ file.file.size }}
+                                                                </td>
+                                                            </tr>
+                                                            {% endif %}
+                                                        {% endfor %}
+                                                        </tbody>
+                                                    </table>
+
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    {% else %}
+                        <div id="tab_stage_{{ stage.order }}" class="tab-pane">
+                            <div class="col-md-12">
+                                <div class="portlet purple-plum box">
+                                    <div class="portlet-title">
+                                        <div class="caption">
+                                            <i class="fa fa-cogs"></i>Stage Documents
+                                        </div>
+                                        <div class="actions">
+                                            <a href="#" class="btn btn-default btn-sm">
+                                                <i class="fa fa-pencil"></i> Edit </a>
+                                        </div>
+                                    </div>
+                                    <div class="portlet-body">
+                                        <form id="dropzone" action="{% url 'document.upload' %}" class="dropzone">
+                                            {% csrf_token %}
+                                            <input type="hidden" name="stage" value="{{ stage.id }}">
+                                            <input type="hidden" name="coe" value="{{ coe.id }}">
 
+                                            <div class="row static-info">
+                                                <div class="col-md-12 value">
+                                                    <table class="table table-condensed table-hover table-stage">
+                                                        <thead>
+                                                        <tr>
+                                                            <th style="display: none;">
+                                                                #
+                                                            </th>
+                                                            <th>
+                                                                Filename
+                                                            </th>
+                                                            <th>
+                                                                Size (k)
+                                                            </th>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        {% for file in coe.files.all %}
+                                                            {% if file.stage == stage %}
+                                                            <tr>
+                                                                <td style="display: none;">{{ file.id }}</td>
+                                                                <td>
+                                                                    <a href="{{ file.file.url }}">{{ file.title }}</a>
+                                                                </td>
+                                                                <td>
+                                                                    {{ file.file.size }}
+                                                                </td>
+                                                            </tr>
+                                                            {% endif %}
+
+                                                        {% endfor %}
+                                                        </tbody>
+                                                    </table>
+
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
                 {% endfor %}
-                </div>
-
-                <!--end col-md-9-->
-                </div>
             </div>
         </div>
     </div>

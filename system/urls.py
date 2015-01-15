@@ -15,5 +15,5 @@ urlpatterns = patterns(
 
     url(r'^icon/', include('system.icon.urls')),
 
-    # url(r'^calendarevent/', include('system.calendarevent.urls')),
+    url(r'^calendarevent/', include('system.calendarevent.urls')),
 )

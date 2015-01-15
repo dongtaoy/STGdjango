@@ -15,7 +15,7 @@ class Visa(models.Model):
 class Stage(models.Model):
     order = models.IntegerField(max_length=10)
     title = models.CharField(max_length=50)
-    description = models.TextField()
+    description = models.TextField(null=True, blank=True)
 
     class Meta:
         ordering = ['order']
