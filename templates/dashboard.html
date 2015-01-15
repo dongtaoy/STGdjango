@@ -1,13 +1,167 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
+{% load bootstrap3 %}
 {% block title %}
-    Dashboard
+    Client List
 {% endblock %}
 {% block plugincss %}
+    <link href="{% static 'assets/global/plugins/fullcalendar/fullcalendar.min.css' %}" rel="stylesheet"/>
+{% endblock %}
+{% block header %}
+    Calendar
+{% endblock %}
+{% block subHeader %}
+
+{% endblock %}
+{% block breadcrumb %}
 {% endblock %}
 {% block content %}
+    {% bootstrap_messages %}
+    <div class="table-toolbar">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="btn-group">
+                    <a href="{% url 'calendarevent.add' %}" class="btn green">
+                        Add New <i class="fa fa-plus"></i>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="portlet box green-meadow calendar">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="fa fa-gift"></i>Calendar
+                    </div>
+                </div>
+                <div class="portlet-body">
+
+                    <div class="row">
+
+                        <div class="col-md-12 col-sm-1">
+                            <div id="calendar" class="has-toolbar">
+                            </div>
+                        </div>
+                    </div>
+                    <!-- END CALENDAR PORTLET-->
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
 {% block pluginjs %}
+    <script src="{% static "assets/global/plugins/jquery-ui/jquery-ui-1.10.3.custom.min.js" %}"></script>
+    <script src="{% static "assets/global/plugins/moment.min.js" %}"></script>
+
+    <script src="{% static "assets/global/plugins/fullcalendar-2.2.6/fullcalendar.min.js" %}"></script>
+    <script src="{% static "assets/global/plugins/fullcalendar-2.2.6/gcal.js" %}"></script>
+
 {% endblock %}
 {% block script %}
+    <script>
+
+
+        function initDrag(html) {
+            // create an Event Object (http://arshaw.com/fullcalendar/docs/event_data/Event_Object/)
+            // it doesn't need to have a start or end
+            var eventObject = {
+                title: $.trim(el.text()) // use the element's text as the event title
+            };
+            // store the Event Object in the DOM element so we can get to it later
+            el.data('eventObject', eventObject);
+            // make the event draggable using jQuery UI
+            el.draggable({
+                zIndex: 999,
+                revert: true, // will cause the event to go back to its
+                revertDuration: 0 //  original position after the drag
+            });
+        }
+
+        function addEvent(title) {
+            title = title.length === 0 ? "Untitled Event" : title;
+            var html = $('<div class="external-event label label-default">' + title + '</div>');
+            jQuery('#event_box').append(html);
+            initDrag(html);
+        }
+
+        function initCalendar() {
+            if (!jQuery().fullCalendar) {
+                return;
+            }
+
+            var date = new Date();
+            var d = date.getDate();
+            var m = date.getMonth();
+            var y = date.getFullYear();
+
+            var h = {};
+
+            if (Metronic.isRTL()) {
+                if ($('#calendar').parents(".portlet").width() <= 720) {
+                    $('#calendar').addClass("mobile");
+                    h = {
+                        right: 'title, prev, next',
+                        center: '',
+                        left: 'agendaDay, agendaWeek, month, today'
+                    };
+                } else {
+                    $('#calendar').removeClass("mobile");
+                    h = {
+                        right: 'title',
+                        center: '',
+                        left: 'agendaDay, agendaWeek, month, today, prev,next'
+                    };
+                }
+            } else {
+                if ($('#calendar').parents(".portlet").width() <= 720) {
+                    $('#calendar').addClass("mobile");
+                    h = {
+                        left: 'title, prev, next',
+                        center: '',
+                        right: 'today,month,agendaWeek,agendaDay'
+                    };
+                } else {
+                    $('#calendar').removeClass("mobile");
+                    h = {
+                        left: 'title',
+                        center: '',
+                        right: 'prev,next,today,month,agendaWeek,agendaDay'
+                    };
+                }
+            }
+
+
+            var addEvent = function (title) {
+
+            };
+
+            $('#event_add').unbind('click').click(function () {
+                var title = $('#event_title').val();
+                addEvent(title);
+            });
+
+            $('#calendar').fullCalendar('destroy'); // destroy the calendar
+
+            $('#calendar').fullCalendar({ //re-initialize the calendar
+                events: '{% url 'calendarevent.feed' %}',
+                header: h,
+                defaultView: 'month', // change default view with available options from http://arshaw.com/fullcalendar/docs/views/Available_Views/
+                slotMinutes: 15,
+                editable: true,
+                timezone: 'Australia/Melbourne',
+                eventClick: function (calEvent, jsEvent, view) {
+                    window.location.href = "/system/calendarevent/mod/" + calEvent.id;
+                }
+            });
+
+        }
+
+        (function () {
+
+            initCalendar();
+        }())
+    </script>
 {% endblock %}

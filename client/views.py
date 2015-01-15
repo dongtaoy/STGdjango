@@ -34,7 +34,7 @@ CLIENT_FIELDS = {
     "personal": ("name", "preferredName", "dob", "phone", "email", "nationality", "onshore"),
     "visa": ("visa", "expire"),
     "service": (
-        "status", "referal", "consultant", "clientManager", "serviceFee", "thirdPartyFeeReceived",
+        "status","stage", "referal", "consultant", "clientManager", "serviceFee", "thirdPartyFeeReceived",
         "thirdPartyFeePaid"),
     "notes": ("note",)
 }
