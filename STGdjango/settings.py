@@ -65,13 +65,13 @@ WSGI_APPLICATION = 'STGdjango.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        # 'HOST': '54.66.143.201',
-        'HOST': '127.0.0.1',
+        'HOST': '54.66.143.201',
+        #'HOST': '127.0.0.1',
         'PORT': '3306',
         'NAME': 'STG',
         'USER': 'root',
-        # 'PASSWORD': 'yudanny1'
-        'PASSWORD': '1',
+        'PASSWORD': 'yudanny1'
+        #'PASSWORD': '1',
     }
 }
 
