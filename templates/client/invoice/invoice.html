@@ -122,6 +122,15 @@
             <td>{{ payment.commssionClaimed|mul:0.1|floatformat:2 }}</td>
         </tr>
         {% endfor %}
+		{% if invoice == invoice.coe.invoices.all.0 %}
+            <tr>
+				<td>{{ invoice.payments.count|add:1 }}</td>
+				<td></td>
+				<td>Bonus per student</td>
+				<td>{{ invoice.coe.bonus }}</td>
+				<td></td>
+			</tr>
+		{% endif %}
         <tr>
             <td colspan="3">Total</td>
             <td>{{ sum|floatformat:2 }}</td>
@@ -130,7 +139,13 @@
 	</table></div>
 	<br />
 	<div id="amount">
-		<h2><span class="name">Total Amount:</span><span class="value">${{ sum|mul:1.1|floatformat:2 }}</span></h2>
+		<h2><span class="name">Total Amount:</span><span class="value">
+            {% if invoice == invoice.coe.invoices.all.0 %}
+            	${{ sum|mul:1.1|add:invoice.coe.bonus|floatformat:2 }}
+            {% else %}
+                ${{ sum|mul:1.1|floatformat:2 }}
+            {% endif %}
+        </span></h2>
 	</div>
 	<div id="payment">
 		<h3>Payment Method:</h3>

@@ -64,6 +64,7 @@ class Client(models.Model):
 class Institution(models.Model):
     name = models.CharField(max_length=100)
     label = models.ForeignKey(Label, null=True, blank=True)
+    commissionRate = models.FloatField(null=True, blank=True)
     description = models.TextField(blank=True, null=True)
 
     def __unicode__(self):
