@@ -63,7 +63,17 @@
                 <div class="portlet-body">
                     <form method="POST">
                         {% csrf_token %}
-                        {% bootstrap_form form %}
+                        {% for field in form %}
+                            {% if field.name in managerField %}
+                                {% if UserGroup.0 in Manager %}
+                                    {% bootstrap_field field %}
+                                {% else %}
+                                    {{ field.as_hidden }}
+                                {% endif %}
+                            {% else %}
+                                {% bootstrap_field field %}
+                            {% endif %}
+                        {% endfor %}
                         {% buttons submit='OK' reset="Reset" %}{% endbuttons %}
                     </form>
 {#                    {{ client.id }}#}

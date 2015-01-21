@@ -47,7 +47,6 @@ def get_custom_form(customModel, customFields):
     return _customForm
 
 
-
 class CoeForm(ModelForm):
     class Meta:
         model = Coe
@@ -78,7 +77,8 @@ class PaymentForm(ModelForm):
         }
 
         widgets = {
-            "coe": forms.HiddenInput()
+            "coe": forms.HiddenInput(),
+            "commssionClaimed": forms.HiddenInput()
         }
 
 
@@ -89,6 +89,16 @@ class DocumentForm(ModelForm):
 
 
 class InvoiceForm(ModelForm):
+    def __init__(self, *args, **kwargs):
+        coe_id = kwargs.pop('coe', 0)
+        user = kwargs.pop('user', 0)
+        super(InvoiceForm, self).__init__(*args, **kwargs)
+        if coe_id and user:
+            coe = Coe.objects.get(id=int(coe_id))
+            self.fields["coe"].initial = coe
+            self.fields["employee"].initial = user.employee
+            self.fields['payments'].queryset = Payment.objects.filter(coe=coe)
+
     class Meta:
         model = Invoice
         fields = "__all__"
@@ -96,7 +106,5 @@ class InvoiceForm(ModelForm):
             "coe": forms.HiddenInput(),
             "employee": forms.HiddenInput()
         }
-
-
 
 

@@ -67,6 +67,7 @@
                         {{ coe.bonus }}
                     </div>
                 </div>
+                {% if UserGroup.0 in Accountant %}
                 <div class="row static-info">
                     <div class="col-md-5 name">
                         Referal's Commission
@@ -83,6 +84,7 @@
                         {{ coe.consultantCommission }}
                     </div>
                 </div>
+                {% endif %}
                 <div class="row static-info">
                     <div class="col-md-5 name">
                         Description

@@ -1,3 +1,4 @@
+from django.shortcuts import redirect
 from django.core.urlresolvers import reverse
 import os
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
@@ -21,17 +22,11 @@ class InvoiceCreateView(SuccessMessageMixin, CreateView):
     def get_success_url(self):
         return reverse("coe.details", kwargs={"coe": int(self.kwargs["coe"])})
 
-    def get_initial(self):
-        coe = Coe.objects.get(id=self.kwargs["coe"])
-        return {
-            "coe": coe,
-            "employee": self.request.user.employee
-        }
-
     def get_context_data(self, **kwargs):
         context = super(InvoiceCreateView, self).get_context_data(**kwargs)
         coe = Coe.objects.get(id=self.kwargs["coe"])
         context["coe"] = coe
+        context["form"] = self.form_class(coe=int(self.kwargs["coe"]), user=self.request.user)
         return context
 
 
@@ -55,6 +50,8 @@ class InvoiceUpdateView(SuccessMessageMixin, UpdateView):
         context = super(InvoiceUpdateView, self).get_context_data(**kwargs)
         coe = Coe.objects.get(id=self.kwargs["coe"])
         context["coe"] = coe
+        invoice = self.get_object()
+        context["form"] = self.form_class(instance=invoice, coe=int(self.kwargs["coe"]), user=self.request.user)
         return context
 
 
@@ -97,13 +94,25 @@ def render_to_pdf(template_src, context_dict):
 
 def invoiceExport(request, **kwargs):
     invoice = Invoice.objects.get(id=kwargs["invoice"])
-    sum = 0
+    commissionSum = 0
     for payment in invoice.payments.all():
         if payment.commssionClaimed:
-            sum += payment.commssionClaimed
+            commissionSum += payment.commssionClaimed
+    bonus = invoice.coe.bonus
+    if bonus:
+        bonusSum = commissionSum + bonus
+        paymentSum = commissionSum*1.1 + bonus
+    else:
+        bonusSum = commissionSum
+        paymentSum = commissionSum*1.1
+    rate = invoice.coe.institution.commissionRate
     return render_to_pdf('client/invoice/invoice.html', {
         'pagesize': 'A4',
         'invoice': invoice,
-        "sum": sum
+        "commissionSum": commissionSum,
+        "bonus": bonus,
+        "bonusSum": bonusSum,
+        "paymentSum": paymentSum,
+        "rate": rate,
     })
 

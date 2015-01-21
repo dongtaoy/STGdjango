@@ -1,4 +1,4 @@
-
+from django.contrib.auth.models import Group
 
 __author__ = 'dongtaoy'
 
@@ -16,6 +16,9 @@ def common(request):
             "Sidebars": Sidebar.objects.filter(parent=None),
             "Payments": Payment.objects.filter(nextDueDate__range=[now, max_date]),
             "Now": now,
-            "User": request.user
-
+            "User": request.user,
+            "UserGroup": request.user.groups.all(),
+            "Consultant": Group.objects.filter(name="Consultant"),
+            "Accountant": Group.objects.exclude(name="Consultant"),
+            "Manager": Group.objects.filter(name="Manager")
     }

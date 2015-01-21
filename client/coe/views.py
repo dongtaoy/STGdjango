@@ -3,12 +3,12 @@ from django.views.generic.detail import DetailView
 from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin
 from client.forms import CoeForm, DocumentForm
-from client.models import Coe, Client, Stage, Document
+from client.models import Coe, Client, Stage, Document, Institution
 from django.http import HttpResponse
 from django.shortcuts import redirect
 from django.core.urlresolvers import reverse
 
-
+MANAGER_FIELDS = ("referalCommission", "consultantCommission")
 
 class CoeCreateView(SuccessMessageMixin, CreateView):
     form_class = CoeForm
@@ -27,6 +27,11 @@ class CoeCreateView(SuccessMessageMixin, CreateView):
         return {
             "client": Client.objects.get(id=self.kwargs["client"])}
 
+    def get_context_data(self, **kwargs):
+        context = super(CoeCreateView, self).get_context_data(**kwargs)
+        context["managerField"] = MANAGER_FIELDS
+        return context
+
 
 class CoeUpdateView(SuccessMessageMixin, UpdateView):
     form_class = CoeForm
@@ -42,6 +47,7 @@ class CoeUpdateView(SuccessMessageMixin, UpdateView):
         context = super(CoeUpdateView, self).get_context_data(**kwargs)
         coe = Coe.objects.get(id=self.kwargs["coe"])
         context["client"] = coe.client
+        context["managerField"] = MANAGER_FIELDS
         return context
 
     def get_success_message(self, cleaned_data):

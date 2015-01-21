@@ -116,7 +116,7 @@
             <td>{{ forloop.counter }}</td>
             <td>{{ payment.id }}</td>
             <td>Commission on <b>{{ invoice.coe.client.name }}</b> <br/>${{ payment.paidAmount }}*
-                {{ payment.commssionClaimed|div:payment.paidAmount|floatformat:2 }}=
+                {{ rate|floatformat:2 }}=
                 ${{ payment.commssionClaimed|floatformat:2 }}</td>
             <td>{{ payment.commssionClaimed|floatformat:2 }}</td>
             <td>{{ payment.commssionClaimed|mul:0.1|floatformat:2 }}</td>
@@ -133,17 +133,22 @@
 		{% endif %}
         <tr>
             <td colspan="3">Total</td>
-            <td>{{ sum|floatformat:2 }}</td>
-            <td>{{ sum|mul:0.1|floatformat:2 }}</td>
+            {% if invoice == invoice.coe.invoices.all.0 %}
+            	<td>{{ bonusSum|floatformat:2 }}</td>
+            {% else %}
+                <td>{{ commissionSum|floatformat:2 }}</td>
+            {% endif %}
+
+            <td>{{ commissionSum|mul:0.1|floatformat:2 }}</td>
         </tr>
 	</table></div>
 	<br />
 	<div id="amount">
 		<h2><span class="name">Total Amount:</span><span class="value">
             {% if invoice == invoice.coe.invoices.all.0 %}
-            	${{ sum|mul:1.1|add:invoice.coe.bonus|floatformat:2 }}
+            	${{ paymentSum|floatformat:2 }}
             {% else %}
-                ${{ sum|mul:1.1|floatformat:2 }}
+                ${{ commissionSum|mul:1.1|floatformat:2 }}
             {% endif %}
         </span></h2>
 	</div>

@@ -5,56 +5,46 @@
                 <div class="caption">
                     <i class="fa fa-money"></i>Payment Information
                 </div>
+                {% if UserGroup.0 in Accountant %}
                 <div class="actions">
                     <a href="{% url "payment.add" coe.id %}" class="btn btn-default btn-sm">
                         <i class="fa fa-pencil"></i> Add </a>
                 </div>
+                {% endif %}
             </div>
             <div class="portlet-body">
-                <form action="/" method="POST">{% csrf_token %}
-{#                    <div class="table-toolbar">#}
-{#                        <div class="row">#}
-{#                            <div class="col-md-6">#}
-{#                                <div class="btn-group">#}
-{#                                    <input type="submit" class="btn green" value="export invoice">#}
-{##}
-{#                                </div>#}
-{#                            </div>#}
-{#                        </div>#}
-{#                    </div>#}
-                    <div class="table-responsive">
-                        <table class="table table-hover table-bordered table-striped table-payment">
-                            <thead>
+                <div class="table-responsive">
+                    <table class="table table-hover table-bordered table-striped table-payment">
+                        <thead>
+                        <tr>
+                            <th>Order</th>
+                            <th>ID</th>
+                            <th>Amount received</th>
+                            <th>Received Date</th>
+                            <th>Amount Paid</th>
+                            <th>Payment Date</th>
+                            <th>Commission Claimed</th>
+                            <th>Commission Received</th>
+                            <th>Next Due Date</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for payment in coe.payments.all %}
                             <tr>
-{#                                <th></th>#}
-                                <th>ID</th>
-                                <th>Amount received</th>
-                                <th>Received Date</th>
-                                <th>Amount Paid</th>
-                                <th>Payment Date</th>
-                                <th>Commission Claimed</th>
-                                <th>Commission Received</th>
-                                <th>Next Due Date</th>
+                                <td>{{ forloop.counter }}</td>
+                                <td>{{ payment.id }}</td>
+                                <td>{{ payment.receivedAmount }}</td>
+                                <td>{{ payment.receivedDate }}</td>
+                                <td>{{ payment.paidAmount }}</td>
+                                <td>{{ payment.paidDate }}</td>
+                                <td>{{ payment.commssionClaimed }}</td>
+                                <td>{{ payment.commssionRecevied }}</td>
+                                <td>{{ payment.nextDueDate }}</td>
                             </tr>
-                            </thead>
-                            <tbody>
-                            {% for payment in coe.payments.all %}
-                                <tr>
-{#                                    <td><input name="pid" type="checkbox" value="{{ payment.id }}"/></td>#}
-                                    <td>{{ payment.id }}</td>
-                                    <td>{{ payment.receivedAmount }}</td>
-                                    <td>{{ payment.receivedDate }}</td>
-                                    <td>{{ payment.paidAmount }}</td>
-                                    <td>{{ payment.paidDate }}</td>
-                                    <td>{{ payment.commssionClaimed }}</td>
-                                    <td>{{ payment.commssionRecevied }}</td>
-                                    <td>{{ payment.nextDueDate }}</td>
-                                </tr>
-                            {% endfor %}
-                            </tbody>
-                        </table>
-                    </div>
-                </form>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>

@@ -1,11 +1,12 @@
 import datetime
+from django.shortcuts import redirect
 from django.core.urlresolvers import reverse
 from django.views.generic import ListView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin
 from client.forms import PaymentForm
-from client.models import Payment, Coe
+from client.models import Payment, Coe, Institution
 
 
 class PaymentCreateView(SuccessMessageMixin, CreateView):
@@ -16,9 +17,6 @@ class PaymentCreateView(SuccessMessageMixin, CreateView):
         name = cleaned_data["coe"]
         return "%s's Payment created" % name
 
-    def get_success_url(self):
-        return reverse("coe.details", kwargs={"coe": int(self.kwargs["coe"])})
-
     def get_initial(self):
         return {
             "coe": Coe.objects.get(id=self.kwargs["coe"])}
@@ -28,6 +26,20 @@ class PaymentCreateView(SuccessMessageMixin, CreateView):
         coe = Coe.objects.get(id=self.kwargs["coe"])
         context["coe"] = coe
         return context
+
+    def post(self, request, *args, **kwargs):
+        coe = Coe.objects.get(id=int(request.POST["coe"]))
+        rate = coe.institution.commissionRate
+        form = self.form_class(self.request.POST)
+        if form.is_valid():
+            if self.request.POST["paidAmount"] and rate:
+                claimed = float(self.request.POST["paidAmount"]) * rate
+                payment = form.save(commit=False)
+                payment.commssionClaimed = claimed
+                payment.save()
+            else:
+                payment = form.save(commit=True)
+        return redirect(reverse("coe.details", kwargs={"coe": int(self.kwargs["coe"])}))
 
 
 class PaymentUpdateView(SuccessMessageMixin, UpdateView):
@@ -51,6 +63,17 @@ class PaymentUpdateView(SuccessMessageMixin, UpdateView):
         context["client"] = coe.client
         context["coe"] = coe
         return context
+
+    def post(self, request, *args, **kwargs):
+        super(PaymentUpdateView, self).post(request, *args, **kwargs)
+        coe = self.get_object().coe
+        rate = coe.institution.commissionRate
+        self.object = self.get_object()
+        if self.request.POST["paidAmount"] and rate:
+            claimed = float(self.request.POST["paidAmount"]) * rate
+            self.object.commssionClaimed = claimed
+            self.object.save()
+        return redirect(reverse("coe.details", kwargs={"coe": int(self.kwargs["coe"])}))
 
 
 class PaymentDeleteView(DeleteView):
