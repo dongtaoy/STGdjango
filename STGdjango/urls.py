@@ -29,8 +29,10 @@ urlpatterns = patterns(
     url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT}),
 )
 
-handler404 = TemplateView.as_view(template_name="common/404.html")
-handler500 = TemplateView.as_view(template_name="common/500.html")
-handler403 = TemplateView.as_view(template_name="common/403.html")
+if settings.DEBUG:
+    urlpatterns += patterns('',
+        (r'^500/$', TemplateView.as_view(template_name="common/500.html")),
+        (r'^404/$', TemplateView.as_view(template_name="common/404.html")),
+    )
 
 admin.autodiscover()
