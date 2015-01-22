@@ -142,5 +142,5 @@ BOOTSTRAP3 = {
 
 # Media root
 #
-MEDIA_ROOT = 'upload/'
+MEDIA_ROOT = '/var/www/STGdjango/upload/'
 MEDIA_URL = '/media/'
