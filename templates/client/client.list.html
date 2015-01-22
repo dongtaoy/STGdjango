@@ -64,22 +64,7 @@
                             <th>Visa</th>
                         </tr>
                         </thead>
-                        <tbody>
-                            {% for client in clients %}
-                            <tr >
-                                <td>{{ client.id }}</td>
-                                <td>{{ client.name }}</td>
-                                <td>{{ client.dob }}</td>
-                                <td>{{ client.status }}</td>
-                                <td>{{ client.nationality }}</td>
-                                <td>{{ client.consultant }}</td>
-                                <td>{{ client.clientManager }}</td>
-{#                                <td>{{ client.stage.title }}</td>#}
-                                <td>Not Ready Yet</td>
-                                <td>{{ client.visa.subClass }}</td>
-                            </tr>
-                            {% endfor %}
-                        </tbody>
+
                         </table>
                     </div>
                 </div>
