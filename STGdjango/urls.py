@@ -4,7 +4,6 @@ from django.views.generic import TemplateView
 import settings
 
 
-
 urlpatterns = patterns(
     '',
     # Examples:
@@ -31,8 +30,8 @@ urlpatterns = patterns(
 
 if settings.DEBUG:
     urlpatterns += patterns('',
-        (r'^500/$', TemplateView.as_view(template_name="common/500.html")),
-        (r'^404/$', TemplateView.as_view(template_name="common/404.html")),
+        (r'^500/$', "common.views.handler500"),
+        (r'^404/$', "common.views.handler404"),
     )
 
 admin.autodiscover()
