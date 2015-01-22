@@ -71,7 +71,7 @@ DATABASES = {
         'NAME': 'STG',
         'USER': 'root',
         # 'PASSWORD': ''
-        'PASSWORD': '',
+        'PASSWORD': '1',
     }
 }
 
