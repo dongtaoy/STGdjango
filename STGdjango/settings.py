@@ -100,8 +100,6 @@ STATICFILES_DIRS = (
 
 ADMIN_MEDIA_PREFIX = '/static/admin/'
 
-STATIC_ROOT = ''
-
 TEMPLATE_DIRS = (
     os.path.join(BASE_DIR, 'templates'),
 )
