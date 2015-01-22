@@ -10,6 +10,6 @@ https://docs.djangoproject.com/en/1.7/howto/deployment/wsgi/
 import os
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "STGdjango.settings")
 from django.contrib.auth.handlers.modwsgi import check_password
-os.environ['PYTHON_EGG_CACHE'] = '/tmp/.python-eggs'
+os.environ.setdefault('PYTHON_EGG_CACHE', '/tmp/.python-eggs')
 from django.core.wsgi import get_wsgi_application
 application = get_wsgi_application()
