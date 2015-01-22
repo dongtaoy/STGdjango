@@ -70,8 +70,8 @@ DATABASES = {
         'PORT': '3306',
         'NAME': 'STG',
         'USER': 'root',
-        # 'PASSWORD': 'yudanny1'
-        'PASSWORD': '1',
+        # 'PASSWORD': ''
+        'PASSWORD': '',
     }
 }
 
