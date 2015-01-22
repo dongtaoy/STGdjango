@@ -106,7 +106,7 @@ class Client(models.Model):
     referal = models.ForeignKey(Employee, blank=True, null=True, related_name="ref")  # todo
     consultant = models.ForeignKey(Employee, blank=True, null=True, related_name="con")  # todo
     clientManager = models.ForeignKey(Employee, blank=True, null=True, related_name="cm")  # todo
-    stage = models.ForeignKey(Stage, null=True, blank=True)  ## todo
+    stage = models.ForeignKey(Stage, null=True, blank=True)
     serviceFee = models.FloatField(blank=True, null=True)
     thirdPartyFeeReceived = models.FloatField(blank=True, null=True)
     thirdPartyFeePaid = models.FloatField(blank=True, null=True)
