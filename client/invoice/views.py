@@ -106,7 +106,7 @@ def invoiceExport(request, **kwargs):
         bonusSum = commissionSum
         paymentSum = commissionSum*1.1
     rate = invoice.coe.institution.commissionRate
-    return render_to_pdf('client/invoice/invoice.html', {
+    return render_to_pdf('client/invoice/invoice2.html', {
         'pagesize': 'A4',
         'invoice': invoice,
         "commissionSum": commissionSum,
