@@ -7,9 +7,10 @@ from client.views import ClientCreateView, ClientUpdateView, ClientDeleteView, C
 urlpatterns = patterns('',
 
     url(r'^$', login_required(ListView.as_view(
+            template_name="client/client.list.html",
             model=Client,
-            context_object_name="clients",
-            template_name="client/client.list.html")), name="client.list"),
+            context_object_name="clients"
+            )), name="client.list"),
 
     url(r'^add/$',
         permission_required("client.add_client")(ClientCreateView.as_view()), name="client.add"),
