@@ -12,7 +12,6 @@ def calendar(request):
 def handler404(request):
     response = render_to_response('common/404.html', {},
                                   context_instance=RequestContext(request))
-    print 404
     response.status_code = 404
     return response
 
@@ -20,6 +19,5 @@ def handler404(request):
 def handler500(request):
     response = render_to_response('common/500.html', {},
                                   context_instance=RequestContext(request))
-    print 500
     response.status_code = 500
     return response
