@@ -68,6 +68,9 @@
 			font-size: 17px;
             text-align: right;
 		}
+        #payment h3{
+            line-height: 1em;
+        }
         #payment .value{
             margin-left: 200px;
         }
@@ -142,13 +145,13 @@
         </tr>
 	</table></div>
 	<div id="amount">
-		<h2><span class="name">Total Amount:</span><span class="value">
+		<h3><span class="name">Total Amount:</span><span class="value">
             {% if invoice == invoice.coe.invoices.all.0 %}
             	${{ paymentSum|floatformat:2 }}
             {% else %}
                 ${{ commissionSum|mul:1.1|floatformat:2 }}
             {% endif %}
-        </span></h2>
+        </span></h3>
 	</div>
 	<div id="payment">
 		<h3>Payment Method:</h3>
