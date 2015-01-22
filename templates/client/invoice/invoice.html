@@ -11,7 +11,7 @@
             margin-top: 2.8cm;
             margin-bottom: 3.3cm;
 			size: ;
-            background-image: url("img.jpg");
+            background-image: url("/media/img.jpg");
 
 			@frame header {
 				-pdf-frame-content:page-header;
@@ -86,7 +86,6 @@
     <div id="title">
 		<h1>Tax Invoice</h1>
 	</div>
-	<br />
 	<div id="body">
     <div id="company">
 		<h2>STG International Service Pty Ltd</h2>
@@ -142,7 +141,6 @@
             <td>{{ commissionSum|mul:0.1|floatformat:2 }}</td>
         </tr>
 	</table></div>
-	<br />
 	<div id="amount">
 		<h2><span class="name">Total Amount:</span><span class="value">
             {% if invoice == invoice.coe.invoices.all.0 %}
