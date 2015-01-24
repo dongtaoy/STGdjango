@@ -12,9 +12,18 @@ def common(request):
     now = datetime.datetime.now()
     max_date = now.date() + datetime.timedelta(30)
 
+    payments = Payment.objects.filter(nextDueDate__range=[now, max_date])
+    count = 0
+
+    # for payment in payments:
+    #     count += 1
+    #     if not payment.nextPayment:
+    #         count += 1
+
     return {"path": request.path,
             "Sidebars": Sidebar.objects.filter(parent=None),
             "Payments": Payment.objects.filter(nextDueDate__range=[now, max_date]),
+            "PaymentCount": count,
             "Now": now,
             "User": request.user,
             "UserGroup": request.user.groups.all(),

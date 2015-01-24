@@ -148,6 +148,7 @@ class Coe(models.Model):
 
 class Payment(models.Model):
     coe = models.ForeignKey(Coe, related_name="payments")
+    previousPayment = models.ForeignKey('self',blank=True, null=True,  related_name="nextPayment")
     receivedAmount = models.FloatField(blank=True, null=True)
     receivedDate = models.DateField(blank=True, null=True)
     paidAmount = models.FloatField(blank=True, null=True)

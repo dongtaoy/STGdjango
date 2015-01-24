@@ -43,7 +43,7 @@ class EmployeeUpdateView(SuccessMessageMixin, UpdateView):
     pk_url_kwarg = 'employee'
     model = Employee
     success_message = '%(name)s Employee updated'
-
+    
 
 class EmployeeDeleteView(DeleteView):
     model = Employee

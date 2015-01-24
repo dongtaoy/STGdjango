@@ -57,17 +57,18 @@
                     <table class="table table-striped table-bordered table-hover">
                         <thead>
                         <tr>
-                            <th>ID</th>
+                            <th hidden>ID</th>
                             <th>Name</th>
                             <th>Phone</th>
-                            <th>Dob</th>
                             <th>Email</th>
+			    <th>Group</th>
                         </tr>
                         </thead>
                         <tbody>
                         {% for employee in employees %}
+			    {% if not employee.user.is_superuser %}	
                             <tr>
-                                <td>{{ employee.id }}</td>
+                                <td hidden>{{ employee.id }}</td>
                                 <td>
                                     {{ employee.name }}
                                 </td>
@@ -75,12 +76,11 @@
                                     {{ employee.phone }}
                                 </td>
                                 <td>
-                                    {{ employee.dob }}
-                                </td>
-                                <td>
                                     {{ employee.email }}
                                 </td>
+				<td>{{ employee.user.groups.all.0 }}</td>
                             </tr>
+			    {% endif %}
                         {% endfor %}
                         </tbody>
                     </table>

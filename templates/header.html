@@ -5,7 +5,7 @@
         <!-- BEGIN LOGO -->
         <div class="page-logo">
             <a href="{% url 'dashboard' %}">
-                <img src="{% static 'assets/admin/layout4/img/logo-light.png' %}" alt="logo" class="logo-default"/>
+		<h1 style="margin-left:40px;" class="logo-default" >STG<span style="font-size:20px">  Service</span></h1>
             </a>
 
             <div class="menu-toggler sidebar-toggler">
@@ -25,19 +25,19 @@
 				</button>
 				<ul class="dropdown-menu" role="menu">
 					<li>
-						<a href="{% url "client.add" %}">
+						<a href="{% url "client.add" %}" target="_blank" >
 						<i class="icon-user"></i> New Client </a>
 					</li>
                     <li>
-						<a href="{% url "institution.add" %}">
+						<a href="{% url "institution.add" %}" target="_blank">
 						<i class="icon-book-open"></i> New Institution </a>
 					</li>
                     <li>
-						<a href="{% url "visa.add" %}">
+						<a href="{% url "visa.add" %}" target="_blank">
 						<i class="icon-globe"></i> New Visa </a>
 					</li>
                     <li>
-						<a href="{% url "stage.add" %}">
+						<a href="{% url "stage.add" %}" target="_blank">
 						<i class="icon-tag"></i> New Stage </a>
 					</li>
 				</ul>
@@ -67,7 +67,7 @@
 						<span class="username username-hide-on-mobile">
 						{{ User.employee.name }} </span>
                             <!-- DOC: Do not remove below empty space(&nbsp;) as its purposely used -->
-                            <img alt="" class="img-circle" src="{% static 'assets/admin/layout4/img/avatar9.jpg' %}"/>
+                            <img alt="" class="img-circle" src="{% static 'logo.jpg' %}"/>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-default">
                             <li>

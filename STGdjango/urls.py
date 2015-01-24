@@ -34,4 +34,9 @@ if settings.DEBUG:
         (r'^404/$', "common.views.handler404"),
     )
 
+
+handler500 = "common.views.handler500"
+handler404 = "common.views.handler404"
+
+
 admin.autodiscover()

@@ -56,6 +56,7 @@ class CoeForm(ModelForm):
             'totalTuitionFee': "Total Tuition Fee",
             "referalCommission": "Referal's Commission",
             "consultantCommission": "Consultant's Commission",
+            "coeNumber": "Coe Number",
         }
         widgets = {
             "client": forms.HiddenInput()
@@ -74,6 +75,7 @@ class PaymentForm(ModelForm):
             "paidDate": "Paid Date",
             "commssionClaimed": "Commssion Claimed",
             "commssionRecevied": "Commssion Recevied",
+            "previousPayment": "Previous Payment",
         }
 
         widgets = {
@@ -105,6 +107,10 @@ class InvoiceForm(ModelForm):
         widgets = {
             "coe": forms.HiddenInput(),
             "employee": forms.HiddenInput()
+        }
+        labels = {
+            "number": "Invoice Number",
+            "issueDate": "Issue Date",
         }
 
 

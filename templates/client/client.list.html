@@ -53,7 +53,7 @@
                     <table class="table table-striped table-bordered table-hover" id="sample_2">
                         <thead>
                         <tr>
-                            <th>ID</th>
+                            <th hidden>ID</th>
                             <th>Name</th>
                             <th>DoB</th>
                             <th>Status</th>
@@ -62,12 +62,13 @@
                             <th>Client Manager</th>
                             <th>Stage</th>
                             <th>Visa</th>
+			    <th></th>
                         </tr>
                         </thead>
                         <tbody>
                             {% for client in clients %}
                             <tr >
-                                <td>{{ client.id }}</td>
+                                <td hidden>{{ client.id }}</td>
                                 <td>{{ client.name }}</td>
                                 <td>{{ client.dob }}</td>
                                 <td>{{ client.status }}</td>
@@ -77,6 +78,8 @@
                                 <td>{{ client.stage }}</td>
 {#                                <td>Not Ready Yet</td>#}
                                 <td>{{ client.visa.subClass }}</td>
+  				<td><a class="btn default btn-xs green-stripe" href="{% url "client.details" client.id %}">
+                                    Details </a></td>
                             </tr>
                             {% endfor %}
                         </tbody>

@@ -14,7 +14,8 @@
             <ul class="dropdown-menu-list scroller" style="height: 275px;"
                 data-handle-color="#637283">
                 {% for payment in Payments|dictsort:"nextDueDate" %}
-                <li>
+                {% if not payment.nextPayment %}
+		<li>
                     <a href="{% url "coe.details" payment.coe.id %}">
                     <span class="photo">
 {#                        <span class="c badge-danger">{{ forloop.counter }}</span>#}
@@ -29,6 +30,7 @@
                     </span>
                     </a>
                 </li>
+		{% endif %}
                 {% endfor %}
             </ul>
         </li>

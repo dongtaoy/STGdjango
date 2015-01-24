@@ -37,7 +37,7 @@ class GroupCreationForm(ModelForm):
 class EmployeeForm(ModelForm):
     class Meta:
         model = Employee
-        exclude = ('user',)
+        exclude = ('user', "dob")
 
 
 class GroupForm(ModelForm):

@@ -56,8 +56,8 @@
                     <table class="table table-striped table-bordered table-hover">
                         <thead>
                         <tr>
-                            <th>ID</th>
                             <th>Order</th>
+                            <th hidden>ID</th>
                             <th>Title</th>
                             <th>Description</th>
                         </tr>
@@ -66,9 +66,9 @@
                         {% for stage in stages %}
                             <tr>
                                 {#                            <tr>#}
-                                <td>{{ stage.id }}</td>
 
                                 <td>{{ stage.order }}</td>
+                                <td hidden name="stage_id">{{ stage.id }}</td>
 
                                 <td>{{ stage.title }}</td>
 
@@ -105,7 +105,7 @@
                 $('.table tbody tr').contextmenu({
                     target: '#context-menu',
                     before: function (e, context) {
-                        $('#edit').attr('href', ('/client/stage/mod/' + $(context).children('td:first').text()));
+                        $('#edit').attr('href', ('/client/stage/mod/' + $(context).children('td[name="stage_id"]').text()));
                         return true;
                     },
                     onItem: function () {

@@ -56,8 +56,8 @@
                     <table class="table table-striped table-bordered table-hover">
                         <thead>
                         <tr>
-                            <th>ID</th>
                             <th>Visa Subclass</th>
+                            <th hidden>ID</th>
                             <th>Visa Description</th>
                         </tr>
                         </thead>
@@ -65,9 +65,10 @@
                         {% for visa in visas %}
                             <tr>
                                 {#                            <tr>#}
-                                <td>{{ visa.id }}</td>
-
                                 <td>{{ visa.subClass }}</td>
+
+                                <td hidden name="visa_id">{{ visa.id }}</td>
+
 
                                 <td>{{ visa.description }}</td>
                             </tr>
@@ -103,7 +104,7 @@
                 $('.table tbody tr').contextmenu({
                     target: '#context-menu',
                     before: function (e, context) {
-                        $('#edit').attr('href', ('/client/visa/mod/' + $(context).children('td:first').text()));
+                        $('#edit').attr('href', ('/client/visa/mod/' + $(context).children('td[name="visa_id"]').text()));
                         return true;
                     },
                     onItem: function () {
