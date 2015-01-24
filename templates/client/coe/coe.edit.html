@@ -103,7 +103,11 @@
 {% block script %}
     <script>
         $('form select').select2();
-        $('input[name="start"]').datepicker();
-        $('input[name="end"]').datepicker();
+        $('input[name="start"]').datepicker({
+                format: 'yyyy-mm-dd'
+            });
+        $('input[name="end"]').datepicker({
+                format: 'yyyy-mm-dd'
+            });
     </script>
 {% endblock %}

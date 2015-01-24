@@ -3,18 +3,18 @@
        data-close-others="true">
         <i class="icon-credit-card"></i>
     <span class="badge badge-danger">
-    {{ Payments.count }} </span>
+    {{ PaymentCount }} </span>
     </a>
     <ul class="dropdown-menu">
         <li class="external">
-            <h3><span class="bold">{{ Payments.count }} urgent</span> payments</h3>
+            <h3><span class="bold">{{ PaymentCount }} urgent</span> payments</h3>
             <a href="{% url "payment.dueDate" %}">view all</a>
         </li>
         <li>
             <ul class="dropdown-menu-list scroller" style="height: 275px;"
                 data-handle-color="#637283">
                 {% for payment in Payments|dictsort:"nextDueDate" %}
-                {% if not payment.nextPayment %}
+                {% if not payment.nextPayment.count %}
 		<li>
                     <a href="{% url "coe.details" payment.coe.id %}">
                     <span class="photo">
@@ -22,7 +22,7 @@
                     </span>
                     <span class="subject">
                         <span class="from">
-                        {{ payment.coe.client.name }} </span>
+                        {{ payment.coe.client }} </span>
                          <span class="badge badge-success time">{{ payment.nextDueDate|timeuntil:Now }}</span>
                     </span>
                     <span class="message">

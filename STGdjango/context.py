@@ -15,10 +15,9 @@ def common(request):
     payments = Payment.objects.filter(nextDueDate__range=[now, max_date])
     count = 0
 
-    # for payment in payments:
-    #     count += 1
-    #     if not payment.nextPayment:
-    #         count += 1
+    for payment in payments:
+        if not payment.nextPayment.count():
+            count += 1
 
     return {"path": request.path,
             "Sidebars": Sidebar.objects.filter(parent=None),

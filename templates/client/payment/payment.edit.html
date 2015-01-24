@@ -5,7 +5,7 @@
     {% if spec_payment %}
         Payment Configuration
     {% else %}
-        {{ client.name }}'s Payment Addition
+        {{ client }}'s Payment Addition
     {% endif %}
 {% endblock %}
 {% block plugincss %}
@@ -90,9 +90,15 @@
     <script>
         (function () {
             $('form select').select2();
-            $('input[name="nextDueDate"]').datepicker();
-            $('input[name="paidDate"]').datepicker();
-            $('input[name="receivedDate"]').datepicker();
+            $('input[name="nextDueDate"]').datepicker({
+                format: 'yyyy-mm-dd'
+            });
+            $('input[name="paidDate"]').datepicker({
+                format: 'yyyy-mm-dd'
+            });
+            $('input[name="receivedDate"]').datepicker({
+                format: 'yyyy-mm-dd'
+            });
         }());
     </script>
 

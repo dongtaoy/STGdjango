@@ -105,7 +105,11 @@
 {% block script %}
     <script>
         (function () {
-            $('input[name="dob"]').datepicker();
+            $('input[name="dob"]').datepicker({
+                format: 'yyyy-mm-dd'
+            });
+                format: 'yyyy-mm-dd'
+            });
         }());
     </script>
 {% endblock %}

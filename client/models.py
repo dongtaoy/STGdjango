@@ -83,7 +83,8 @@ class Stage(models.Model):
 
 class Client(models.Model):
     # Personal Information
-    name = models.CharField(max_length=100)
+    firstName = models.CharField(max_length=100)
+    surname = models.CharField(max_length=100, default="")
     preferredName = models.CharField(max_length=100, blank=True, null=True)
     dob = models.DateField(blank=True, null=True)
     nationality = models.CharField(max_length=100, blank=True, null=True, choices=NATIONALITY)
@@ -115,7 +116,7 @@ class Client(models.Model):
     note = models.TextField(blank=True, null=True)
 
     def __unicode__(self):
-        return self.name
+        return "%s %s" % (self.firstName, self.surname)
 
 
 class Institution(models.Model):

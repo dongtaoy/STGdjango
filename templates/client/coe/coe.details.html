@@ -2,7 +2,7 @@
 {% load staticfiles %}
 {% load bootstrap3 %}
 {% block title %}
-    {{ client.name }}'s Details
+    {{ client }}'s Details
 {% endblock %}
 {% block plugincss %}
     <link rel="stylesheet" type="text/css"
@@ -14,7 +14,7 @@
 
 {#page content#}
 {% block header %}
-    {{ client.name }}'s
+    {{ client }}'s
 {% endblock %}
 {% block subHeader %}
     Details
@@ -44,7 +44,7 @@
                     <div class="caption">
                         <i class="icon-user font-green-sharp"></i>
 					<span class="caption-subject font-green-sharp bold uppercase">
-					{{ client.name }}'s </span>
+					{{ client }}'s </span>
                         <span class="caption-helper">COE</span>
                     </div>
 
@@ -112,7 +112,7 @@
                 $('.table-payment tbody tr').contextmenu({
                     target: '#payment-contextmenu',
                     before: function (e, context) {
-                        $('#edit').attr('href', ('/client/payment/mod/{{ coe.id }}/' + $(context).children('td:first').text()));
+                        $('#edit').attr('href', ('/client/payment/mod/{{ coe.id }}/' + $(context).children('td[name="payment_id"]').text()));
                         return true;
                     },
                     onItem: function () {

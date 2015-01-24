@@ -6,7 +6,7 @@ from client.forms import get_custom_form
 from client.models import Client
 
 CLIENT_FIELDS = {
-    "personal": ("name", "preferredName", "dob", "phone", "email", "nationality", "onshore"),
+    "personal": ("firstName", "surname", "preferredName", "dob", "phone", "email", "nationality", "onshore"),
     "visa": ("visa", "expire"),
     "service": (
         "status", "stage", "referal", "consultant", "clientManager", "serviceFee", "thirdPartyFeeReceived",
@@ -23,7 +23,7 @@ class ClientCreateView(SuccessMessageMixin, CreateView):
     form_class = get_custom_form(MODELS['client'], CLIENT_FIELDS["personal"])
     success_url = "/client/"
     template_name = "client/client.edit.html"
-    success_message = "%(name)s Client created"
+    success_message = "%(firstName)s Client created"
 
 
 class ClientUpdateView(SuccessMessageMixin, UpdateView):

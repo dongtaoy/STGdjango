@@ -25,6 +25,7 @@ class PaymentCreateView(SuccessMessageMixin, CreateView):
         context = super(PaymentCreateView, self).get_context_data(**kwargs)
         coe = Coe.objects.get(id=self.kwargs["coe"])
         context["coe"] = coe
+        context["form"] = self.form_class(coe=coe.id)
         return context
 
     def post(self, request, *args, **kwargs):
@@ -62,6 +63,8 @@ class PaymentUpdateView(SuccessMessageMixin, UpdateView):
         coe = Coe.objects.get(id=self.kwargs["coe"])
         context["client"] = coe.client
         context["coe"] = coe
+        payment = self.get_object()
+        context["form"] = self.form_class(instance=payment, coe=coe.id)
         return context
 
     def post(self, request, *args, **kwargs):

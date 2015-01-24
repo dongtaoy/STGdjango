@@ -64,6 +64,15 @@ class CoeForm(ModelForm):
 
 
 class PaymentForm(ModelForm):
+    def __init__(self, *args, **kwargs):
+        coe_id = kwargs.pop('coe', 0)
+        super(PaymentForm, self).__init__(*args, **kwargs)
+        if coe_id:
+            coe = Coe.objects.get(id=int(coe_id))
+            self.fields["coe"].initial = coe
+            self.fields['previousPayment'].queryset = Payment.objects.filter(coe=coe)
+
+
     class Meta:
         model = Payment
         fields = "__all__"
@@ -76,6 +85,7 @@ class PaymentForm(ModelForm):
             "commssionClaimed": "Commssion Claimed",
             "commssionRecevied": "Commssion Recevied",
             "previousPayment": "Previous Payment",
+            "nextDueDate": "Next Due Date",
         }
 
         widgets = {

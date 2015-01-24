@@ -32,7 +32,7 @@
                         {% for payment in coe.payments.all %}
                             <tr>
                                 <td>{{ forloop.counter }}</td>
-                                <td>{{ payment.id }}</td>
+                                <td name="payment_id">{{ payment.id }}</td>
                                 <td>{{ payment.receivedAmount }}</td>
                                 <td>{{ payment.receivedDate }}</td>
                                 <td>{{ payment.paidAmount }}</td>

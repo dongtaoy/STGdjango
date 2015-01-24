@@ -3,7 +3,7 @@
 {% load bootstrap3 %}
 {% block title %}
     {% if spec_client %}
-        {{ spec_client.name }}'s {{ section|capfirst }} Configuration
+        {{ spec_client }}'s {{ section|capfirst }} Configuration
     {% else %}
         New Client
     {% endif %}
@@ -18,7 +18,7 @@
 {% endblock %}
 {% block header %}
     {% if spec_client %}
-        {{ spec_client.name }}'s {{ section|capfirst }}
+        {{ spec_client }}'s {{ section|capfirst }}
     {% else %}
         New Client
     {% endif %}
@@ -59,7 +59,7 @@
                 <div class="portlet-title">
                     <div class="caption">
                         <i class="fa fa-user"></i>
-                        {% if spec_client.name %}
+                        {% if spec_client %}
                             {{ section|capfirst }} Information
                         {% else %}
                             Add New Client
@@ -94,8 +94,16 @@
     <script>
         (function () {
             $('form select').select2();
-            $('input[name="dob"]').datepicker();
-            $('input[name="expire"]').datepicker();
+            $('input[name="dob"]').datepicker({
+                format: 'yyyy-mm-dd'
+            });
+                format: 'yyyy-mm-dd'
+            });
+            $('input[name="expire"]').datepicker({
+                format: 'yyyy-mm-dd'
+            });
+                format: 'yyyy-mm-dd'
+            });
         }());
     </script>
 {% endblock %}

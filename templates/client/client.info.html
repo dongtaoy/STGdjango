@@ -2,7 +2,7 @@
 {% load staticfiles %}
 {% load bootstrap3 %}
 {% block title %}
-    {{ client.name }}'s Details
+    {{ client }}'s Details
 {% endblock %}
 {% block plugincss %}
 	<link rel="stylesheet" type="text/css" href="{% static 'assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css' %}"/>
@@ -11,7 +11,7 @@
 
 {#page content#}
 {% block header %}
-    {{ client.name }}'s
+    {{ client }}'s
 {% endblock %}
 {% block subHeader %}
     Details
@@ -41,7 +41,7 @@
 				<div class="caption">
 					<i class="icon-user font-green-sharp"></i>
 					<span class="caption-subject font-green-sharp bold uppercase">
-					{{ client.name }} </span>
+					{{ client }} </span>
 					<span class="caption-helper">information</span>
 				</div>
 				<div class="actions">
@@ -100,10 +100,18 @@
 										<div class="portlet-body">
 											<div class="row static-info">
 												<div class="col-md-5 name">
-													Name
+													First Name
 												</div>
 												<div class="col-md-7 value">
-													{{ client.name }}
+													{{ client.firstName }}
+												</div>
+											</div>
+                                        	<div class="row static-info">
+												<div class="col-md-5 name">
+													Surname
+												</div>
+												<div class="col-md-7 value">
+													{{ client.surname }}
 												</div>
 											</div>
 											<div class="row static-info">

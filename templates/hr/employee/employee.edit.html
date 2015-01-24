@@ -71,7 +71,7 @@
     <script>
         (function () {
             $('form select').select2();
-            $('input[name="dob"]').datepicker();
+            $('input[name="dob"]').datepicker({dateFormat: 'yyyy-mm-dd'});
         }());
     </script>
 {% endblock %}

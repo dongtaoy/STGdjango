@@ -117,7 +117,7 @@
         <tr>
             <td>{{ forloop.counter }}</td>
             <td>{{ payment.id }}</td>
-            <td>Commission on <b>{{ invoice.coe.client.name }}</b> <br/>${{ payment.paidAmount }}*
+            <td>Commission on <b>{{ invoice.coe.client }}</b> <br/>${{ payment.paidAmount }}*
                 {{ rate|floatformat:2 }}=
                 ${{ payment.commssionClaimed|floatformat:2 }}</td>
             <td>{{ payment.commssionClaimed|floatformat:2 }}</td>
