@@ -35,9 +35,22 @@ class GroupCreationForm(ModelForm):
 
 
 class EmployeeForm(ModelForm):
+
     class Meta:
         model = Employee
         exclude = ('user', "dob")
+
+
+class EmployeeUpdateForm(ModelForm):
+    group = forms.ModelChoiceField(queryset=Group.objects.all())
+
+    class Meta:
+        model = Employee
+        exclude = ("dob",)
+
+        widgets = {
+            "user": forms.HiddenInput()
+        }
 
 
 class GroupForm(ModelForm):
